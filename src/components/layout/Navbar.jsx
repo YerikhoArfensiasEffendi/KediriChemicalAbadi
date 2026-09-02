@@ -59,12 +59,12 @@ export default function Navbar() {
     >
       
       {/* ── LAYER 1: Soft White Depth Gradient Base ── */}
-      <div className="absolute top-0 left-0 right-0 w-full h-24 sm:h-28 lg:h-32 pointer-events-none overflow-visible">
+      <div className="absolute top-0 left-0 right-0 w-full h-28 sm:h-36 lg:h-44 pointer-events-none overflow-visible">
         <div className={cn(
           "w-full h-full transition-all duration-500",
           isScrolled 
-            ? "bg-gradient-to-b from-white/90 via-white/60 to-transparent"
-            : "bg-gradient-to-b from-white/60 via-white/25 to-transparent"
+            ? "bg-gradient-to-b from-white/80 via-white/40 to-transparent"
+            : "bg-gradient-to-b from-white/40 via-white/15 to-transparent"
         )} />
       </div>
 
@@ -72,14 +72,14 @@ export default function Navbar() {
       <motion.div
         style={{ x: layer1X, y: layer1Y }}
         className={cn(
-          "absolute -top-1 -left-4 -right-4 w-[calc(100%+32px)] h-24 sm:h-28 lg:h-32 pointer-events-none select-none overflow-visible animate-liquid-flow",
-          isScrolled ? "opacity-100" : "opacity-95"
+          "absolute -top-2 -left-6 -right-6 w-[calc(100%+48px)] h-28 sm:h-36 lg:h-44 pointer-events-none select-none overflow-visible animate-liquid-flow",
+          isScrolled ? "opacity-55" : "opacity-50"
         )}
       >
         <img
           src="/images/navbar_liquid_final_4k.png"
           alt="3D Liquid Water Wave Ribbon PT Kediri Chemical Abadi"
-          className="w-full h-full object-cover object-top filter drop-shadow-md"
+          className="w-full h-full object-contain object-top filter drop-shadow-sm"
           draggable={false}
         />
       </motion.div>
@@ -87,13 +87,13 @@ export default function Navbar() {
       {/* ── LAYER 3: Shadow Echo Wave (Reverse Parallax for 3D Depth) ── */}
       <motion.div
         style={{ x: layer2X, y: layer2Y }}
-        className="absolute top-1 -left-2 -right-2 w-[calc(100%+16px)] h-20 sm:h-24 lg:h-28 pointer-events-none select-none overflow-visible animate-liquid-flow-reverse opacity-20 mix-blend-multiply"
+        className="absolute top-0 -left-3 -right-3 w-[calc(100%+24px)] h-24 sm:h-32 lg:h-40 pointer-events-none select-none overflow-visible animate-liquid-flow-reverse opacity-10 mix-blend-multiply"
       >
         <img
           src="/images/navbar_liquid_final_4k.png"
           alt=""
           aria-hidden="true"
-          className="w-full h-full object-cover object-top filter blur-[1px] contrast-110"
+          className="w-full h-full object-contain object-top filter blur-[1px]"
           draggable={false}
         />
       </motion.div>
@@ -101,7 +101,7 @@ export default function Navbar() {
       {/* ── LAYER 4: Caustic Light Shimmer (Moving Refraction) ── */}
       <motion.div 
         style={{ x: shimmerX }}
-        className="absolute top-0 left-0 right-0 w-full h-20 sm:h-24 lg:h-28 pointer-events-none overflow-visible animate-caustic-shimmer"
+        className="absolute top-0 left-0 right-0 w-full h-28 sm:h-36 lg:h-44 pointer-events-none overflow-visible animate-caustic-shimmer"
       >
         <div 
           className="w-full h-full"
