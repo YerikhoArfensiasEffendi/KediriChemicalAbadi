@@ -135,8 +135,17 @@ export default function IndustriesSection() {
     <>
       <section id="industries" className="py-16 sm:py-24 bg-white text-slate-900 relative w-full overflow-hidden">
         
+        {/* Ambient 4K Liquid Water Texture Background */}
+        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none opacity-25 mix-blend-multiply">
+          <img
+            src="/images/bg_liquid_caustics_4k.png"
+            alt="Liquid Water Caustics Texture"
+            className="w-full h-full object-cover object-top"
+          />
+        </div>
+
         {/* Section Header (No Eyebrow Tag) */}
-        <div className="max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-14 xl:px-20 w-full mb-10 sm:mb-14">
+        <div className="max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-14 xl:px-20 w-full mb-10 sm:mb-14 relative z-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-sky-100">
             <div className="space-y-2 max-w-2xl">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-heading text-slate-900 tracking-tight leading-tight">

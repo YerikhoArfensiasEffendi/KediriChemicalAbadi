@@ -43,8 +43,18 @@ export default function MakloonSchemeSection() {
 
   return (
     <>
-      <section id="makloon" className="py-16 sm:py-24 bg-white text-slate-900 border-b border-sky-100">
-        <div className="max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-14 xl:px-20 w-full space-y-12">
+      <section id="makloon" className="py-16 sm:py-24 bg-white text-slate-900 border-b border-sky-100 relative overflow-hidden">
+        
+        {/* Ambient 4K Liquid Water Texture Background */}
+        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none opacity-25 mix-blend-multiply">
+          <img
+            src="/images/bg_liquid_caustics_4k.png"
+            alt="Liquid Water Caustics Texture"
+            className="w-full h-full object-cover object-bottom"
+          />
+        </div>
+
+        <div className="max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-14 xl:px-20 w-full space-y-12 relative z-10">
           
           {/* Section Header: Direct Title & Subline (No Eyebrow Tag) */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-sky-100">

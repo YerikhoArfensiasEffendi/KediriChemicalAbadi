@@ -134,6 +134,15 @@ export default function HeroSection() {
             className="absolute -top-32 right-0 w-[600px] h-[600px] bg-blue-100/50 rounded-full blur-3xl pointer-events-none z-0" 
           />
 
+          {/* Ambient 4K Liquid Water Caustics & Ripple Texture (Tema Air Higienis & Segar) */}
+          <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none opacity-40 mix-blend-multiply">
+            <img
+              src="/images/bg_liquid_caustics_4k.png"
+              alt="Liquid Water Caustics Texture"
+              className="w-full h-full object-cover object-top filter contrast-105"
+            />
+          </div>
+
           {/* ========================================================= */}
           {/* FASE 1: INTRO PEMBUKA "PT KEDIRI CHEMICAL ABADI"          */}
           {/* (Aktif HANYA di awal scroll 0 -> 0.20, lalu lenyap total)  */}
