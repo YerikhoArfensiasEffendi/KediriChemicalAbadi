@@ -11,32 +11,21 @@ export default function Navbar() {
   const location = useLocation()
   const headerRef = useRef(null)
 
-  // Mouse parallax for interactive 3D depth
+  // Mouse parallax for subtle 3D depth on the liquid shape
   const rawMouseX = useMotionValue(0)
-  const rawMouseY = useMotionValue(0)
-  const mouseX = useSpring(rawMouseX, { stiffness: 50, damping: 18 })
-  const mouseY = useSpring(rawMouseY, { stiffness: 50, damping: 18 })
-
-  // Transform mouse position into parallax offsets for each layer
-  const layer1X = useTransform(mouseX, [-1, 1], [-12, 12])
-  const layer1Y = useTransform(mouseY, [-1, 1], [-4, 4])
-  const layer2X = useTransform(mouseX, [-1, 1], [8, -8])
-  const layer2Y = useTransform(mouseY, [-1, 1], [3, -3])
-  const shimmerX = useTransform(mouseX, [-1, 1], [-20, 20])
+  const mouseX = useSpring(rawMouseX, { stiffness: 40, damping: 20 })
+  const waveShiftX = useTransform(mouseX, [-1, 1], [-6, 6])
 
   const handleMouseMove = useCallback((e) => {
     if (!headerRef.current) return
     const rect = headerRef.current.getBoundingClientRect()
     const nx = ((e.clientX - rect.left) / rect.width - 0.5) * 2
-    const ny = ((e.clientY - rect.top) / rect.height - 0.5) * 2
     rawMouseX.set(nx)
-    rawMouseY.set(ny)
-  }, [rawMouseX, rawMouseY])
+  }, [rawMouseX])
 
   const handleMouseLeave = useCallback(() => {
     rawMouseX.set(0)
-    rawMouseY.set(0)
-  }, [rawMouseX, rawMouseY])
+  }, [rawMouseX])
 
   useEffect(() => {
     setMobileOpen(false)
@@ -55,127 +44,107 @@ export default function Navbar() {
       ref={headerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="fixed top-0 left-0 right-0 z-50 w-full pointer-events-none select-none"
+      className="fixed top-0 left-0 right-0 z-50 w-full select-none"
     >
-      
-      {/* ── LAYER 1: Soft White Depth Gradient Base ── */}
-      <div className="absolute top-0 left-0 right-0 w-full h-28 sm:h-36 lg:h-44 pointer-events-none overflow-visible">
-        <div className={cn(
-          "w-full h-full transition-all duration-500",
-          isScrolled 
-            ? "bg-gradient-to-b from-white/80 via-white/40 to-transparent"
-            : "bg-gradient-to-b from-white/40 via-white/15 to-transparent"
-        )} />
-      </div>
+      {/* ═══════════════════════════════════════════════════════════════ */}
+      {/* LIQUID WAVE NAVBAR SHAPE — The wave IS the navbar background  */}
+      {/* Stretches edge-to-edge, forming a unique organic nav shape    */}
+      {/* ═══════════════════════════════════════════════════════════════ */}
+      <div className="relative w-full">
+        
+        {/* The Liquid Wave Shape — Full-bleed from corner to corner */}
+        <motion.div
+          style={{ x: waveShiftX }}
+          className="absolute top-0 left-[-3%] w-[106%] h-[140px] sm:h-[160px] lg:h-[180px] pointer-events-none select-none animate-liquid-flow"
+        >
+          <img
+            src="/images/navbar_liquid_final_4k.png"
+            alt=""
+            aria-hidden="true"
+            className={cn(
+              "w-full h-full object-fill transition-all duration-500",
+              isScrolled ? "opacity-60" : "opacity-70"
+            )}
+            draggable={false}
+          />
+        </motion.div>
 
-      {/* ── LAYER 2: Primary 3D Liquid Wave (Mouse Parallax + Flow Anim) ── */}
-      <motion.div
-        style={{ x: layer1X, y: layer1Y }}
-        className={cn(
-          "absolute -top-2 -left-6 -right-6 w-[calc(100%+48px)] h-28 sm:h-36 lg:h-44 pointer-events-none select-none overflow-visible animate-liquid-flow",
-          isScrolled ? "opacity-55" : "opacity-50"
-        )}
-      >
-        <img
-          src="/images/navbar_liquid_final_4k.png"
-          alt="3D Liquid Water Wave Ribbon PT Kediri Chemical Abadi"
-          className="w-full h-full object-contain object-top filter drop-shadow-sm"
-          draggable={false}
-        />
-      </motion.div>
-
-      {/* ── LAYER 3: Shadow Echo Wave (Reverse Parallax for 3D Depth) ── */}
-      <motion.div
-        style={{ x: layer2X, y: layer2Y }}
-        className="absolute top-0 -left-3 -right-3 w-[calc(100%+24px)] h-24 sm:h-32 lg:h-40 pointer-events-none select-none overflow-visible animate-liquid-flow-reverse opacity-10 mix-blend-multiply"
-      >
-        <img
-          src="/images/navbar_liquid_final_4k.png"
-          alt=""
-          aria-hidden="true"
-          className="w-full h-full object-contain object-top filter blur-[1px]"
-          draggable={false}
-        />
-      </motion.div>
-
-      {/* ── LAYER 4: Caustic Light Shimmer (Moving Refraction) ── */}
-      <motion.div 
-        style={{ x: shimmerX }}
-        className="absolute top-0 left-0 right-0 w-full h-28 sm:h-36 lg:h-44 pointer-events-none overflow-visible animate-caustic-shimmer"
-      >
+        {/* Caustic light shimmer moving across the wave */}
         <div 
-          className="w-full h-full"
+          className="absolute top-0 left-0 right-0 h-[120px] sm:h-[140px] lg:h-[150px] pointer-events-none animate-caustic-shimmer"
           style={{
-            background: 'linear-gradient(115deg, transparent 20%, rgba(56,189,248,0.1) 35%, rgba(255,255,255,0.18) 50%, rgba(56,189,248,0.07) 65%, transparent 80%)',
+            background: 'linear-gradient(110deg, transparent 25%, rgba(255,255,255,0.15) 45%, rgba(186,230,253,0.1) 55%, transparent 75%)',
             backgroundSize: '200% 100%',
           }}
         />
-      </motion.div>
 
-      {/* ── LAYER 5: Glassmorphic Scroll Wash ── */}
-      <div className={cn(
-        "absolute top-0 left-0 right-0 w-full h-20 transition-all duration-400 pointer-events-none",
-        isScrolled ? "bg-white/20 backdrop-blur-sm" : "bg-transparent"
-      )} />
+        {/* Scroll blur frost overlay — fades in on scroll */}
+        <div className={cn(
+          "absolute top-0 left-0 right-0 h-20 transition-all duration-500 pointer-events-none",
+          isScrolled 
+            ? "bg-white/50 backdrop-blur-md" 
+            : "bg-transparent backdrop-blur-none"
+        )} />
 
-      {/* ══════════════════════════════════════════════ */}
-      {/* INTERACTIVE NAVIGATION CONTENT BAR            */}
-      {/* ══════════════════════════════════════════════ */}
-      <div className="h-20 w-full flex items-center pointer-events-auto relative z-10">
-        <div className="max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-14 xl:px-20 w-full flex items-center justify-between gap-6">
-          
-          {/* Logo */}
-          <Link to="/" className="flex items-center shrink-0 group py-1">
-            <img
-              src="/images/kca_logo.png"
-              alt="Logo Resmi PT Kediri Chemical Abadi"
-              className="h-11 sm:h-12 w-auto object-contain transition-transform group-hover:scale-105 duration-300 filter drop-shadow-sm"
-            />
-          </Link>
-
-          {/* Desktop Navigation Pill Menu */}
-          <nav className="hidden lg:flex items-center gap-1.5 xl:gap-2 ml-auto bg-white/65 backdrop-blur-lg p-1.5 rounded-full border border-white/50 shadow-sm shadow-blue-900/8">
-            {NAVIGATION_DATA.navLinks.map((link) => (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                end={link.to === '/'}
-                className={({ isActive }) =>
-                  cn(
-                    'px-4 py-2 rounded-full text-xs font-heading font-extrabold uppercase tracking-wider transition-all duration-300 cursor-pointer relative',
-                    isActive
-                      ? 'text-white bg-gradient-to-r from-[#0F58A8] to-[#0284C7] shadow-sm shadow-blue-600/30'
-                      : 'text-slate-700 hover:text-[#0F58A8] hover:bg-white/80'
-                  )
-                }
-              >
-                {link.label}
-              </NavLink>
-            ))}
-          </nav>
-
-          {/* Desktop CTA Button */}
-          <div className="hidden lg:flex items-center pl-2">
-            <Link to="/contact" className="btn-fluid-primary text-xs py-2 px-5">
-              <span>Hubungi Lab</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
+        {/* ════════════════════════════════════════════════ */}
+        {/* NAV CONTENT — Sits on top of the liquid shape   */}
+        {/* ════════════════════════════════════════════════ */}
+        <div className="relative z-10 h-20 w-full flex items-center pointer-events-auto">
+          <div className="max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-14 xl:px-20 w-full flex items-center justify-between gap-6">
+            
+            {/* Logo */}
+            <Link to="/" className="flex items-center shrink-0 group py-1">
+              <img
+                src="/images/kca_logo.png"
+                alt="Logo Resmi PT Kediri Chemical Abadi"
+                className="h-11 sm:h-12 w-auto object-contain transition-transform group-hover:scale-105 duration-300 filter drop-shadow-sm"
+              />
             </Link>
-          </div>
 
-          {/* Mobile Hamburger */}
-          <div className="flex items-center lg:hidden ml-auto">
-            <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="p-2.5 rounded-full text-slate-700 hover:text-[#0F58A8] hover:bg-blue-50 border border-white/50 bg-white/60 backdrop-blur-md cursor-pointer transition-colors shadow-xs"
-              aria-label="Toggle Mobile Menu"
-            >
-              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
+            {/* Desktop Navigation Pill Menu */}
+            <nav className="hidden lg:flex items-center gap-1.5 xl:gap-2 ml-auto bg-white/50 backdrop-blur-lg p-1.5 rounded-full border border-white/40 shadow-sm">
+              {NAVIGATION_DATA.navLinks.map((link) => (
+                <NavLink
+                  key={link.to}
+                  to={link.to}
+                  end={link.to === '/'}
+                  className={({ isActive }) =>
+                    cn(
+                      'px-4 py-2 rounded-full text-xs font-heading font-extrabold uppercase tracking-wider transition-all duration-300 cursor-pointer',
+                      isActive
+                        ? 'text-white bg-gradient-to-r from-[#0F58A8] to-[#0284C7] shadow-sm shadow-blue-600/30'
+                        : 'text-slate-700 hover:text-[#0F58A8] hover:bg-white/70'
+                    )
+                  }
+                >
+                  {link.label}
+                </NavLink>
+              ))}
+            </nav>
+
+            {/* Desktop CTA */}
+            <div className="hidden lg:flex items-center pl-2">
+              <Link to="/contact" className="btn-fluid-primary text-xs py-2 px-5">
+                <span>Hubungi Lab</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+
+            {/* Mobile Hamburger */}
+            <div className="flex items-center lg:hidden ml-auto">
+              <button
+                onClick={() => setMobileOpen(!mobileOpen)}
+                className="p-2.5 rounded-full text-slate-700 hover:text-[#0F58A8] hover:bg-blue-50 border border-white/40 bg-white/50 backdrop-blur-md cursor-pointer transition-colors shadow-xs"
+                aria-label="Toggle Mobile Menu"
+              >
+                {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Mobile Dropdown Menu */}
+      {/* Mobile Dropdown */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
