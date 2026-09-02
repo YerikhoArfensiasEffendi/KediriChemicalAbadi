@@ -1,0 +1,8 @@
+Cara Install Font
+   - Ekstrak File Zip dengan cara : Klik kanan pada file dan Klik Extract All
+   - Open file dengan format TrueType font file
+   - Kemudian klik install, jika sudah close
+   - Lakukan hal yang sama untuk jenis font berikutnya
+
+Catatan:
+Apabila teman-teman sudah install font kami, maka tidak perlu install Kembali karena template sudah bisa langsung digunakan.
