@@ -25,35 +25,40 @@ export default function Navbar() {
   }, [])
 
   return (
-    <header className={cn(
-      "fixed top-0 left-0 right-0 z-50 w-full h-20 flex items-center transition-all duration-300 overflow-hidden",
-      isScrolled
-        ? "bg-white/85 backdrop-blur-md border-b border-sky-100/70 shadow-xs"
-        : "bg-white/60 backdrop-blur-md border-b border-sky-100/50"
-    )}>
-      {/* Liquid Water Flow Header Banner (Riak Air & Gelombang Kristal 3D) */}
-      <div className="absolute inset-0 pointer-events-none select-none overflow-hidden z-0">
+    <header className="fixed top-0 left-0 right-0 z-50 w-full pointer-events-none transition-all duration-300">
+      
+      {/* 3D Liquid Water Wave Ribbon (Riak Air Melingkar & Gelombang 3D Alami) */}
+      <div className={cn(
+        "absolute top-0 left-0 right-0 w-full h-28 sm:h-32 lg:h-36 pointer-events-none select-none transition-all duration-500",
+        isScrolled ? "opacity-95" : "opacity-90"
+      )}>
         <img
-          src="/images/header_liquid_clean.png"
-          alt="Liquid Water Wave Header Ribbon"
-          className="w-full h-full object-cover object-top opacity-80 mix-blend-multiply filter contrast-105"
+          src="/images/header_liquid_3d_hires.png"
+          alt="3D Liquid Water Wave Header Ribbon PT Kediri Chemical Abadi"
+          className="w-full h-full object-cover object-top mix-blend-multiply filter contrast-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-white/30 via-transparent to-white/20 pointer-events-none" />
+        {/* Subtle glass wash on scroll */}
+        <div className={cn(
+          "absolute inset-0 transition-all duration-300",
+          isScrolled ? "bg-white/40 backdrop-blur-xs" : "bg-transparent"
+        )} />
       </div>
 
-      <div className="max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-14 xl:px-20 w-full flex items-center justify-between gap-6 relative z-10">
-        
-        {/* Logo Resmi PT Kediri Chemical Abadi */}
-        <Link to="/" className="flex items-center shrink-0 group py-1">
-          <img
-            src="/images/kca_logo.png"
-            alt="Logo Resmi PT Kediri Chemical Abadi"
-            className="h-11 sm:h-12 w-auto object-contain transition-transform group-hover:scale-105 duration-300"
-          />
-        </Link>
+      {/* Interactive Navigation Content Bar */}
+      <div className="h-20 w-full flex items-center pointer-events-auto relative z-10">
+        <div className="max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-14 xl:px-20 w-full flex items-center justify-between gap-6">
+          
+          {/* Logo Resmi PT Kediri Chemical Abadi */}
+          <Link to="/" className="flex items-center shrink-0 group py-1">
+            <img
+              src="/images/kca_logo.png"
+              alt="Logo Resmi PT Kediri Chemical Abadi"
+              className="h-11 sm:h-12 w-auto object-contain transition-transform group-hover:scale-105 duration-300 filter drop-shadow-xs"
+            />
+          </Link>
 
-        {/* Desktop Navigation Pill Menu (Manis, Estetik, Tema Air) */}
-        <nav className="hidden lg:flex items-center gap-1.5 xl:gap-2 ml-auto bg-slate-50/80 p-1.5 rounded-full border border-sky-100 shadow-2xs">
+          {/* Desktop Navigation Pill Menu (Glassmorphic Floating Water Theme) */}
+          <nav className="hidden lg:flex items-center gap-1.5 xl:gap-2 ml-auto bg-white/75 backdrop-blur-md p-1.5 rounded-full border border-white/80 shadow-sm shadow-blue-900/5">
           {NAVIGATION_DATA.navLinks.map((link) => (
             <NavLink
               key={link.to}
@@ -94,8 +99,8 @@ export default function Navbar() {
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
-
       </div>
+    </div>
 
       {/* Mobile Dropdown Menu */}
       <AnimatePresence>
@@ -105,7 +110,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-20 inset-x-0 bg-white/95 backdrop-blur-xl border-b border-sky-100 shadow-xl p-6 lg:hidden z-50"
+            className="absolute top-20 inset-x-0 bg-white/95 backdrop-blur-xl border-b border-sky-100 shadow-xl p-6 lg:hidden z-50 pointer-events-auto"
           >
             <nav className="flex flex-col gap-2">
               {NAVIGATION_DATA.navLinks.map((link) => (
