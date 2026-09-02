@@ -16,6 +16,10 @@ export default function HomePage() {
           name="description"
           content="Pusat riset dan manufaktur kimia pembersih konsentrat 100% non-fosfat berkapasitas 500+ Ton/bulan di Mojoroto, Kediri. Penyaluran massal B2B dan maklon private label."
         />
+        <link rel="canonical" href="https://kedirichemical.id/" />
+        <meta property="og:title" content="PT Kediri Chemical Abadi — Pusat Manufaktur & Formulasi Kimia Pembersih Industri" />
+        <meta property="og:description" content="Pusat riset dan manufaktur kimia pembersih konsentrat 100% non-fosfat berkapasitas 500+ Ton/bulan di Mojoroto, Kediri." />
+        <meta property="og:url" content="https://kedirichemical.id/" />
       </Helmet>
 
       <HeroSection />

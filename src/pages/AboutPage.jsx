@@ -474,6 +474,10 @@ export default function AboutPage() {
           name="description"
           content="Sejarah perjalanan 2 dekade, latar belakang berdirinya pabrik di Mojoroto Kediri, fasilitas reaktor SS 316L 500+ Ton/bulan, dan dewan direksi PT Kediri Chemical Abadi."
         />
+        <link rel="canonical" href="https://kedirichemical.id/about" />
+        <meta property="og:title" content="Profil Perusahaan, Sejarah & Fasilitas Pabrik — PT Kediri Chemical Abadi" />
+        <meta property="og:description" content="Sejarah perjalanan 2 dekade dedikasi manufaktur kimia di Mojoroto, Kediri." />
+        <meta property="og:url" content="https://kedirichemical.id/about" />
       </Helmet>
 
       {/* ========================================================================= */}

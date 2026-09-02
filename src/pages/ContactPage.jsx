@@ -65,6 +65,10 @@ _Dikirim via Halaman Kontak kedirichemical.com_`
           name="description"
           content="Hubungi pabrik PT Kediri Chemical Abadi di Mojoroto, Kediri. Hotline WhatsApp 085812307629, email kdrchemicals@gmail.com, dan peta lokasi fasilitas produksi."
         />
+        <link rel="canonical" href="https://kedirichemical.id/contact" />
+        <meta property="og:title" content="Hubungi Kami & Lokasi Pabrik — PT Kediri Chemical Abadi" />
+        <meta property="og:description" content="Hotline WhatsApp B2B 085812307629, email resmi penawaran, dan peta rute fasilitas pabrik di Kediri." />
+        <meta property="og:url" content="https://kedirichemical.id/contact" />
       </Helmet>
 
       {/* ========================================================================= */}

@@ -36,6 +36,10 @@ export default function IndustriesPage() {
           name="description"
           content="Formulasi kimia pembersih industri terpadu untuk rumah sakit KARS, perhotelan nasional, sentra laundry komersial, dan pabrik manufaktur."
         />
+        <link rel="canonical" href="https://kedirichemical.id/industries" />
+        <meta property="og:title" content="Sektor Pasokan Industri & Analisis Efisiensi — PT Kediri Chemical Abadi" />
+        <meta property="og:description" content="Optimalisasi biaya operasional kimia pembersih per sektor strategis di Indonesia." />
+        <meta property="og:url" content="https://kedirichemical.id/industries" />
       </Helmet>
 
       {/* Header Banner */}

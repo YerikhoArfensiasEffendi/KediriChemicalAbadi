@@ -156,6 +156,10 @@ export default function ProductsPage() {
           name="description"
           content="Katalog teknis kimia pembersih 100% non-fosfat terkelompok per sektor industri: Laundry, Perhotelan, Restoran F&B, Rumah Sakit, dan Manufaktur Otomotif."
         />
+        <link rel="canonical" href="https://kedirichemical.id/products" />
+        <meta property="og:title" content="Katalog Kimia B2B Terpadu per Sektor — PT Kediri Chemical Abadi" />
+        <meta property="og:description" content="Katalog teknis kimia pembersih 100% non-fosfat terkelompok per sektor industri." />
+        <meta property="og:url" content="https://kedirichemical.id/products" />
       </Helmet>
 
       {/* Header Banner (Fluid Water Theme Canvas) */}

@@ -184,6 +184,10 @@ export default function ServicesPage() {
           name="description"
           content="Jasa maklon toll compounding formula kimia pembersih private label dan skema kemitraan Dedicated Production Line VIP mesin khusus di Kediri."
         />
+        <link rel="canonical" href="https://kedirichemical.id/services" />
+        <meta property="og:title" content="Layanan Maklon & Dedicated Production Line — PT Kediri Chemical Abadi" />
+        <meta property="og:description" content="Jasa maklon toll compounding formula kimia pembersih private label dan skema kemitraan Dedicated Production Line VIP di Kediri." />
+        <meta property="og:url" content="https://kedirichemical.id/services" />
       </Helmet>
 
       {/* Header Banner (Direct Title & Subline) */}

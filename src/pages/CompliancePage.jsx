@@ -166,6 +166,10 @@ export default function CompliancePage() {
           name="description"
           content="Standar mutu ISO 9001:2015, terdaftar e-Catalog LKPP, formulasi non-fosfat ramah IPAL, dan prosedur kendali mutu per batch PT Kediri Chemical Abadi."
         />
+        <link rel="canonical" href="https://kedirichemical.id/compliance" />
+        <meta property="og:title" content="Kepatuhan Mutu, Legalitas & Standar IPAL — PT Kediri Chemical Abadi" />
+        <meta property="og:description" content="Standar mutu ISO 9001:2015, izin PKRT, formulasi non-fosfat ramah IPAL rumah sakit di Kediri." />
+        <meta property="og:url" content="https://kedirichemical.id/compliance" />
       </Helmet>
 
       {/* ========================================================================= */}
