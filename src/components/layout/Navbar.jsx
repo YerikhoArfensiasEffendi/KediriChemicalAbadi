@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ArrowUpRight } from 'lucide-react'
 import { cn } from '@/utils/cn'
 import { NAVIGATION_DATA } from '@/data/navigationData'
@@ -9,23 +9,6 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const location = useLocation()
-  const headerRef = useRef(null)
-
-  // Mouse parallax for subtle 3D depth on the liquid shape
-  const rawMouseX = useMotionValue(0)
-  const mouseX = useSpring(rawMouseX, { stiffness: 40, damping: 20 })
-  const waveShiftX = useTransform(mouseX, [-1, 1], [-6, 6])
-
-  const handleMouseMove = useCallback((e) => {
-    if (!headerRef.current) return
-    const rect = headerRef.current.getBoundingClientRect()
-    const nx = ((e.clientX - rect.left) / rect.width - 0.5) * 2
-    rawMouseX.set(nx)
-  }, [rawMouseX])
-
-  const handleMouseLeave = useCallback(() => {
-    rawMouseX.set(0)
-  }, [rawMouseX])
 
   useEffect(() => {
     setMobileOpen(false)
@@ -33,142 +16,167 @@ export default function Navbar() {
   }, [location.pathname])
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 15)
+    const handleScroll = () => setIsScrolled(window.scrollY > 20)
     window.addEventListener('scroll', handleScroll, { passive: true })
     handleScroll()
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   return (
-    <header
-      ref={headerRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className="fixed top-0 left-0 right-0 z-50 w-full select-none"
-    >
-      {/* ═══════════════════════════════════════════════════════════════ */}
-      {/* LIQUID WAVE NAVBAR SHAPE — The wave IS the navbar background  */}
-      {/* Stretches edge-to-edge, forming a unique organic nav shape    */}
-      {/* ═══════════════════════════════════════════════════════════════ */}
-      <div className="relative w-full">
+    <header className="fixed top-3.5 sm:top-4 inset-x-0 z-50 pointer-events-none select-none transition-all duration-300">
+      <div className="max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-10 w-full flex items-center justify-between gap-4">
         
-        {/* The Liquid Wave Shape — Balanced wide fit */}
-        <motion.div
-          style={{ x: waveShiftX }}
-          className="absolute top-0 left-0 right-0 w-full h-[125px] sm:h-[145px] lg:h-[165px] pointer-events-none select-none animate-liquid-flow"
-        >
-          <img
-            src="/images/navbar_liquid_final_4k.png"
-            alt=""
-            aria-hidden="true"
-            className={cn(
-              "w-full h-full object-cover object-top transition-all duration-500",
-              isScrolled ? "opacity-80 drop-shadow-md" : "opacity-55"
-            )}
-            draggable={false}
-          />
-        </motion.div>
-
-        {/* Caustic light shimmer moving across the wave */}
-        <div 
+        {/* ═══════════════════════════════════════════════════════ */}
+        {/* SISI KIRI: Kapsul Identitas Legal & Pabrik (Brand Dock) */}
+        {/* ═══════════════════════════════════════════════════════ */}
+        <Link
+          to="/"
           className={cn(
-            "absolute top-0 left-0 right-0 h-[120px] sm:h-[140px] lg:h-[150px] pointer-events-none animate-caustic-shimmer transition-opacity duration-500",
-            isScrolled ? "opacity-100" : "opacity-60"
+            "pointer-events-auto flex items-center gap-3 px-3.5 sm:px-4 py-2 rounded-2xl transition-all duration-300 group",
+            isScrolled
+              ? "bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-md shadow-slate-900/5"
+              : "bg-white/85 backdrop-blur-lg border border-slate-200/70 shadow-xs"
           )}
-          style={{
-            background: 'linear-gradient(110deg, transparent 25%, rgba(255,255,255,0.15) 45%, rgba(186,230,253,0.1) 55%, transparent 75%)',
-            backgroundSize: '200% 100%',
-          }}
-        />
+        >
+          {/* Logo Resmi PT Kediri Chemical Abadi */}
+          <img
+            src="/images/kca_logo.png"
+            alt="Logo Resmi PT Kediri Chemical Abadi"
+            className="h-9 sm:h-10 w-auto object-contain transition-transform group-hover:scale-105 duration-300"
+          />
 
-        {/* ════════════════════════════════════════════════ */}
-        {/* NAV CONTENT — Sits on top of the liquid shape   */}
-        {/* ════════════════════════════════════════════════ */}
-        <div className="relative z-10 h-20 w-full flex items-center pointer-events-auto">
-          <div className="max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-14 xl:px-20 w-full flex items-center justify-between gap-6">
-            
-            {/* Logo */}
-            <Link to="/" className="flex items-center shrink-0 group py-1">
-              <img
-                src="/images/kca_logo.png"
-                alt="Logo Resmi PT Kediri Chemical Abadi"
-                className="h-11 sm:h-12 w-auto object-contain transition-transform group-hover:scale-105 duration-300 filter drop-shadow-sm"
-              />
-            </Link>
+          {/* Micro Typography Identitas Pabrik */}
+          <div className="hidden sm:flex flex-col text-left pr-1">
+            <span className="text-[12px] font-heading font-extrabold text-slate-900 tracking-tight leading-tight group-hover:text-[#0F58A8] transition-colors">
+              PT KEDIRI CHEMICAL ABADI
+            </span>
+            <span className="text-[10px] font-medium text-slate-500 tracking-normal flex items-center gap-1.5 mt-0.5">
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              Pabrik Kimia B2B • Est. 2004
+            </span>
+          </div>
+        </Link>
 
-            {/* Desktop Navigation Pill Menu */}
-            <nav className="hidden lg:flex items-center gap-1.5 xl:gap-2 ml-auto bg-white/50 backdrop-blur-lg p-1.5 rounded-full border border-white/40 shadow-sm">
-              {NAVIGATION_DATA.navLinks.map((link) => (
-                <NavLink
-                  key={link.to}
-                  to={link.to}
-                  end={link.to === '/'}
-                  className={({ isActive }) =>
-                    cn(
-                      'px-4 py-2 rounded-full text-xs font-heading font-extrabold uppercase tracking-wider transition-all duration-300 cursor-pointer',
-                      isActive
-                        ? 'text-white bg-gradient-to-r from-[#0F58A8] to-[#0284C7] shadow-sm shadow-blue-600/30'
-                        : 'text-slate-700 hover:text-[#0F58A8] hover:bg-white/70'
-                    )
-                  }
-                >
-                  {link.label}
-                </NavLink>
-              ))}
-            </nav>
+        {/* ═══════════════════════════════════════════════════════ */}
+        {/* SISI KANAN: Floating Action & Navigation Dock          */}
+        {/* ═══════════════════════════════════════════════════════ */}
+        <div className="pointer-events-auto flex items-center gap-2.5 sm:gap-3">
+          
+          {/* Desktop Navigation Glass Dock */}
+          <nav
+            className={cn(
+              "hidden lg:flex items-center gap-1 p-1.5 rounded-full transition-all duration-300",
+              isScrolled
+                ? "bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-md shadow-slate-900/5"
+                : "bg-white/85 backdrop-blur-lg border border-slate-200/70 shadow-xs"
+            )}
+          >
+            {NAVIGATION_DATA.navLinks.map((link) => (
+              <NavLink
+                key={link.to}
+                to={link.to}
+                end={link.to === '/'}
+                className={({ isActive }) =>
+                  cn(
+                    'px-3.5 xl:px-4 py-2 rounded-full text-xs font-heading font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer',
+                    isActive
+                      ? 'text-white bg-gradient-to-r from-[#0F58A8] to-[#0284C7] shadow-xs shadow-blue-600/30 font-extrabold'
+                      : 'text-slate-700 hover:text-[#0F58A8] hover:bg-slate-100/80'
+                  )
+                }
+              >
+                {link.label}
+              </NavLink>
+            ))}
 
-            {/* Desktop CTA */}
-            <div className="hidden lg:flex items-center pl-2">
-              <Link to="/contact" className="btn-fluid-primary text-xs py-2 px-5">
+            {/* Quick CTA inside dock for Desktop */}
+            <div className="pl-1">
+              <Link
+                to="/contact"
+                className="btn-fluid-primary text-xs py-2 px-4.5 rounded-full shadow-xs"
+              >
                 <span>Hubungi Lab</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
               </Link>
             </div>
+          </nav>
 
-            {/* Mobile Hamburger */}
-            <div className="flex items-center lg:hidden ml-auto">
-              <button
-                onClick={() => setMobileOpen(!mobileOpen)}
-                className="p-2.5 rounded-full text-slate-700 hover:text-[#0F58A8] hover:bg-blue-50 border border-white/40 bg-white/50 backdrop-blur-md cursor-pointer transition-colors shadow-xs"
-                aria-label="Toggle Mobile Menu"
-              >
-                {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-              </button>
-            </div>
+          {/* Quick Contact Pill for Tablet/Mobile */}
+          <div className="hidden sm:flex lg:hidden">
+            <Link
+              to="/contact"
+              className="btn-fluid-primary text-xs py-2 px-4 rounded-full shadow-xs"
+            >
+              <span>Hubungi Lab</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
+
+          {/* Mobile Hamburger Toggle Glass Pill */}
+          <div className="flex items-center lg:hidden">
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className={cn(
+                "p-2.5 rounded-2xl transition-all duration-300 cursor-pointer text-slate-700 hover:text-[#0F58A8]",
+                isScrolled
+                  ? "bg-white/95 backdrop-blur-xl border border-slate-200 shadow-md"
+                  : "bg-white/85 backdrop-blur-lg border border-slate-200/70 shadow-xs"
+              )}
+              aria-label="Toggle Mobile Menu"
+            >
+              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
+
         </div>
+
       </div>
 
-      {/* Mobile Dropdown */}
+      {/* ═══════════════════════════════════════════════════════ */}
+      {/* MOBILE DROPDOWN DOCK                                    */}
+      {/* ═══════════════════════════════════════════════════════ */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: -8, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -8, scale: 0.98 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-20 inset-x-0 bg-white/95 backdrop-blur-xl border-b border-sky-100 shadow-xl p-6 lg:hidden z-50 pointer-events-auto"
+            className="max-w-[1700px] mx-auto px-4 sm:px-6 mt-2 pointer-events-auto lg:hidden"
           >
-            <nav className="flex flex-col gap-2">
-              {NAVIGATION_DATA.navLinks.map((link) => (
-                <NavLink
-                  key={link.to}
-                  to={link.to}
-                  end={link.to === '/'}
-                  onClick={() => setMobileOpen(false)}
-                  className={({ isActive }) =>
-                    cn(
-                      'px-4 py-3 rounded-xl text-xs font-heading font-extrabold uppercase tracking-wider transition-all',
-                      isActive
-                        ? 'text-white bg-gradient-to-r from-[#0F58A8] to-[#0284C7] shadow-sm'
-                        : 'text-slate-700 hover:bg-blue-50/60'
-                    )
-                  }
-                >
-                  {link.label}
-                </NavLink>
-              ))}
-            </nav>
+            <div className="bg-white/95 backdrop-blur-2xl border border-slate-200 rounded-3xl shadow-xl p-4 sm:p-5">
+              <nav className="flex flex-col gap-1.5">
+                {NAVIGATION_DATA.navLinks.map((link) => (
+                  <NavLink
+                    key={link.to}
+                    to={link.to}
+                    end={link.to === '/'}
+                    onClick={() => setMobileOpen(false)}
+                    className={({ isActive }) =>
+                      cn(
+                        'px-4 py-3 rounded-2xl text-xs font-heading font-extrabold uppercase tracking-wider transition-all',
+                        isActive
+                          ? 'text-white bg-gradient-to-r from-[#0F58A8] to-[#0284C7] shadow-xs'
+                          : 'text-slate-700 hover:bg-slate-100/80 hover:text-[#0F58A8]'
+                      )
+                    }
+                  >
+                    {link.label}
+                  </NavLink>
+                ))}
+
+                <div className="pt-2 border-t border-slate-100 mt-1">
+                  <Link
+                    to="/contact"
+                    onClick={() => setMobileOpen(false)}
+                    className="btn-fluid-primary w-full text-xs py-3 rounded-2xl text-center flex items-center justify-center gap-2"
+                  >
+                    <span>Hubungi Lab & Konsultasi B2B</span>
+                    <ArrowUpRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </nav>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
