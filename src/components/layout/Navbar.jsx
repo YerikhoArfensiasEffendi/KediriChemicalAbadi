@@ -52,37 +52,37 @@ export default function Navbar() {
       {/* ═══════════════════════════════════════════════════════════════ */}
       <div className="relative w-full">
         
-        {/* The Liquid Wave Shape — Full-bleed from corner to corner */}
+        {/* The Liquid Wave Shape — Part of the navbar itself */}
         <motion.div
           style={{ x: waveShiftX }}
-          className="absolute top-0 left-[-3%] w-[106%] h-[140px] sm:h-[160px] lg:h-[180px] pointer-events-none select-none animate-liquid-flow"
+          className="absolute top-0 left-0 right-0 w-full h-[110px] sm:h-[130px] lg:h-[150px] pointer-events-none select-none animate-liquid-flow"
         >
           <img
             src="/images/navbar_liquid_final_4k.png"
             alt=""
             aria-hidden="true"
             className={cn(
-              "w-full h-full object-fill transition-all duration-500",
-              isScrolled ? "opacity-60" : "opacity-70"
+              "w-full h-full object-cover object-top transition-all duration-500",
+              isScrolled ? "opacity-55" : "opacity-65"
             )}
             draggable={false}
           />
         </motion.div>
 
-        {/* Caustic light shimmer moving across the wave */}
+        {/* Caustic light shimmer */}
         <div 
-          className="absolute top-0 left-0 right-0 h-[120px] sm:h-[140px] lg:h-[150px] pointer-events-none animate-caustic-shimmer"
+          className="absolute top-0 left-0 right-0 h-[110px] sm:h-[130px] lg:h-[150px] pointer-events-none animate-caustic-shimmer"
           style={{
             background: 'linear-gradient(110deg, transparent 25%, rgba(255,255,255,0.15) 45%, rgba(186,230,253,0.1) 55%, transparent 75%)',
             backgroundSize: '200% 100%',
           }}
         />
 
-        {/* Scroll blur frost overlay — fades in on scroll */}
+        {/* Scroll blur frost — covers ENTIRE liquid + nav area together */}
         <div className={cn(
-          "absolute top-0 left-0 right-0 h-20 transition-all duration-500 pointer-events-none",
+          "absolute top-0 left-0 right-0 h-[110px] sm:h-[130px] lg:h-[150px] transition-all duration-500 pointer-events-none z-[5]",
           isScrolled 
-            ? "bg-white/50 backdrop-blur-md" 
+            ? "bg-white/45 backdrop-blur-md" 
             : "bg-transparent backdrop-blur-none"
         )} />
 
