@@ -10,51 +10,70 @@ export default function WhyChooseUsSection() {
   const FEATURES = [
     {
       icon: FlaskConical,
-      tag: 'QC LAB PRESISI',
+      tag: 'QC Lab Presisi',
       title: 'Standar Mutu ISO 9001:2015',
-      desc: 'Pengujian titrasi pH digital, viskositas, dan berat jenis terkalibrasi per batch sebelum rilis COA resmi.'
+      desc: 'Setiap batch diuji titrasi pH digital, viskositas, dan berat jenis sebelum rilis COA resmi.',
+      iconColor: 'text-[#0F58A8]',
+      tagColor: 'text-slate-400'
     },
     {
       icon: Leaf,
-      tag: 'ESG SAFE',
+      tag: 'ESG & KARS Safe',
       title: '100% Bebas Fosfat / STPP',
-      desc: 'Formulasi ramah lingkungan, tidak merusak biofilter IPAL rumah sakit dan mencegah eutrofikasi.'
+      desc: 'Formulasi ramah lingkungan, tidak merusak biofilter IPAL rumah sakit dan mencegah eutrofikasi.',
+      iconColor: 'text-emerald-600',
+      tagColor: 'text-slate-400'
     },
     {
       icon: Factory,
-      tag: 'KAPASITAS MASSAL',
-      title: 'Reaktor Stainless Steel 316L',
-      desc: 'Lini pencampuran anti-korosi berkapasitas 500+ Ton/bulan untuk kepastian pasokan industri berkelanjutan.'
+      tag: 'Skalabilitas Tinggi',
+      title: 'Kapasitas Reaktor 500+ Ton',
+      desc: 'Lini pencampuran Stainless Steel 316L siap melayani kontrak pasokan skala besar tanpa jeda.',
+      iconColor: 'text-slate-700',
+      tagColor: 'text-slate-400'
     },
     {
       icon: Droplets,
-      tag: 'DOSIS EFISIEN',
-      title: 'Konsentrat Hemat Dosis',
-      desc: 'Konsentrat aktif murni hemat dosis 10–15 ml/kg cucian, memangkas biaya chemical operasional hingga 30%.'
+      tag: 'Efisiensi Biaya',
+      title: 'Formulasi Konsentrat Hemat Dosis',
+      desc: 'Efisiensi dosis 10–15 ml/kg cucian, memangkas biaya chemical operasional hingga 30%.',
+      iconColor: 'text-sky-600',
+      tagColor: 'text-slate-400'
     }
   ]
 
   return (
-    <section className="py-20 sm:py-28 bg-white text-slate-900 relative overflow-hidden">
+    <section className="py-20 sm:py-28 bg-gradient-to-b from-white via-sky-50/15 to-white text-slate-900 relative overflow-hidden">
       
-      {/* Subtle Soap Lather / Foam Bubble Ambient Background Accent (Top-Right & Edges) */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] pointer-events-none opacity-40 select-none overflow-hidden">
-        <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full text-sky-100">
-          <circle cx="340" cy="80" r="90" fill="currentColor" fillOpacity="0.35" />
-          <circle cx="260" cy="160" r="60" fill="currentColor" fillOpacity="0.25" />
-          <circle cx="370" cy="220" r="45" fill="currentColor" fillOpacity="0.3" />
-          <circle cx="190" cy="90" r="35" fill="currentColor" fillOpacity="0.2" />
-          <circle cx="280" cy="50" r="25" fill="currentColor" fillOpacity="0.4" />
-          <circle cx="220" cy="210" r="20" fill="currentColor" fillOpacity="0.15" />
-          <circle cx="320" cy="280" r="30" fill="currentColor" fillOpacity="0.2" />
-        </svg>
+      {/* ========================================================================= */}
+      {/* 1. AMBIENT LIQUID WATER RIPPLE & REALISTIC SOAP LATHER BACKGROUND TEXTURES */}
+      {/* ========================================================================= */}
+      
+      {/* Sisi Kiri Atas: Tekstur Gelombang & Riak Air Murni (Liquid Water Ripple) */}
+      <div className="absolute -top-10 -left-10 w-[460px] h-[460px] pointer-events-none opacity-40 select-none overflow-hidden rounded-full blur-2xl">
+        <img
+          src="/images/water_ripple_accent.jpg"
+          alt="Water Ripple Caustics Background Texture"
+          className="w-full h-full object-cover mix-blend-multiply"
+        />
       </div>
 
-      <div className="absolute bottom-0 left-0 w-80 h-80 pointer-events-none opacity-30 select-none overflow-hidden">
-        <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full text-sky-100">
-          <circle cx="60" cy="240" r="80" fill="currentColor" fillOpacity="0.3" />
-          <circle cx="140" cy="180" r="50" fill="currentColor" fillOpacity="0.2" />
-          <circle cx="80" cy="130" r="30" fill="currentColor" fillOpacity="0.25" />
+      {/* Sisi Kanan Bawah: Tekstur Buih Busa Sabun Alami (Realistic Soap Lather Bubbles) */}
+      <div className="absolute -bottom-16 -right-10 w-[550px] h-[550px] pointer-events-none opacity-60 select-none overflow-hidden rounded-full blur-xs">
+        <img
+          src="/images/soap_lather_accent.jpg"
+          alt="Natural Soap Lather Foam Bubbles Background Texture"
+          className="w-full h-full object-contain mix-blend-multiply"
+        />
+      </div>
+
+      {/* Sisi Kanan Atas: Gelembung Busa Halus (Soap Foam Top Accent) */}
+      <div className="absolute top-0 right-0 w-80 h-80 pointer-events-none opacity-45 select-none overflow-hidden">
+        <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full text-sky-200">
+          <circle cx="260" cy="50" r="70" fill="currentColor" fillOpacity="0.3" />
+          <circle cx="180" cy="90" r="45" fill="currentColor" fillOpacity="0.25" />
+          <circle cx="240" cy="140" r="30" fill="currentColor" fillOpacity="0.35" />
+          <circle cx="130" cy="50" r="20" fill="currentColor" fillOpacity="0.2" />
         </svg>
       </div>
 
@@ -62,96 +81,69 @@ export default function WhyChooseUsSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           {/* ========================================================================= */}
-          {/* SISI KIRI: CLEAN IMAGE GALLERY (STAINLESS REAKTOR & KEMASAN BERSIH)       */}
-          {/* Tanpa floating sticker badges / sticker cards - 100% foto bersih          */}
+          {/* 2. SISI KIRI: COMPOSITE GALLERY (STAINLESS REAKTOR + SABUN & BOTOL DISPENSER)*/}
           {/* ========================================================================= */}
           <motion.div
             className="lg:col-span-5"
-            initial={{ opacity: 0, x: -25 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="grid grid-cols-12 gap-3 sm:gap-4">
-              
-              {/* Foto Utama: Lini Reaktor Stainless Steel 316L */}
-              <div className="col-span-12 rounded-2xl overflow-hidden bg-slate-100 border border-slate-200/80 shadow-sm aspect-[16/10] group">
-                <img
-                  src="/images/kca_factory_reactors.jpg"
-                  alt="Fasilitas Reaktor Pencampur Stainless Steel 316L PT Kediri Chemical Abadi"
-                  className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700 ease-out select-none"
-                />
-              </div>
-
-              {/* Foto Pendukung 1: Lantai Pabrik & Produksi Bersih */}
-              <div className="col-span-6 rounded-2xl overflow-hidden bg-slate-100 border border-slate-200/80 shadow-sm aspect-[4/3] group">
-                <img
-                  src="/images/kca_factory_floor.jpg"
-                  alt="Lantai Fasilitas Produksi Manufaktur PT Kediri Chemical Abadi"
-                  className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700 ease-out select-none"
-                />
-              </div>
-
-              {/* Foto Pendukung 2: Lini Kemasan Sabun & Deterjen Standar PKRT */}
-              <div className="col-span-6 rounded-2xl overflow-hidden bg-slate-50 border border-slate-200/80 shadow-sm aspect-[4/3] p-2 flex items-center justify-center group">
-                <img
-                  src="/images/kca_packaging_lineup.png"
-                  alt="Lini Kemasan Sabun dan Kimia Pembersih PT Kediri Chemical Abadi"
-                  className="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-700 ease-out select-none"
-                />
-              </div>
-
+            <div className="relative rounded-3xl overflow-hidden bg-white/80 backdrop-blur-sm border border-slate-200/90 shadow-2xl shadow-blue-900/10 p-2 sm:p-2.5 group hover:shadow-blue-900/15 transition-all duration-500">
+              <img
+                src="/images/kca_soap_gallery_composite.jpg"
+                alt="Fasilitas Reaktor Pabrik Bioreactor Stainless Steel dan Formulasi Sabun PT Kediri Chemical Abadi"
+                className="w-full h-auto object-cover rounded-2xl select-none group-hover:scale-[1.01] transition-transform duration-700 ease-out"
+              />
             </div>
           </motion.div>
 
           {/* ========================================================================= */}
-          {/* SISI KANAN: OPEN EDITORIAL CONTENT & BORDERLESS 2x2 FEATURE GRID          */}
+          {/* 3. SISI KANAN: EDITORIAL HIERARCHY & 2x2 FEATURE GRID                     */}
           {/* ========================================================================= */}
           <motion.div
-            className="lg:col-span-7 space-y-8"
-            initial={{ opacity: 0, x: 25 }}
+            className="lg:col-span-7 space-y-7"
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           >
             {/* Main Headline & Supporting Paragraph */}
-            <div className="space-y-3">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-heading text-slate-900 tracking-tight leading-tight">
+            <div className="space-y-3.5">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-heading text-slate-900 tracking-tight leading-tight uppercase">
                 SOLUSI SABUN &amp; KEBERSIHAN PROFESIONAL
               </h2>
 
-              <p className="text-slate-600 text-xs sm:text-sm lg:text-[15px] leading-relaxed font-normal max-w-2xl">
-                Didirikan sejak 2004, PT Kediri Chemical Abadi memproduksi formula sabun dan kimia pembersih industri terpadu untuk rumah sakit, perhotelan nasional, sentra laundry komersial, dan sektor manufaktur. Kami mengoperasikan reaktor Stainless Steel 316L dengan air murni demineralisasi dan sistem kendali mutu ISO 9001:2015.
+              <p className="text-slate-600 text-xs sm:text-sm lg:text-[14px] leading-relaxed font-normal max-w-2xl">
+                Didirikan sejak 2004, PT Kediri Chemical Abadi telah menjadi mitra manufaktur kimia pembersih bagi ratusan rumah sakit, perhotelan nasional, sentra laundry komersial, dan industri manufaktur. Kami mengintegrasikan riset formulasi bebas fosfat dengan lini pencampuran presisi tinggi berstandar mutu ISO 9001:2015.
               </p>
             </div>
 
-            {/* Borderless 2x2 Feature Grid (No heavy cards, no heavy borders, airy editorial) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-7 pt-2">
+            {/* 2x2 Borderless Feature Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-7 pt-3">
               {FEATURES.map((feat, idx) => {
                 const Icon = feat.icon
                 return (
-                  <div key={idx} className="space-y-1.5 group">
+                  <div key={idx} className="space-y-2 group">
                     
-                    {/* Micro-tag with subtle dot */}
-                    <div className="flex items-center gap-1.5 text-[#0F58A8]">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#0F58A8]" />
-                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#0F58A8]">
+                    {/* Header Row: Fine Outline Icon on Left + Micro-tag on Right */}
+                    <div className="flex items-center justify-between">
+                      <div className="w-8 h-8 rounded-lg bg-sky-50/80 border border-sky-100 flex items-center justify-center shrink-0 shadow-2xs group-hover:bg-blue-50 transition-colors">
+                        <Icon className={`w-4 h-4 ${feat.iconColor} stroke-[1.75]`} />
+                      </div>
+                      <span className="text-[10px] sm:text-[11px] font-mono font-medium text-slate-400">
                         {feat.tag}
                       </span>
                     </div>
 
-                    {/* Fine Outline Icon & Bold Title */}
-                    <div className="flex items-center gap-2.5 pt-0.5">
-                      <div className="w-7 h-7 rounded-lg bg-sky-50 text-[#0F58A8] flex items-center justify-center shrink-0">
-                        <Icon className="w-4 h-4 stroke-[1.75]" />
-                      </div>
-                      <h3 className="text-sm sm:text-base font-bold font-heading text-slate-900 leading-snug">
-                        {feat.title}
-                      </h3>
-                    </div>
+                    {/* Bold Title */}
+                    <h3 className="text-sm sm:text-base font-bold font-heading text-slate-900 leading-snug">
+                      {feat.title}
+                    </h3>
 
                     {/* Concise Body Text */}
-                    <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed font-normal pl-9.5">
+                    <p className="text-xs text-slate-600 leading-relaxed font-normal">
                       {feat.desc}
                     </p>
 
