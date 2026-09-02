@@ -175,10 +175,10 @@ export default function ProductShowcaseSection() {
                 {/* Sisi Kiri: Galeri Visual Kemasan Bersih (5 Kolom) */}
                 <div className="lg:col-span-5 space-y-4">
                   
-                  {/* Foto Produk Murni & Bersih Tanpa Teks Menumpuk */}
-                  <div className="relative bg-gradient-to-b from-sky-50/70 via-white to-sky-50/30 border border-sky-100 rounded-3xl p-6 sm:p-8 flex flex-col items-center justify-center overflow-hidden aspect-[4/3] group shadow-lg shadow-blue-900/5">
+                  {/* Foto Produk Murni & Bersih Tanpa Background Card */}
+                  <div className="relative flex flex-col items-center justify-center p-2 aspect-[4/3] group">
                     
-                    {/* Dynamic Image with Crossfade */}
+                    {/* Dynamic Image with Crossfade & Clean Blend */}
                     <AnimatePresence mode="wait">
                       <motion.img
                         key={selectedPackaging.id}
@@ -188,7 +188,7 @@ export default function ProductShowcaseSection() {
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.95 }}
                         transition={{ duration: 0.3 }}
-                        className="w-full h-52 sm:h-60 object-contain relative z-10 filter drop-shadow-lg group-hover:scale-105 transition-transform duration-500 select-none"
+                        className="w-full h-60 sm:h-72 object-contain relative z-10 mix-blend-multiply group-hover:scale-105 transition-transform duration-500 select-none"
                       />
                     </AnimatePresence>
                   </div>
@@ -253,15 +253,9 @@ export default function ProductShowcaseSection() {
                 {/* Sisi Kanan: Tab Interaktif Detail Formulasi & TDS (7 Kolom) */}
                 <div className="lg:col-span-7 space-y-5">
                   
-                  {/* Title & Narrative Overview */}
-                  <div className="space-y-1.5">
-                    <div className="flex items-center gap-2 text-[#0F58A8]">
-                      <CorporateLogos.Laundry />
-                      <span className="text-xs font-bold font-heading uppercase tracking-wider">
-                        Formula Unggulan Sektor Medis &amp; Hospitality
-                      </span>
-                    </div>
-                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold font-heading text-slate-900 leading-tight">
+                  {/* Title & Narrative Overview (Direct Title - No Eyebrow Tag) */}
+                  <div className="space-y-2">
+                    <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-heading text-slate-900 tracking-tight leading-tight">
                       {heroProduct.title || heroProduct.name}
                     </h3>
                     <p className="text-slate-700 text-xs sm:text-[13px] leading-relaxed font-normal">
