@@ -8,7 +8,7 @@ export default function PrivacyPolicyPage() {
   const waDisplay = COMPANY_DATA.contacts?.whatsappDisplay || '085812307629'
 
   return (
-    <main className="bg-white text-slate-900 pt-6">
+    <main className="bg-white text-slate-900 pt-20">
       <Helmet>
         <title>Kebijakan Privasi & Klausul Kerahasiaan (NDA) — PT Kediri Chemical Abadi</title>
         <meta

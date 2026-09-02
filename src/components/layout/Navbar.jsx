@@ -26,10 +26,10 @@ export default function Navbar() {
 
   return (
     <header className={cn(
-      "sticky top-0 z-50 h-20 flex items-center transition-all duration-300 relative overflow-hidden",
+      "fixed top-0 left-0 right-0 z-50 w-full h-20 flex items-center transition-all duration-300 overflow-hidden",
       isScrolled
-        ? "bg-white/80 backdrop-blur-md border-b border-sky-100/70 shadow-xs"
-        : "bg-white/50 backdrop-blur-md border-b border-sky-100/50"
+        ? "bg-white/85 backdrop-blur-md border-b border-sky-100/70 shadow-xs"
+        : "bg-white/60 backdrop-blur-md border-b border-sky-100/50"
     )}>
       {/* Liquid Water Flow Header Banner (Riak Air & Gelombang Kristal 3D) */}
       <div className="absolute inset-0 pointer-events-none select-none overflow-hidden z-0">

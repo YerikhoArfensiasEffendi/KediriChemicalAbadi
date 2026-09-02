@@ -29,7 +29,7 @@ const SECTOR_BENEFITS = [
 
 export default function IndustriesPage() {
   return (
-    <main className="bg-white text-slate-900 pt-6">
+    <main className="bg-white text-slate-900 pt-20">
       <Helmet>
         <title>Sektor Pasokan Industri & Analisis Efisiensi — PT Kediri Chemical Abadi</title>
         <meta

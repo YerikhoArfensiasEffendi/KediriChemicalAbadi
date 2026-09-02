@@ -159,7 +159,7 @@ const QC_PRINCIPLES = [
 
 export default function CompliancePage() {
   return (
-    <main className="bg-white text-slate-900 pt-6">
+    <main className="bg-white text-slate-900 pt-20">
       <Helmet>
         <title>Kepatuhan Mutu, Legalitas & Standar IPAL — PT Kediri Chemical Abadi</title>
         <meta

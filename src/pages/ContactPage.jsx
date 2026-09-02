@@ -58,7 +58,7 @@ _Dikirim via Halaman Kontak kedirichemical.com_`
   }
 
   return (
-    <main className="bg-white text-slate-900 pt-6">
+    <main className="bg-white text-slate-900 pt-20">
       <Helmet>
         <title>Hubungi Kami & Lokasi Pabrik — PT Kediri Chemical Abadi</title>
         <meta

@@ -467,7 +467,7 @@ export default function AboutPage() {
   ]
 
   return (
-    <main className="bg-white text-slate-900 pt-6">
+    <main className="bg-white text-slate-900 pt-20">
       <Helmet>
         <title>Profil Perusahaan, Sejarah & Fasilitas Pabrik — PT Kediri Chemical Abadi</title>
         <meta

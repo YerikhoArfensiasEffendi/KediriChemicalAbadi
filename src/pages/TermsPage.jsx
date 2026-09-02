@@ -8,7 +8,7 @@ export default function TermsPage() {
   const waDisplay = COMPANY_DATA.contacts?.whatsappDisplay || '085812307629'
 
   return (
-    <main className="bg-white text-slate-900 pt-6">
+    <main className="bg-white text-slate-900 pt-20">
       <Helmet>
         <title>Syarat & Ketentuan Pasokan B2B — PT Kediri Chemical Abadi</title>
         <meta

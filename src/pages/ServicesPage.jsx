@@ -177,7 +177,7 @@ export default function ServicesPage() {
   const [rfqOpen, setRfqOpen] = useState(false)
 
   return (
-    <main className="bg-white text-slate-900 pt-6">
+    <main className="bg-white text-slate-900 pt-20">
       <Helmet>
         <title>Layanan Maklon & Dedicated Production Line — PT Kediri Chemical Abadi</title>
         <meta

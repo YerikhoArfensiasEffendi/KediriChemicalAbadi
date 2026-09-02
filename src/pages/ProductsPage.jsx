@@ -149,7 +149,7 @@ export default function ProductsPage() {
   }
 
   return (
-    <main className="bg-white text-slate-900">
+    <main className="bg-white text-slate-900 pt-20">
       <Helmet>
         <title>Katalog Kimia B2B Terpadu per Sektor — PT Kediri Chemical Abadi</title>
         <meta
