@@ -34,26 +34,14 @@ export default function Navbar() {
       <div className="max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-14 xl:px-20 h-full w-full flex items-center justify-between gap-6">
         
         {/* ═══════════════════════════════════════════════════════════ */}
-        {/* SISI KIRI: Identitas Pabrik Tegas & Rapi                    */}
+        {/* SISI KIRI: Logo Resmi PT Kediri Chemical Abadi              */}
         {/* ═══════════════════════════════════════════════════════════ */}
-        <Link to="/" className="flex items-center gap-3 py-1 group">
-          {/* Logo Resmi PT Kediri Chemical Abadi */}
+        <Link to="/" className="flex items-center py-1 group shrink-0">
           <img
             src="/images/kca_logo.png"
             alt="Logo Resmi PT Kediri Chemical Abadi"
-            className="h-9 sm:h-10 w-auto object-contain transition-transform group-hover:scale-102 duration-300"
+            className="h-11 sm:h-13 lg:h-14 w-auto object-contain transition-transform group-hover:scale-105 duration-300"
           />
-
-          {/* Micro Typography Identitas Pabrik Tegas */}
-          <div className="hidden sm:flex flex-col text-left">
-            <span className="text-xs sm:text-sm font-heading font-extrabold text-slate-900 tracking-tight leading-tight group-hover:text-[#0F58A8] transition-colors">
-              PT KEDIRI CHEMICAL ABADI
-            </span>
-            <span className="text-[10px] font-semibold text-slate-500 tracking-wider uppercase flex items-center gap-1.5 mt-0.5 font-mono">
-              <span className="inline-block w-1.5 h-1.5 rounded-xs bg-emerald-500" />
-              Pabrik Kimia B2B • Est. 2004
-            </span>
-          </div>
         </Link>
 
         {/* ═══════════════════════════════════════════════════════════ */}
