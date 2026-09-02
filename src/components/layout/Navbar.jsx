@@ -26,12 +26,38 @@ export default function Navbar() {
 
   return (
     <header className={cn(
-      "sticky top-0 z-50 h-20 flex items-center transition-all duration-300",
+      "sticky top-0 z-50 h-20 flex items-center transition-all duration-300 relative overflow-hidden",
       isScrolled
         ? "bg-white/85 backdrop-blur-lg border-b border-sky-100 shadow-sm shadow-blue-900/5"
         : "bg-white border-b border-slate-100"
     )}>
-      <div className="max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-14 xl:px-20 w-full flex items-center justify-between gap-6">
+      {/* Subtle Liquid Flow & Water Wave Motif Spanning Across Navigation Bar */}
+      <div className="absolute inset-0 pointer-events-none opacity-30 select-none overflow-hidden">
+        <svg 
+          className="absolute -bottom-1 left-0 w-full h-8 text-sky-200/60 preserve-3d" 
+          viewBox="0 0 1440 48" 
+          fill="none" 
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path 
+            d="M0 24C240 40 480 8 720 24C960 40 1200 8 1440 24V48H0V24Z" 
+            fill="currentColor" 
+            fillOpacity="0.4"
+          />
+          <path 
+            d="M0 32C320 16 640 44 960 28C1280 12 1360 36 1440 32V48H0V32Z" 
+            fill="currentColor" 
+            fillOpacity="0.25"
+          />
+        </svg>
+
+        {/* Delicate Water Droplet Accents */}
+        <div className="absolute top-3 left-[15%] w-1.5 h-1.5 rounded-full bg-sky-400/40 blur-[0.5px]" />
+        <div className="absolute top-7 left-[45%] w-2 h-2 rounded-full bg-blue-400/30 blur-[0.5px]" />
+        <div className="absolute top-4 right-[25%] w-1.5 h-1.5 rounded-full bg-sky-300/40 blur-[0.5px]" />
+      </div>
+
+      <div className="max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-14 xl:px-20 w-full flex items-center justify-between gap-6 relative z-10">
         
         {/* Logo Resmi PT Kediri Chemical Abadi */}
         <Link to="/" className="flex items-center shrink-0 group py-1">
