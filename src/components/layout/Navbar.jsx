@@ -26,12 +26,22 @@ export default function Navbar() {
 
   return (
     <header className={cn(
-      "sticky top-0 z-50 h-20 flex items-center transition-all duration-300",
+      "sticky top-0 z-50 h-20 flex items-center transition-all duration-300 relative overflow-hidden",
       isScrolled
-        ? "bg-white/80 backdrop-blur-md border-b border-sky-100/60 shadow-xs"
-        : "bg-white/60 backdrop-blur-md border-b border-slate-100/60"
+        ? "bg-white/80 backdrop-blur-md border-b border-sky-100/70 shadow-xs"
+        : "bg-white/50 backdrop-blur-md border-b border-sky-100/50"
     )}>
-      <div className="max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-14 xl:px-20 w-full flex items-center justify-between gap-6">
+      {/* Liquid Water Flow Header Banner (Riak Air & Gelombang Kristal 3D) */}
+      <div className="absolute inset-0 pointer-events-none select-none overflow-hidden z-0">
+        <img
+          src="/images/header_liquid_clean.png"
+          alt="Liquid Water Wave Header Ribbon"
+          className="w-full h-full object-cover object-top opacity-80 mix-blend-multiply filter contrast-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-white/30 via-transparent to-white/20 pointer-events-none" />
+      </div>
+
+      <div className="max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-14 xl:px-20 w-full flex items-center justify-between gap-6 relative z-10">
         
         {/* Logo Resmi PT Kediri Chemical Abadi */}
         <Link to="/" className="flex items-center shrink-0 group py-1">
