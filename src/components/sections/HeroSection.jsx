@@ -23,11 +23,11 @@ export default function HeroSection() {
   })
 
   // =========================================================================
-  // PARALLAX BACKGROUND & AMBIENT GLOW
+  // PARALLAX BACKGROUND & AMBIENT GLOW (Terkunci stabil, bebas celah atas)
   // =========================================================================
-  const bgY = useTransform(smoothProgress, [0, 1], ['0%', '14%'])
-  const bgScale = useTransform(smoothProgress, [0, 1], [1.02, 1.10])
-  const glowScale = useTransform(smoothProgress, [0, 1], [1, 1.3])
+  const bgY = useTransform(smoothProgress, [0, 1], ['0px', '0px'])
+  const bgScale = useTransform(smoothProgress, [0, 1], [1.04, 1.08])
+  const glowScale = useTransform(smoothProgress, [0, 1], [1, 1.2])
 
   // =========================================================================
   // FASE 1: INTRO PEMBUKA "PT KEDIRI CHEMICAL ABADI" (Scroll 0.0 -> 0.20)
@@ -113,19 +113,19 @@ export default function HeroSection() {
         {/* Sticky Viewport Stage */}
         <section className="sticky top-0 h-screen w-full pt-20 bg-white text-slate-900 overflow-hidden flex flex-col justify-center select-none border-b border-slate-200">
           
-          {/* Real Factory Plant Floor Background (Dengan Parallax & Gradasi) */}
+          {/* Real Factory Plant Floor Background (Terkunci Penuh, Zero Gap Atas) */}
           <motion.div 
             style={{ y: bgY, scale: bgScale }}
-            className="absolute inset-0 z-0 pointer-events-none overflow-hidden origin-center will-change-transform"
+            className="absolute -top-12 -bottom-12 -left-6 -right-6 w-[calc(100%+48px)] h-[calc(100%+96px)] z-0 pointer-events-none overflow-hidden origin-center will-change-transform"
           >
             <img
               src="/images/kca_factory_floor.jpg"
               alt="Fasilitas Reaktor & Lini Produksi Pabrik PT Kediri Chemical Abadi"
-              className="w-full h-full object-cover object-center opacity-70"
+              className="w-full h-full object-cover object-center opacity-75"
             />
             {/* Gradasi Lembut Bersih */}
             <div className="absolute inset-0 bg-gradient-to-r from-white/85 via-white/50 to-white/20" />
-            <div className="absolute inset-0 bg-white/20" />
+            <div className="absolute inset-0 bg-white/15" />
           </motion.div>
 
           {/* Soft Royal Blue Ambient Glow dengan Parallax Scaling */}
@@ -135,7 +135,7 @@ export default function HeroSection() {
           />
 
           {/* Ambient 4K Liquid Water Caustics & Ripple Texture (Tema Air Higienis & Segar) */}
-          <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none opacity-40 mix-blend-multiply">
+          <div className="absolute -top-12 -bottom-12 -left-6 -right-6 w-[calc(100%+48px)] h-[calc(100%+96px)] z-0 pointer-events-none overflow-hidden select-none opacity-35 mix-blend-multiply">
             <img
               src="/images/bg_liquid_caustics_4k.png"
               alt="Liquid Water Caustics Texture"

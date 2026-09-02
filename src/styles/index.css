@@ -54,9 +54,9 @@ body {
   font-size: 0.8125rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  border-radius: 9999px;
-  box-shadow: 0 4px 14px rgba(15, 88, 168, 0.25);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(15, 88, 168, 0.2);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
 }
 
@@ -70,7 +70,7 @@ body {
   background: linear-gradient(
     to right,
     rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0.35) 50%,
     rgba(255, 255, 255, 0) 100%
   );
   transform: rotate(25deg);
@@ -80,8 +80,8 @@ body {
 
 .btn-fluid-primary:hover {
   background: linear-gradient(135deg, #0d4b8f 0%, #0369a1 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(15, 88, 168, 0.35);
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 18px rgba(15, 88, 168, 0.3);
 }
 
 .btn-fluid-primary:hover::before {
@@ -98,14 +98,14 @@ body {
   padding: 0.75rem 1.75rem;
   background: #FFFFFF;
   color: #0F58A8;
-  border: 1.5px solid #BAE6FD;
+  border: 1px solid #BAE6FD;
   font-weight: 700;
   font-size: 0.8125rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  border-radius: 9999px;
-  box-shadow: 0 2px 8px rgba(15, 88, 168, 0.06);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 4px rgba(15, 88, 168, 0.04);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
 }
 
@@ -113,8 +113,8 @@ body {
   background: #F0F9FF;
   border-color: #0F58A8;
   color: #0A192F;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(15, 88, 168, 0.12);
+  transform: translateY(-1.5px);
+  box-shadow: 0 4px 14px rgba(15, 88, 168, 0.1);
 }
 
 /* Water Ripple Pulse */
