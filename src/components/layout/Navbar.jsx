@@ -27,20 +27,20 @@ export default function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 w-full pointer-events-none transition-all duration-300 select-none">
       
-      {/* 4K Ultra HD 3D Liquid Water Wave Ribbon (Riak Air Melingkar & Gelombang 3D Alami) */}
+      {/* 4K Ultra HD Authentic 3D Liquid Water Wave Ribbon (Riak Air & Gelombang Kristal) */}
       <div className={cn(
-        "absolute top-0 left-0 right-0 w-full h-24 sm:h-28 lg:h-32 pointer-events-none select-none transition-all duration-500",
-        isScrolled ? "opacity-95" : "opacity-90"
+        "absolute top-0 left-0 right-0 w-full h-24 sm:h-28 lg:h-36 pointer-events-none select-none transition-all duration-500 overflow-visible",
+        isScrolled ? "opacity-100" : "opacity-95"
       )}>
         <img
-          src="/images/header_liquid_master_4k.png"
-          alt="4K Ultra HD 3D Liquid Water Wave Header Ribbon PT Kediri Chemical Abadi"
-          className="w-full h-full object-cover object-top mix-blend-multiply filter contrast-110 drop-shadow-xs"
+          src="/images/navbar_liquid_4k_ultra.png"
+          alt="4K Ultra HD 3D Liquid Water Wave Ribbon PT Kediri Chemical Abadi"
+          className="w-full h-full object-cover object-top filter contrast-105 drop-shadow-xs"
         />
         {/* Subtle glass wash on scroll */}
         <div className={cn(
           "absolute inset-0 transition-all duration-300",
-          isScrolled ? "bg-white/40 backdrop-blur-xs" : "bg-transparent"
+          isScrolled ? "bg-white/35 backdrop-blur-xs" : "bg-transparent"
         )} />
       </div>
 
