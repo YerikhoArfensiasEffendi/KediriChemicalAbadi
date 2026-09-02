@@ -46,35 +46,14 @@ export default function WhyChooseUsSection() {
     <section className="py-20 sm:py-28 bg-gradient-to-b from-white via-sky-50/15 to-white text-slate-900 relative overflow-hidden">
       
       {/* ========================================================================= */}
-      {/* 1. AMBIENT LIQUID WATER RIPPLE & REALISTIC SOAP LATHER BACKGROUND TEXTURES */}
+      {/* 1. AMBIENT LIQUID WATER CAUSTICS TEXTURE (Clean Asset Texture)            */}
       {/* ========================================================================= */}
-      
-      {/* Sisi Kiri Atas: Tekstur Gelombang & Riak Air Murni (Liquid Water Ripple) */}
-      <div className="absolute -top-10 -left-10 w-[460px] h-[460px] pointer-events-none opacity-40 select-none overflow-hidden rounded-full blur-2xl">
+      <div className="absolute inset-0 pointer-events-none opacity-20 select-none overflow-hidden mix-blend-multiply">
         <img
-          src="/images/water_ripple_accent.jpg"
-          alt="Water Ripple Caustics Background Texture"
-          className="w-full h-full object-cover mix-blend-multiply"
+          src="/images/bg_liquid_caustics_4k.png"
+          alt="Clean Ambient Liquid Water Caustics Texture"
+          className="w-full h-full object-cover object-center"
         />
-      </div>
-
-      {/* Sisi Kanan Bawah: Tekstur Buih Busa Sabun Alami (Realistic Soap Lather Bubbles) */}
-      <div className="absolute -bottom-16 -right-10 w-[550px] h-[550px] pointer-events-none opacity-60 select-none overflow-hidden rounded-full blur-xs">
-        <img
-          src="/images/soap_lather_accent.jpg"
-          alt="Natural Soap Lather Foam Bubbles Background Texture"
-          className="w-full h-full object-contain mix-blend-multiply"
-        />
-      </div>
-
-      {/* Sisi Kanan Atas: Gelembung Busa Halus (Soap Foam Top Accent) */}
-      <div className="absolute top-0 right-0 w-80 h-80 pointer-events-none opacity-45 select-none overflow-hidden">
-        <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full text-sky-200">
-          <circle cx="260" cy="50" r="70" fill="currentColor" fillOpacity="0.3" />
-          <circle cx="180" cy="90" r="45" fill="currentColor" fillOpacity="0.25" />
-          <circle cx="240" cy="140" r="30" fill="currentColor" fillOpacity="0.35" />
-          <circle cx="130" cy="50" r="20" fill="currentColor" fillOpacity="0.2" />
-        </svg>
       </div>
 
       <div className="max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-14 xl:px-20 w-full relative z-10">
