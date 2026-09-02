@@ -33,7 +33,7 @@ export default function Navbar() {
         isScrolled ? "opacity-100" : "opacity-95"
       )}>
         <img
-          src="/images/navbar_liquid_aligned_4k.png"
+          src="/images/navbar_liquid_final_4k.png"
           alt="4K Ultra HD 3D Liquid Water Wave Ribbon PT Kediri Chemical Abadi"
           className="w-full h-full object-cover object-top filter contrast-105 drop-shadow-xs"
         />
