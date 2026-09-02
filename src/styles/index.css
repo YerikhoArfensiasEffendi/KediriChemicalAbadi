@@ -137,3 +137,58 @@ body {
   animation: water-pulse 4s infinite ease-in-out;
 }
 
+/* 3D Liquid Flow Animation — Continuous Gentle Wave Drift */
+@keyframes liquid-flow {
+  0% {
+    transform: translateX(0) scaleX(1);
+  }
+  50% {
+    transform: translateX(-8px) scaleX(1.005);
+  }
+  100% {
+    transform: translateX(0) scaleX(1);
+  }
+}
+
+@keyframes liquid-flow-reverse {
+  0% {
+    transform: translateX(0) scaleX(1) translateY(0);
+  }
+  50% {
+    transform: translateX(6px) scaleX(1.003) translateY(-2px);
+  }
+  100% {
+    transform: translateX(0) scaleX(1) translateY(0);
+  }
+}
+
+@keyframes caustic-shimmer {
+  0% {
+    opacity: 0.08;
+    background-position: 0% 50%;
+  }
+  50% {
+    opacity: 0.18;
+    background-position: 100% 50%;
+  }
+  100% {
+    opacity: 0.08;
+    background-position: 0% 50%;
+  }
+}
+
+.animate-liquid-flow {
+  animation: liquid-flow 6s infinite ease-in-out;
+  will-change: transform;
+}
+
+.animate-liquid-flow-reverse {
+  animation: liquid-flow-reverse 8s infinite ease-in-out;
+  will-change: transform;
+}
+
+.animate-caustic-shimmer {
+  animation: caustic-shimmer 5s infinite ease-in-out;
+  background-size: 200% 100%;
+  will-change: opacity, background-position;
+}
