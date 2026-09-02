@@ -23,52 +23,52 @@ export default function Navbar() {
   }, [])
 
   return (
-    <header className="fixed top-3.5 sm:top-4 inset-x-0 z-50 pointer-events-none select-none transition-all duration-300">
+    <header className="fixed top-3 sm:top-4 inset-x-0 z-50 pointer-events-none select-none transition-all duration-300">
       <div className="max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-10 w-full flex items-center justify-between gap-4">
         
-        {/* ═══════════════════════════════════════════════════════ */}
-        {/* SISI KIRI: Kapsul Identitas Legal & Pabrik (Brand Dock) */}
-        {/* ═══════════════════════════════════════════════════════ */}
+        {/* ═══════════════════════════════════════════════════════════ */}
+        {/* SISI KIRI: Identitas Pabrik Tegas & Minimalis (Brand Box)   */}
+        {/* ═══════════════════════════════════════════════════════════ */}
         <Link
           to="/"
           className={cn(
-            "pointer-events-auto flex items-center gap-3 px-3.5 sm:px-4 py-2 rounded-2xl transition-all duration-300 group",
+            "pointer-events-auto flex items-center gap-3 px-3.5 sm:px-4 py-2 rounded-lg transition-all duration-300 group border",
             isScrolled
-              ? "bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-md shadow-slate-900/5"
-              : "bg-white/85 backdrop-blur-lg border border-slate-200/70 shadow-xs"
+              ? "bg-white/95 backdrop-blur-xl border-slate-300/90 shadow-sm"
+              : "bg-white/90 backdrop-blur-lg border-slate-200/80 shadow-2xs"
           )}
         >
           {/* Logo Resmi PT Kediri Chemical Abadi */}
           <img
             src="/images/kca_logo.png"
             alt="Logo Resmi PT Kediri Chemical Abadi"
-            className="h-9 sm:h-10 w-auto object-contain transition-transform group-hover:scale-105 duration-300"
+            className="h-8 sm:h-9 w-auto object-contain transition-transform group-hover:scale-102 duration-300"
           />
 
-          {/* Micro Typography Identitas Pabrik */}
+          {/* Micro Typography Identitas Pabrik Tegas */}
           <div className="hidden sm:flex flex-col text-left pr-1">
-            <span className="text-[12px] font-heading font-extrabold text-slate-900 tracking-tight leading-tight group-hover:text-[#0F58A8] transition-colors">
+            <span className="text-xs font-heading font-extrabold text-slate-900 tracking-tight leading-tight group-hover:text-[#0F58A8] transition-colors">
               PT KEDIRI CHEMICAL ABADI
             </span>
-            <span className="text-[10px] font-medium text-slate-500 tracking-normal flex items-center gap-1.5 mt-0.5">
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="text-[9.5px] font-semibold text-slate-500 tracking-wider uppercase flex items-center gap-1.5 mt-0.5 font-mono">
+              <span className="inline-block w-1.5 h-1.5 rounded-xs bg-emerald-500" />
               Pabrik Kimia B2B • Est. 2004
             </span>
           </div>
         </Link>
 
-        {/* ═══════════════════════════════════════════════════════ */}
-        {/* SISI KANAN: Floating Action & Navigation Dock          */}
-        {/* ═══════════════════════════════════════════════════════ */}
+        {/* ═══════════════════════════════════════════════════════════ */}
+        {/* SISI KANAN: Navigasi Tegas, Simpel & Presisi (Action Bar)   */}
+        {/* ═══════════════════════════════════════════════════════════ */}
         <div className="pointer-events-auto flex items-center gap-2.5 sm:gap-3">
           
-          {/* Desktop Navigation Glass Dock */}
+          {/* Desktop Navigation Crisp Dock */}
           <nav
             className={cn(
-              "hidden lg:flex items-center gap-1 p-1.5 rounded-full transition-all duration-300",
+              "hidden lg:flex items-center gap-1 p-1.5 rounded-lg border transition-all duration-300",
               isScrolled
-                ? "bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-md shadow-slate-900/5"
-                : "bg-white/85 backdrop-blur-lg border border-slate-200/70 shadow-xs"
+                ? "bg-white/95 backdrop-blur-xl border-slate-300/90 shadow-sm"
+                : "bg-white/90 backdrop-blur-lg border-slate-200/80 shadow-2xs"
             )}
           >
             {NAVIGATION_DATA.navLinks.map((link) => (
@@ -78,10 +78,10 @@ export default function Navbar() {
                 end={link.to === '/'}
                 className={({ isActive }) =>
                   cn(
-                    'px-3.5 xl:px-4 py-2 rounded-full text-xs font-heading font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer',
+                    'px-3.5 py-1.5 rounded-md text-xs font-heading uppercase tracking-wider transition-all duration-200 cursor-pointer font-bold',
                     isActive
-                      ? 'text-white bg-gradient-to-r from-[#0F58A8] to-[#0284C7] shadow-xs shadow-blue-600/30 font-extrabold'
-                      : 'text-slate-700 hover:text-[#0F58A8] hover:bg-slate-100/80'
+                      ? 'text-white bg-[#0F58A8] shadow-2xs font-extrabold'
+                      : 'text-slate-700 hover:text-[#0F58A8] hover:bg-slate-100/90'
                   )
                 }
               >
@@ -89,38 +89,39 @@ export default function Navbar() {
               </NavLink>
             ))}
 
-            {/* Quick CTA inside dock for Desktop */}
-            <div className="pl-1">
-              <Link
-                to="/contact"
-                className="btn-fluid-primary text-xs py-2 px-4.5 rounded-full shadow-xs"
-              >
-                <span>Hubungi Lab</span>
-                <ArrowUpRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
+            {/* Subtle Vertical Divider */}
+            <div className="h-4 w-px bg-slate-200 mx-1" />
+
+            {/* Quick CTA inside dock for Desktop (Tegas, Kotak Presisi) */}
+            <Link
+              to="/contact"
+              className="h-8 px-4 bg-[#0F58A8] hover:bg-blue-700 active:bg-blue-800 text-white rounded-md text-xs font-heading font-extrabold uppercase tracking-wider inline-flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer"
+            >
+              <span>Hubungi Lab</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </Link>
           </nav>
 
-          {/* Quick Contact Pill for Tablet/Mobile */}
+          {/* Quick Contact for Tablet */}
           <div className="hidden sm:flex lg:hidden">
             <Link
               to="/contact"
-              className="btn-fluid-primary text-xs py-2 px-4 rounded-full shadow-xs"
+              className="h-9 px-4 bg-[#0F58A8] hover:bg-blue-700 text-white rounded-lg text-xs font-heading font-extrabold uppercase tracking-wider inline-flex items-center gap-1.5 shadow-2xs"
             >
               <span>Hubungi Lab</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 
-          {/* Mobile Hamburger Toggle Glass Pill */}
+          {/* Mobile Hamburger Toggle (Tegas rounded-lg) */}
           <div className="flex items-center lg:hidden">
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className={cn(
-                "p-2.5 rounded-2xl transition-all duration-300 cursor-pointer text-slate-700 hover:text-[#0F58A8]",
+                "p-2.5 rounded-lg border transition-all duration-300 cursor-pointer text-slate-700 hover:text-[#0F58A8]",
                 isScrolled
-                  ? "bg-white/95 backdrop-blur-xl border border-slate-200 shadow-md"
-                  : "bg-white/85 backdrop-blur-lg border border-slate-200/70 shadow-xs"
+                  ? "bg-white/95 backdrop-blur-xl border-slate-300 shadow-sm"
+                  : "bg-white/90 backdrop-blur-lg border-slate-200/80 shadow-2xs"
               )}
               aria-label="Toggle Mobile Menu"
             >
@@ -132,20 +133,20 @@ export default function Navbar() {
 
       </div>
 
-      {/* ═══════════════════════════════════════════════════════ */}
-      {/* MOBILE DROPDOWN DOCK                                    */}
-      {/* ═══════════════════════════════════════════════════════ */}
+      {/* ═══════════════════════════════════════════════════════════ */}
+      {/* MOBILE DROPDOWN DOCK (Tegas & Rapi)                         */}
+      {/* ═══════════════════════════════════════════════════════════ */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -8, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -8, scale: 0.98 }}
-            transition={{ duration: 0.2 }}
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.15 }}
             className="max-w-[1700px] mx-auto px-4 sm:px-6 mt-2 pointer-events-auto lg:hidden"
           >
-            <div className="bg-white/95 backdrop-blur-2xl border border-slate-200 rounded-3xl shadow-xl p-4 sm:p-5">
-              <nav className="flex flex-col gap-1.5">
+            <div className="bg-white/95 backdrop-blur-2xl border border-slate-300/80 rounded-xl shadow-lg p-4">
+              <nav className="flex flex-col gap-1">
                 {NAVIGATION_DATA.navLinks.map((link) => (
                   <NavLink
                     key={link.to}
@@ -154,10 +155,10 @@ export default function Navbar() {
                     onClick={() => setMobileOpen(false)}
                     className={({ isActive }) =>
                       cn(
-                        'px-4 py-3 rounded-2xl text-xs font-heading font-extrabold uppercase tracking-wider transition-all',
+                        'px-4 py-2.5 rounded-lg text-xs font-heading uppercase tracking-wider transition-all font-bold',
                         isActive
-                          ? 'text-white bg-gradient-to-r from-[#0F58A8] to-[#0284C7] shadow-xs'
-                          : 'text-slate-700 hover:bg-slate-100/80 hover:text-[#0F58A8]'
+                          ? 'text-white bg-[#0F58A8] font-extrabold'
+                          : 'text-slate-700 hover:bg-slate-100 hover:text-[#0F58A8]'
                       )
                     }
                   >
@@ -169,9 +170,9 @@ export default function Navbar() {
                   <Link
                     to="/contact"
                     onClick={() => setMobileOpen(false)}
-                    className="btn-fluid-primary w-full text-xs py-3 rounded-2xl text-center flex items-center justify-center gap-2"
+                    className="w-full h-11 bg-[#0F58A8] hover:bg-blue-700 text-white rounded-lg text-xs font-heading font-extrabold uppercase tracking-wider flex items-center justify-center gap-2 shadow-2xs"
                   >
-                    <span>Hubungi Lab & Konsultasi B2B</span>
+                    <span>Hubungi Lab &amp; Konsultasi B2B</span>
                     <ArrowUpRight className="w-4 h-4" />
                   </Link>
                 </div>
