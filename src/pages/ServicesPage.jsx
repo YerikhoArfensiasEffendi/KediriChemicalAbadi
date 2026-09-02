@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { motion } from 'framer-motion'
 import { 
@@ -18,7 +19,6 @@ import {
   Package,
   Handshake
 } from 'lucide-react'
-import MakloonSchemeSection from '@/components/sections/MakloonSchemeSection'
 import CTASection from '@/components/sections/CTASection'
 import RFQModal from '@/components/ui/RFQModal'
 
@@ -205,8 +205,26 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Makloon Scheme Comparison Cards */}
-      <MakloonSchemeSection />
+      {/* Makloon Information & Direct Consultation Callout */}
+      <section className="py-14 bg-slate-50/70 border-b border-slate-200">
+        <div className="max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-14 xl:px-20 text-center space-y-4">
+          <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold font-heading text-slate-900 tracking-tight">
+            Konsultasikan Kebutuhan Maklon &amp; Dapatkan Informasi Lengkap
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto leading-relaxed">
+            Untuk menjaga kerahasiaan formula dan skema kemitraan bisnis (NDA), detail spesifikasi kapasitas reaktor dan proposal penawaran maklon diberikan langsung melalui sesi konsultasi bersama tim kami.
+          </p>
+          <div className="pt-2">
+            <Link
+              to="/contact"
+              className="h-10 px-6 bg-[#0F58A8] hover:bg-blue-700 text-white rounded-md text-xs font-heading font-extrabold uppercase tracking-wider inline-flex items-center gap-2 shadow-2xs transition-all"
+            >
+              <span>Hubungi Tim Riset &amp; Dapatkan Informasi Maklon</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* ========================================================================= */}
       {/* ALUR KERJA PRODUKSI KIMIA KCA (DIAGRAM INFOGRAFIS PERSIS GAMBAR)          */}

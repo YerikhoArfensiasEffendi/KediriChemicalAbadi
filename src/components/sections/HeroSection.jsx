@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import { ArrowRight, FileDown, ChevronDown, CheckCircle2 } from 'lucide-react'
 import { HERO_DATA } from '@/data/heroData'
@@ -216,12 +217,12 @@ export default function HeroSection() {
                     <ArrowRight className="w-4 h-4" />
                   </button>
 
-                  <a
-                    href="#makloon"
+                  <Link
+                    to="/contact"
                     className="btn-fluid-secondary"
                   >
-                    <span>Layanan Maklon</span>
-                  </a>
+                    <span>Informasi Maklon</span>
+                  </Link>
                 </div>
               </motion.div>
 

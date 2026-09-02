@@ -3,7 +3,6 @@ import HeroSection from '@/components/sections/HeroSection'
 import BannerSliderSection from '@/components/sections/BannerSliderSection'
 import ProductShowcaseSection from '@/components/sections/ProductShowcaseSection'
 import WhyChooseUsSection from '@/components/sections/WhyChooseUsSection'
-import MakloonSchemeSection from '@/components/sections/MakloonSchemeSection'
 import IndustriesSection from '@/components/sections/IndustriesSection'
 import CTASection from '@/components/sections/CTASection'
 
@@ -26,7 +25,6 @@ export default function HomePage() {
       <BannerSliderSection />
       <ProductShowcaseSection />
       <WhyChooseUsSection />
-      <MakloonSchemeSection />
       <IndustriesSection />
       <CTASection />
     </main>
