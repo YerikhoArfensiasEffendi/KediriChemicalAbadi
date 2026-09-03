@@ -212,22 +212,12 @@ export default function ProductsPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.3 }}
-                    className="flex flex-col justify-between group relative transition-all duration-300 space-y-4 p-2 sm:p-3"
+                    className="bg-white border border-slate-200/90 hover:border-[#0F58A8]/40 rounded-3xl p-5 sm:p-6 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group relative space-y-5"
                   >
                     <div className="space-y-4">
                       
-                      {/* Pure 3D Product Image (No Box, No Background, Pure Floating Product) */}
-                      <div className="w-full h-48 sm:h-56 flex items-center justify-center overflow-hidden py-2 group-hover:scale-105 transition-transform duration-500">
-                        <img
-                          src={product.image || '/images/product_jerigen5l.jpg'}
-                          alt={product.title}
-                          className="w-full h-full object-contain filter drop-shadow-md select-none mix-blend-multiply"
-                          loading="lazy"
-                        />
-                      </div>
-
                       {/* Top Bar: SKU & Badge */}
-                      <div className="flex items-center justify-between gap-2 border-b border-slate-200/80 pb-2.5">
+                      <div className="flex items-center justify-between gap-2 border-b border-slate-100 pb-3">
                         <span className={`text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full border ${theme.skuBadge}`}>
                           {product.sku}
                         </span>
@@ -236,6 +226,16 @@ export default function ProductsPage() {
                             {product.badge}
                           </span>
                         )}
+                      </div>
+
+                      {/* Pure Product Image (No Inner Box, Pure Floating Bottle, No Rectangular Shadow) */}
+                      <div className="w-full h-44 sm:h-52 flex items-center justify-center overflow-hidden py-1 group-hover:scale-105 transition-transform duration-500">
+                        <img
+                          src={product.image || '/images/product_jerigen5l.jpg'}
+                          alt={product.title}
+                          className="w-full h-full object-contain select-none mix-blend-multiply"
+                          loading="lazy"
+                        />
                       </div>
 
                       {/* Title & Description */}
