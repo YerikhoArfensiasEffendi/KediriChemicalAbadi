@@ -197,22 +197,13 @@ export default function IndustriesSection() {
                     isRightAligned ? 'lg:order-1' : 'lg:order-2'
                   }`}
                 >
-                  {/* Header Sektor with Vector Logo */}
-                  <div className="space-y-1.5">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-full bg-sky-50 border border-sky-100 flex items-center justify-center shrink-0 text-[#0F58A8]">
-                        <LogoComp />
-                      </div>
-                      <span className="text-[10px] font-mono font-bold text-[#0F58A8] uppercase tracking-wider bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-100">
-                        {sec.badge}
-                      </span>
-                    </div>
-
+                  {/* Header Sektor: Judul Langsung di Paling Atas */}
+                  <div className="space-y-2">
                     <h3 className="text-lg sm:text-xl lg:text-2xl font-extrabold font-heading text-slate-900 leading-snug">
                       {sec.title}
                     </h3>
 
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal pt-1">
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
                       {sec.description}
                     </p>
                   </div>
