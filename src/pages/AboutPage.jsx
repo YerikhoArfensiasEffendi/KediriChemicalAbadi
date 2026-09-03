@@ -10,14 +10,12 @@ import {
   FlaskConical, 
   Droplets, 
   Leaf, 
-  MousePointer2,
-  ChevronDown,
   ArrowRight
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { COMPANY_DATA } from '@/data/companyData'
 
-const SLIDES = [
+const TIMELINE_SLIDES = [
   // SLIDE 0: HERO BANNER SEJARAH KAMI
   {
     type: 'hero',
@@ -118,7 +116,7 @@ const SLIDES = [
     imageCaption: 'Instalasi Pengolahan Air Demineralisasi RO 50.000 L/Hari & Reaktor Kapasitas 500+ Ton/Bln',
     align: 'right'
   },
-  // SLIDE 6: TAHUN 2024-2026 (SLIDE TAHUN TERAKHIR)
+  // SLIDE 6: TAHUN 2024-2026 (SLIDE TAHUN TERAKHIR - TERMINASI)
   {
     type: 'timeline',
     id: '2026',
@@ -137,18 +135,6 @@ const SLIDES = [
     image: '/images/kca_packaging_lineup.png',
     imageCaption: 'Lini Produk Resmi & Fasilitas Lab PT Kediri Chemical Abadi Standar ISO 9001:2015',
     align: 'left'
-  },
-  // SLIDE 7: DEWAN DIREKSI & TATA KELOLA KORPORAT
-  {
-    type: 'directors',
-    id: 'directors',
-    label: 'Direksi'
-  },
-  // SLIDE 8: KOMITMEN ESG & PENUTUP
-  {
-    type: 'esg',
-    id: 'esg',
-    label: 'Prinsip'
   }
 ]
 
@@ -157,11 +143,17 @@ export default function AboutPage() {
   const [isTransitioning, setIsTransitioning] = useState(false)
   const [direction, setDirection] = useState(1) // 1 = scroll down, -1 = scroll up
   const [isPushingPrologue, setIsPushingPrologue] = useState(false)
-  const [isLeavingTimeline, setIsLeavingTimeline] = useState(false)
   const containerRef = useRef(null)
 
+  const scrollToDireksi = useCallback(() => {
+    const el = document.getElementById('direksi')
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [])
+
   const changeSlide = useCallback((newIdx, dir = 1) => {
-    if (newIdx < 0 || newIdx >= SLIDES.length || isTransitioning || isPushingPrologue || isLeavingTimeline) return
+    if (newIdx < 0 || newIdx >= TIMELINE_SLIDES.length || isTransitioning || isPushingPrologue) return
 
     // JEMBATAN MASUK SINEMATIK: Dari Latar Belakang (1) ke Tahun 2004 (2)
     if (currentIdx === 1 && newIdx === 2 && dir === 1) {
@@ -179,37 +171,23 @@ export default function AboutPage() {
       return
     }
 
-    // JEMBATAN KELUAR SINEMATIK: Dari Tahun Terakhir 2026 (6) ke Direksi (7)
-    // Garis terakhir dan konten 2026 melayang naik meninggalkan linimasa sebelum masuk Direksi
-    if (currentIdx === 6 && newIdx === 7 && dir === 1) {
-      setIsTransitioning(true)
-      setIsLeavingTimeline(true)
-      setDirection(1)
-
-      setTimeout(() => {
-        setIsLeavingTimeline(false)
-        setCurrentIdx(7)
-        setTimeout(() => {
-          setIsTransitioning(false)
-        }, 850)
-      }, 700)
-      return
-    }
-
-    // Pergantian Slide Standar
+    // Pergantian Slide Linimasa Standar
     setIsTransitioning(true)
     setDirection(dir)
     setCurrentIdx(newIdx)
     setTimeout(() => {
       setIsTransitioning(false)
     }, 950)
-  }, [currentIdx, isTransitioning, isPushingPrologue, isLeavingTimeline])
+  }, [currentIdx, isTransitioning, isPushingPrologue])
 
   const nextSlide = useCallback(() => {
-    if (currentIdx < SLIDES.length - 1) {
+    if (currentIdx < TIMELINE_SLIDES.length - 1) {
       changeSlide(currentIdx + 1, 1)
+    } else if (currentIdx === TIMELINE_SLIDES.length - 1) {
+      // Pada slide terakhir linimasa (2026), scroll berikutnya mengalirkan layar ke Dewan Direksi!
+      scrollToDireksi()
     }
-  }, [currentIdx, changeSlide])
+  }, [currentIdx, changeSlide, scrollToDireksi])
 
   const prevSlide = useCallback(() => {
     if (currentIdx > 0) {
@@ -217,19 +195,26 @@ export default function AboutPage() {
     }
   }, [currentIdx, changeSlide])
 
-  // Pause Lenis while on Section-Locked AboutPage
-  useEffect(() => {
-    window.__lenis?.stop()
-    return () => {
-      window.__lenis?.start()
-    }
-  }, [])
-
-  // Responsif & Ringan: 1 Sentuhan Scroll Langsung Berpindah Halus
+  // Wheel Listener Adaptif:
+  // - Saat di linimasa (scrollY <= 20): kontrol perpindahan slide 0 s/d 6
+  // - Pada slide 2026 saat scroll down: scroll mulus ke Dewan Direksi (#direksi)
+  // - Saat sudah berada di Dewan Direksi ke bawah (scrollY > 20): scrolling normal bebas dengan Lenis
   useEffect(() => {
     let lastScrollTime = 0
 
     const handleWheel = (e) => {
+      // Jika pengguna sudah berada di section normal (Dewan Direksi / ESG / Footer), biarkan scroll normal!
+      if (window.scrollY > 20) {
+        return
+      }
+
+      // Jika berada di slide terakhir (2026) dan scroll ke bawah, arahkan ke Dewan Direksi!
+      if (currentIdx === TIMELINE_SLIDES.length - 1 && e.deltaY > 0) {
+        scrollToDireksi()
+        return
+      }
+
+      // Di dalam linimasa, kontrol perpindahan slide
       e.preventDefault()
       const now = Date.now()
       if (now - lastScrollTime < 850) return
@@ -238,17 +223,24 @@ export default function AboutPage() {
         lastScrollTime = now
         if (e.deltaY > 0) {
           nextSlide()
-        } else {
+        } else if (e.deltaY < 0 && currentIdx > 0) {
           prevSlide()
         }
       }
     }
 
     const handleKeyDown = (e) => {
+      if (window.scrollY > 20) return
+
       if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
-        e.preventDefault()
-        nextSlide()
-      } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+        if (currentIdx < TIMELINE_SLIDES.length - 1) {
+          e.preventDefault()
+          nextSlide()
+        } else {
+          e.preventDefault()
+          scrollToDireksi()
+        }
+      } else if ((e.key === 'ArrowUp' || e.key === 'PageUp') && currentIdx > 0) {
         e.preventDefault()
         prevSlide()
       }
@@ -259,12 +251,14 @@ export default function AboutPage() {
       touchStartY = e.touches[0].clientY
     }
     const handleTouchEnd = (e) => {
+      if (window.scrollY > 20) return
+
       const touchEndY = e.changedTouches[0].clientY
       const diff = touchStartY - touchEndY
       if (Math.abs(diff) > 25) {
         if (diff > 0) {
           nextSlide()
-        } else {
+        } else if (diff < 0 && currentIdx > 0) {
           prevSlide()
         }
       }
@@ -286,17 +280,14 @@ export default function AboutPage() {
       }
       window.removeEventListener('keydown', handleKeyDown)
     }
-  }, [nextSlide, prevSlide])
+  }, [currentIdx, nextSlide, prevSlide, scrollToDireksi])
 
-  const currentSlide = SLIDES[currentIdx]
+  const currentSlide = TIMELINE_SLIDES[currentIdx]
   const isTimeline = currentSlide.type === 'timeline'
   const isLastTimelineYear = currentSlide.id === '2026'
 
   return (
-    <main 
-      ref={containerRef} 
-      className="h-screen w-screen overflow-hidden bg-white text-slate-900 pt-20 relative select-none flex flex-col justify-between"
-    >
+    <main className="w-full bg-white text-slate-900 select-none relative">
       <Helmet>
         <title>Sejarah & Profil Perusahaan — PT Kediri Chemical Abadi</title>
         <meta
@@ -307,41 +298,72 @@ export default function AboutPage() {
       </Helmet>
 
       {/* ═════════════════════════════════════════════════════════════════════ */}
-      {/* GARIS TENGAH PERMANEN (HANYA DI BAGIAN TIMELINE)                     */}
-      {/* PADA 2026: BERHENTI DI TITIK (bottom-1/2), TIDAK DI TEMBUS KE BAWAH!*/}
+      {/* SECTION 1: LINIMASA SEJARAH SINEMATIK (SLIDE 0 S/D 6: 2026)          */}
       {/* ═════════════════════════════════════════════════════════════════════ */}
-      {isTimeline && (
-        <motion.div 
-          animate={isLeavingTimeline ? { y: -160, opacity: 0 } : { y: 0, opacity: 1 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className={`hidden lg:block absolute left-1/2 -translate-x-1/2 top-0 ${
-            isLastTimelineYear ? 'bottom-1/2' : 'bottom-0'
-          } w-[2px] pointer-events-none z-0`}
-        >
-          {/* Garis Dasar Abu-abu Halus */}
-          <div className="w-full h-full bg-slate-200" />
-          {/* Garis Aksen Biru Korporat Halus */}
-          <div className="absolute top-0 left-0 right-0 bottom-0 w-full bg-[#0F58A8]/60" />
-        </motion.div>
-      )}
+      <div 
+        ref={containerRef}
+        className="h-screen w-full overflow-hidden bg-white pt-20 relative flex flex-col justify-between"
+      >
+        {/* GARIS TENGAH PERMANEN (HANYA DI BAGIAN TIMELINE) */}
+        {/* PADA 2026: BERHENTI TEPAT DI TITIK (bottom-1/2), TIDAK TEMBUS KE BAWAH! */}
+        {isTimeline && (
+          <div 
+            className={`hidden lg:block absolute left-1/2 -translate-x-1/2 top-0 ${
+              isLastTimelineYear ? 'bottom-1/2' : 'bottom-0'
+            } w-[2px] pointer-events-none z-0`}
+          >
+            {/* Garis Dasar Abu-abu Halus */}
+            <div className="w-full h-full bg-slate-200" />
+            {/* Garis Aksen Biru Korporat Halus */}
+            <div className="absolute top-0 left-0 right-0 bottom-0 w-full bg-[#0F58A8]/60" />
+          </div>
+        )}
 
-      {/* ═════════════════════════════════════════════════════════════════════ */}
-      {/* TITIK PEMBERHENTIAN (NODE BULLET) TEPAT DI TENGAH LAYAR (DEAD-CENTER) */}
-      {/* MELUNCUR NAIK TINGGI KE ATAS (-80PX) & MUNCUL DARI BAWAH (+80PX)     */}
-      {/* ═════════════════════════════════════════════════════════════════════ */}
-      {isTimeline && (
-        <motion.div 
-          animate={isLeavingTimeline ? { y: -160, opacity: 0 } : { y: 0, opacity: 1 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="hidden lg:flex absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-0 pointer-events-none items-center justify-center"
-        >
-          <AnimatePresence mode="wait">
+        {/* TITIK PEMBERHENTIAN (NODE BULLET) TEPAT DI TENGAH LAYAR (DEAD-CENTER) */}
+        {isTimeline && (
+          <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-0 pointer-events-none items-center justify-center">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`node-${currentSlide.id}`}
+                initial={{ 
+                  opacity: 0, 
+                  y: direction > 0 ? 80 : -80,
+                  scale: 0.75
+                }}
+                animate={{ 
+                  opacity: 1, 
+                  y: 0, 
+                  scale: 1 
+                }}
+                exit={{ 
+                  opacity: 0, 
+                  y: direction > 0 ? -80 : 80,
+                  scale: 0.75
+                }}
+                transition={{ 
+                  duration: 0.85, 
+                  ease: [0.16, 1, 0.3, 1] 
+                }}
+                className={`w-5 h-5 rounded-full border-2 border-[#0F58A8] bg-white flex items-center justify-center shadow-xs ${
+                  isLastTimelineYear ? 'ring-4 ring-blue-100/90' : ''
+                }`}
+              >
+                <div className="w-2 h-2 rounded-full bg-[#0F58A8]" />
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        )}
+
+        {/* PANGGUNG PRESENTASI LINIMASA */}
+        <div className="flex-1 w-full h-full relative overflow-hidden flex items-center justify-center">
+          <AnimatePresence mode="wait" custom={direction}>
             <motion.div
-              key={`node-${currentSlide.id}`}
+              key={currentSlide.id}
+              custom={direction}
               initial={{ 
                 opacity: 0, 
-                y: direction > 0 ? 80 : -80,
-                scale: 0.75
+                y: direction > 0 ? 90 : -90,
+                scale: 0.985
               }}
               animate={{ 
                 opacity: 1, 
@@ -350,481 +372,383 @@ export default function AboutPage() {
               }}
               exit={{ 
                 opacity: 0, 
-                y: direction > 0 ? -80 : 80,
-                scale: 0.75
+                y: direction > 0 ? -120 : 120,
+                scale: 0.985
               }}
               transition={{ 
-                duration: 0.85, 
+                duration: 0.88, 
                 ease: [0.16, 1, 0.3, 1] 
               }}
-              className={`w-5 h-5 rounded-full border-2 border-[#0F58A8] bg-white flex items-center justify-center shadow-xs ${
-                isLastTimelineYear ? 'ring-4 ring-blue-100/90' : ''
-              }`}
+              className="w-full h-full flex items-center justify-center px-4 sm:px-8 lg:px-16 relative"
             >
-              <div className="w-2 h-2 rounded-full bg-[#0F58A8]" />
-            </motion.div>
-          </AnimatePresence>
-        </motion.div>
-      )}
+              <div className="max-w-6xl mx-auto w-full relative z-10">
 
-      {/* ═════════════════════════════════════════════════════════════════════ */}
-      {/* PANGGUNG PRESENTASI: FADE OUT LEBIH PELAN & LEBIH JAUH KE ATAS (-120PX)*/}
-      {/* ═════════════════════════════════════════════════════════════════════ */}
-      <div className="flex-1 w-full h-full relative overflow-hidden flex items-center justify-center">
-        <AnimatePresence mode="wait" custom={direction}>
-          <motion.div
-            key={currentSlide.id}
-            custom={direction}
-            initial={{ 
-              opacity: 0, 
-              y: direction > 0 ? 90 : -90,
-              scale: 0.985
-            }}
-            animate={{ 
-              opacity: 1, 
-              y: 0, 
-              scale: 1 
-            }}
-            exit={{ 
-              opacity: 0, 
-              y: direction > 0 ? -120 : 120,
-              scale: 0.985
-            }}
-            transition={{ 
-              duration: 0.88, 
-              ease: [0.16, 1, 0.3, 1] 
-            }}
-            className="w-full h-full flex items-center justify-center px-4 sm:px-8 lg:px-16 relative"
-          >
-            <motion.div 
-              animate={isLeavingTimeline ? { y: -160, opacity: 0 } : {}}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="max-w-6xl mx-auto w-full relative z-10"
-            >
-
-              {/* 1. HERO SLIDE */}
-              {currentSlide.type === 'hero' && (
-                <div className="max-w-5xl mx-auto w-full text-center space-y-6 sm:space-y-8">
-                  {/* Judul Muncul Halus & Tenang */}
-                  <motion.div 
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -80 }}
-                    transition={{ duration: 0.85, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                    className="flex items-center justify-center gap-4 sm:gap-8"
-                  >
-                    <div className="h-[1.5px] bg-slate-300 w-16 sm:w-32 lg:w-48" />
-                    <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-heading tracking-[0.18em] text-[#0F58A8] uppercase">
-                      {currentSlide.title}
-                    </h1>
-                    <div className="h-[1.5px] bg-slate-300 w-16 sm:w-32 lg:w-48" />
-                  </motion.div>
-
-                  {/* Foto Mosaik Muncul Paralaks dari Bawah */}
-                  <motion.div 
-                    initial={{ opacity: 0, y: 60, scale: 0.97 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -100, scale: 0.97 }}
-                    transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                    className="relative overflow-hidden rounded-xl border border-slate-200/90 shadow-md bg-slate-100 aspect-[21/9]"
-                  >
-                    <img
-                      src={currentSlide.image}
-                      alt={currentSlide.title}
-                      className="w-full h-full object-cover filter brightness-[0.98] contrast-[1.03]"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent pointer-events-none" />
-                    <div className="absolute bottom-3 left-4 sm:left-6 text-white text-xs sm:text-sm font-heading font-medium drop-shadow-sm">
-                      {currentSlide.subtitle}
-                    </div>
-                  </motion.div>
-                </div>
-              )}
-
-              {/* 2. PROLOGUE / LATAR BELAKANG */}
-              {currentSlide.type === 'prologue' && (
-                <div className="max-w-4xl mx-auto w-full text-center space-y-6 relative">
-                  {/* GARIS PENDORONG YANG MUNCUL TERLEBIH DAHULU MENUJU TAHUN 2004 */}
-                  {isPushingPrologue && (
-                    <div className="hidden lg:block fixed left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] pointer-events-none z-0">
-                      <div className="w-full h-full bg-slate-200" />
-                      <motion.div
-                        initial={{ scaleY: 0, originY: 1 }}
-                        animate={{ scaleY: 1, originY: 1 }}
-                        transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-                        className="absolute inset-0 w-full bg-[#0F58A8] origin-bottom shadow-xs"
-                      />
-                    </div>
-                  )}
-
-                  {/* KONTEN LATAR BELAKANG TERDORONG NAIK HINGGA FADE OUT */}
-                  <motion.div
-                    animate={isPushingPrologue ? { y: -180, opacity: 0 } : { y: 0, opacity: 1 }}
-                    transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-                    className="space-y-6 relative z-10"
-                  >
-                    {/* Judul */}
-                    <div className="space-y-2.5">
-                      <h2 className="text-base sm:text-lg lg:text-xl font-bold font-heading uppercase tracking-wider text-[#0F58A8]">
+                {/* 1. HERO SLIDE */}
+                {currentSlide.type === 'hero' && (
+                  <div className="max-w-5xl mx-auto w-full text-center space-y-6 sm:space-y-8">
+                    <motion.div 
+                      initial={{ opacity: 0, y: 40 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -80 }}
+                      transition={{ duration: 0.85, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                      className="flex items-center justify-center gap-4 sm:gap-8"
+                    >
+                      <div className="h-[1.5px] bg-slate-300 w-16 sm:w-32 lg:w-48" />
+                      <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-heading tracking-[0.18em] text-[#0F58A8] uppercase">
                         {currentSlide.title}
-                      </h2>
-                      <h3 className="text-sm sm:text-base font-bold font-heading uppercase tracking-wide text-slate-900">
+                      </h1>
+                      <div className="h-[1.5px] bg-slate-300 w-16 sm:w-32 lg:w-48" />
+                    </motion.div>
+
+                    <motion.div 
+                      initial={{ opacity: 0, y: 60, scale: 0.97 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -100, scale: 0.97 }}
+                      transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                      className="relative overflow-hidden rounded-xl border border-slate-200/90 shadow-md bg-slate-100 aspect-[21/9]"
+                    >
+                      <img
+                        src={currentSlide.image}
+                        alt={currentSlide.title}
+                        className="w-full h-full object-cover filter brightness-[0.98] contrast-[1.03]"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent pointer-events-none" />
+                      <div className="absolute bottom-3 left-4 sm:left-6 text-white text-xs sm:text-sm font-heading font-medium drop-shadow-sm">
                         {currentSlide.subtitle}
-                      </h3>
-                    </div>
+                      </div>
+                    </motion.div>
+                  </div>
+                )}
 
-                    {/* Paragraf Latar Belakang */}
-                    <div className="text-sm sm:text-[15.5px] text-slate-800 leading-[1.85] font-normal text-justify sm:text-center space-y-4 max-w-3xl mx-auto">
-                      <p>{currentSlide.desc1}</p>
-                      <p>{currentSlide.desc2}</p>
-                      <p>{currentSlide.desc3}</p>
-                    </div>
-                  </motion.div>
-                </div>
-              )}
+                {/* 2. PROLOGUE / LATAR BELAKANG */}
+                {currentSlide.type === 'prologue' && (
+                  <div className="max-w-4xl mx-auto w-full text-center space-y-6 relative">
+                    {/* GARIS PENDORONG YANG MUNCUL TERLEBIH DAHULU MENUJU TAHUN 2004 */}
+                    {isPushingPrologue && (
+                      <div className="hidden lg:block fixed left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] pointer-events-none z-0">
+                        <div className="w-full h-full bg-slate-200" />
+                        <motion.div
+                          initial={{ scaleY: 0, originY: 1 }}
+                          animate={{ scaleY: 1, originY: 1 }}
+                          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+                          className="absolute inset-0 w-full bg-[#0F58A8] origin-bottom shadow-xs"
+                        />
+                      </div>
+                    )}
 
-              {/* 3. TIMELINE TAHUN: MASUK BERGANTIAN (FOTO -> TULISAN) SECARA KALEM */}
-              {currentSlide.type === 'timeline' && (
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center relative z-20">
-                  
-                  {/* GANJIL: FOTO KIRI, TULISAN KANAN */}
-                  {currentSlide.align === 'left' && (
-                    <>
-                      {/* LANGKAH 1: FOTO MUNCUL PARALAKS PERLAHAN DARI BAWAH, KELUAR NAIK KE ATAS (-100PX) */}
-                      <motion.div 
-                        initial={{ opacity: 0, y: 60, scale: 0.97 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: -100, scale: 0.97 }}
-                        transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                        className="lg:col-span-6 order-2 lg:order-1 flex justify-center lg:justify-end relative z-20"
-                      >
-                        <div className="relative p-2.5 sm:p-3 bg-white border border-slate-200/90 shadow-md rounded-lg max-w-md w-full group">
-                          <div className="overflow-hidden rounded aspect-[16/11] bg-slate-100">
-                            <img
-                              src={currentSlide.image}
-                              alt={currentSlide.year}
-                              className="w-full h-full object-cover select-none group-hover:scale-103 transition-transform duration-700 ease-out"
-                            />
-                          </div>
-                          <div className="pt-2 text-center text-xs font-heading font-medium text-slate-600">
-                            {currentSlide.imageCaption}
-                          </div>
-                        </div>
-                      </motion.div>
+                    {/* KONTEN LATAR BELAKANG TERDORONG NAIK HINGGA FADE OUT */}
+                    <motion.div
+                      animate={isPushingPrologue ? { y: -180, opacity: 0 } : { y: 0, opacity: 1 }}
+                      transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+                      className="space-y-6 relative z-10"
+                    >
+                      <div className="space-y-2.5">
+                        <h2 className="text-base sm:text-lg lg:text-xl font-bold font-heading uppercase tracking-wider text-[#0F58A8]">
+                          {currentSlide.title}
+                        </h2>
+                        <h3 className="text-sm sm:text-base font-bold font-heading uppercase tracking-wide text-slate-900">
+                          {currentSlide.subtitle}
+                        </h3>
+                      </div>
 
-                      {/* LANGKAH 2: TULISAN MUNCUL BERGANTIAN SECARA TENANG, KELUAR NAIK KE ATAS (-90PX) */}
-                      <motion.div 
-                        initial={{ opacity: 0, y: 50 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -90 }}
-                        transition={{ duration: 0.9, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                        className="lg:col-span-6 order-1 lg:order-2 space-y-3.5 lg:pl-6 text-left relative z-20"
-                      >
-                        {/* Tahun & Badge */}
-                        <div className="space-y-1">
-                          <span className="text-[11px] font-bold font-heading uppercase tracking-widest text-slate-500 block">
-                            {currentSlide.badge}
-                          </span>
-                          <h3 className="text-3xl sm:text-4xl lg:text-[44px] font-bold font-heading text-[#0F58A8] tracking-tight leading-none flex items-center gap-3">
-                            <span>{currentSlide.year}</span>
-                            <span className="text-xs font-mono font-normal px-2.5 py-0.5 rounded-full bg-blue-50 text-[#0F58A8] border border-blue-200">
-                              {isLastTimelineYear ? 'Masa Kini & Masa Depan' : 'Tonggak Sejarah'}
-                            </span>
-                          </h3>
-                        </div>
+                      <div className="text-sm sm:text-[15.5px] text-slate-800 leading-[1.85] font-normal text-justify sm:text-center space-y-4 max-w-3xl mx-auto">
+                        <p>{currentSlide.desc1}</p>
+                        <p>{currentSlide.desc2}</p>
+                        <p>{currentSlide.desc3}</p>
+                      </div>
+                    </motion.div>
+                  </div>
+                )}
 
-                        {/* Judul & Narasi */}
-                        <div className="space-y-2">
-                          <h4 className="text-sm sm:text-base font-bold font-heading text-slate-900 leading-snug">
-                            {currentSlide.title}
-                          </h4>
-                          <p className="text-sm sm:text-[15px] text-slate-800 leading-[1.8] font-normal">
-                            {currentSlide.desc}
-                          </p>
-                          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-                            {currentSlide.details}
-                          </p>
-                        </div>
-
-                        {/* Poin Pencapaian */}
-                        <div className="pt-2 border-t border-slate-100 space-y-1.5">
-                          {currentSlide.highlights.map((h, hIdx) => (
-                            <div key={hIdx} className="flex items-start gap-2 text-xs sm:text-sm text-slate-700">
-                              <CheckCircle2 className="w-4 h-4 text-[#0F58A8] shrink-0 mt-0.5" />
-                              <span className="leading-snug">{h}</span>
+                {/* 3. TIMELINE TAHUN: MASUK BERGANTIAN (FOTO -> TULISAN) SECARA KALEM */}
+                {currentSlide.type === 'timeline' && (
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center relative z-20">
+                    
+                    {/* GANJIL: FOTO KIRI, TULISAN KANAN */}
+                    {currentSlide.align === 'left' && (
+                      <>
+                        <motion.div 
+                          initial={{ opacity: 0, y: 60, scale: 0.97 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: -100, scale: 0.97 }}
+                          transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                          className="lg:col-span-6 order-2 lg:order-1 flex justify-center lg:justify-end relative z-20"
+                        >
+                          <div className="relative p-2.5 sm:p-3 bg-white border border-slate-200/90 shadow-md rounded-lg max-w-md w-full group">
+                            <div className="overflow-hidden rounded aspect-[16/11] bg-slate-100">
+                              <img
+                                src={currentSlide.image}
+                                alt={currentSlide.year}
+                                className="w-full h-full object-cover select-none group-hover:scale-103 transition-transform duration-700 ease-out"
+                              />
                             </div>
-                          ))}
-                        </div>
-
-                        {/* Box Terobosan */}
-                        <div className="p-3 bg-blue-50/70 border-l-2 border-[#0F58A8] rounded-r text-xs sm:text-sm text-slate-800 font-medium leading-relaxed">
-                          <strong className="text-slate-900">Pencapaian:</strong> {currentSlide.breakthrough}
-                        </div>
-                      </motion.div>
-                    </>
-                  )}
-
-                  {/* GENAP: TULISAN KIRI, FOTO KANAN */}
-                  {currentSlide.align === 'right' && (
-                    <>
-                      {/* LANGKAH 2: TULISAN MUNCUL BERGANTIAN SECARA TENANG (RATA KANAN), KELUAR NAIK KE ATAS (-90PX) */}
-                      <motion.div 
-                        initial={{ opacity: 0, y: 50 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -90 }}
-                        transition={{ duration: 0.9, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                        className="lg:col-span-6 order-1 lg:order-1 space-y-3.5 lg:pr-6 text-left lg:text-right flex flex-col lg:items-end relative z-20"
-                      >
-                        {/* Tahun & Badge */}
-                        <div className="space-y-1">
-                          <span className="text-[11px] font-bold font-heading uppercase tracking-widest text-slate-500 block">
-                            {currentSlide.badge}
-                          </span>
-                          <h3 className="text-3xl sm:text-4xl lg:text-[44px] font-bold font-heading text-[#0F58A8] tracking-tight leading-none flex items-center gap-3 lg:flex-row-reverse">
-                            <span>{currentSlide.year}</span>
-                            <span className="text-xs font-mono font-normal px-2.5 py-0.5 rounded-full bg-blue-50 text-[#0F58A8] border border-blue-200">
-                              Tonggak Sejarah
-                            </span>
-                          </h3>
-                        </div>
-
-                        {/* Judul & Narasi */}
-                        <div className="space-y-2">
-                          <h4 className="text-sm sm:text-base font-bold font-heading text-slate-900 leading-snug">
-                            {currentSlide.title}
-                          </h4>
-                          <p className="text-sm sm:text-[15px] text-slate-800 leading-[1.8] font-normal">
-                            {currentSlide.desc}
-                          </p>
-                          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-                            {currentSlide.details}
-                          </p>
-                        </div>
-
-                        {/* Poin Pencapaian */}
-                        <div className="pt-2 border-t border-slate-100 space-y-1.5 flex flex-col lg:items-end">
-                          {currentSlide.highlights.map((h, hIdx) => (
-                            <div key={hIdx} className="flex items-start gap-2 text-xs sm:text-sm text-slate-700 lg:flex-row-reverse text-left lg:text-right">
-                              <CheckCircle2 className="w-4 h-4 text-[#0F58A8] shrink-0 mt-0.5" />
-                              <span className="leading-snug">{h}</span>
+                            <div className="pt-2 text-center text-xs font-heading font-medium text-slate-600">
+                              {currentSlide.imageCaption}
                             </div>
-                          ))}
-                        </div>
-
-                        {/* Box Terobosan */}
-                        <div className="p-3 bg-blue-50/70 border-l-2 lg:border-l-0 lg:border-r-2 border-[#0F58A8] rounded-r lg:rounded-r-none lg:rounded-l text-xs sm:text-sm text-slate-800 font-medium leading-relaxed text-left lg:text-right">
-                          <strong className="text-slate-900">Pencapaian:</strong> {currentSlide.breakthrough}
-                        </div>
-                      </motion.div>
-
-                      {/* LANGKAH 1: FOTO MUNCUL PARALAKS PERLAHAN DARI BAWAH, KELUAR NAIK KE ATAS (-100PX) */}
-                      <motion.div 
-                        initial={{ opacity: 0, y: 60, scale: 0.97 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: -100, scale: 0.97 }}
-                        transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                        className="lg:col-span-6 order-2 lg:order-2 flex justify-center lg:justify-start relative z-20"
-                      >
-                        <div className="relative p-2.5 sm:p-3 bg-white border border-slate-200/90 shadow-md rounded-lg max-w-md w-full group">
-                          <div className="overflow-hidden rounded aspect-[16/11] bg-slate-100">
-                            <img
-                              src={currentSlide.image}
-                              alt={currentSlide.year}
-                              className="w-full h-full object-cover select-none group-hover:scale-103 transition-transform duration-700 ease-out"
-                            />
                           </div>
-                          <div className="pt-2 text-center text-xs font-heading font-medium text-slate-600">
-                            {currentSlide.imageCaption}
-                          </div>
-                        </div>
-                      </motion.div>
-                    </>
-                  )}
+                        </motion.div>
 
-                </div>
-              )}
-
-              {/* 4. DIREKSI */}
-              {currentSlide.type === 'directors' && (
-                <div className="max-w-[1200px] mx-auto w-full space-y-8">
-                  <motion.div 
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -80 }}
-                    transition={{ duration: 0.85, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                    className="text-center max-w-3xl mx-auto space-y-2"
-                  >
-                    <span className="text-xs font-bold font-heading uppercase tracking-widest text-[#0F58A8] block">
-                      TATA KELOLA PERUSAHAAN & KEPEMIMPINAN
-                    </span>
-                    <h2 className="text-xl sm:text-2xl font-bold font-heading text-slate-900 tracking-tight leading-tight uppercase">
-                      Dewan Direksi & Kepemimpinan 2 Generasi
-                    </h2>
-                    <p className="text-sm text-slate-600 font-normal max-w-2xl mx-auto">
-                      Sinergi pengalaman lebih dari 20 tahun dalam riset kimia industri dengan manajemen modern berstandar ISO 9001:2015.
-                    </p>
-                  </motion.div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-4xl mx-auto divide-y md:divide-y-0 md:divide-x divide-slate-200 items-start">
-                    {COMPANY_DATA.boardOfDirectors.map((person, pIdx) => (
-                      <motion.div
-                        key={pIdx}
-                        initial={{ opacity: 0, y: 40 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -80 }}
-                        transition={{ duration: 0.85, delay: 0.25 + pIdx * 0.15, ease: [0.16, 1, 0.3, 1] }}
-                        className={`space-y-4 ${pIdx === 1 ? 'md:pl-8 lg:pl-10 pt-6 md:pt-0' : 'md:pr-8 lg:pr-10'}`}
-                      >
-                        <div className="flex items-start gap-3.5">
-                          <div className="w-11 h-11 bg-white border border-slate-300 text-[#0F58A8] flex items-center justify-center font-heading font-bold text-base shadow-2xs shrink-0 rounded-md">
-                            {person.name.split(' ').map((n) => n[0]).join('')}
-                          </div>
-                          <div>
-                            <h3 className="text-base font-bold font-heading text-slate-900 leading-snug">
-                              {person.name}
+                        <motion.div 
+                          initial={{ opacity: 0, y: 50 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -90 }}
+                          transition={{ duration: 0.9, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                          className="lg:col-span-6 order-1 lg:order-2 space-y-3.5 lg:pl-6 text-left relative z-20"
+                        >
+                          <div className="space-y-1">
+                            <span className="text-[11px] font-bold font-heading uppercase tracking-widest text-slate-500 block">
+                              {currentSlide.badge}
+                            </span>
+                            <h3 className="text-3xl sm:text-4xl lg:text-[44px] font-bold font-heading text-[#0F58A8] tracking-tight leading-none flex items-center gap-3">
+                              <span>{currentSlide.year}</span>
+                              <span className="text-xs font-mono font-normal px-2.5 py-0.5 rounded-full bg-blue-50 text-[#0F58A8] border border-blue-200">
+                                {isLastTimelineYear ? 'Masa Kini & Masa Depan' : 'Tonggak Sejarah'}
+                              </span>
                             </h3>
-                            <span className="text-xs font-semibold text-[#0F58A8] block">
-                              {person.role}
-                            </span>
-                            <span className="text-xs text-slate-500 block pt-0.5 font-medium">
-                              Rekam Jejak: {person.experience}
-                            </span>
                           </div>
-                        </div>
 
-                        <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">
-                          {person.bio}
-                        </p>
+                          <div className="space-y-2">
+                            <h4 className="text-sm sm:text-base font-bold font-heading text-slate-900 leading-snug">
+                              {currentSlide.title}
+                            </h4>
+                            <p className="text-sm sm:text-[15px] text-slate-800 leading-[1.8] font-normal">
+                              {currentSlide.desc}
+                            </p>
+                            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                              {currentSlide.details}
+                            </p>
+                          </div>
 
-                        <div className="space-y-1 pt-2 border-t border-slate-200">
-                          <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block font-heading">
-                            Fokus Tanggung Jawab:
-                          </span>
-                          <div className="space-y-1 text-xs text-slate-700">
-                            {(person.responsibilities || [person.focus]).map((resp, rIdx) => (
-                              <div key={rIdx} className="flex items-start gap-2">
-                                <CheckCircle2 className="w-3.5 h-3.5 text-[#0F58A8] shrink-0 mt-0.5" />
-                                <span className="leading-snug">{resp}</span>
+                          <div className="pt-2 border-t border-slate-100 space-y-1.5">
+                            {currentSlide.highlights.map((h, hIdx) => (
+                              <div key={hIdx} className="flex items-start gap-2 text-xs sm:text-sm text-slate-700">
+                                <CheckCircle2 className="w-4 h-4 text-[#0F58A8] shrink-0 mt-0.5" />
+                                <span className="leading-snug">{h}</span>
                               </div>
                             ))}
                           </div>
-                        </div>
-                      </motion.div>
+
+                          <div className="p-3 bg-blue-50/70 border-l-2 border-[#0F58A8] rounded-r text-xs sm:text-sm text-slate-800 font-medium leading-relaxed">
+                            <strong className="text-slate-900">Pencapaian:</strong> {currentSlide.breakthrough}
+                          </div>
+                        </motion.div>
+                      </>
+                    )}
+
+                    {/* GENAP: TULISAN KIRI, FOTO KANAN */}
+                    {currentSlide.align === 'right' && (
+                      <>
+                        <motion.div 
+                          initial={{ opacity: 0, y: 50 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -90 }}
+                          transition={{ duration: 0.9, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                          className="lg:col-span-6 order-1 lg:order-1 space-y-3.5 lg:pr-6 text-left lg:text-right flex flex-col lg:items-end relative z-20"
+                        >
+                          <div className="space-y-1">
+                            <span className="text-[11px] font-bold font-heading uppercase tracking-widest text-slate-500 block">
+                              {currentSlide.badge}
+                            </span>
+                            <h3 className="text-3xl sm:text-4xl lg:text-[44px] font-bold font-heading text-[#0F58A8] tracking-tight leading-none flex items-center gap-3 lg:flex-row-reverse">
+                              <span>{currentSlide.year}</span>
+                              <span className="text-xs font-mono font-normal px-2.5 py-0.5 rounded-full bg-blue-50 text-[#0F58A8] border border-blue-200">
+                                Tonggak Sejarah
+                              </span>
+                            </h3>
+                          </div>
+
+                          <div className="space-y-2">
+                            <h4 className="text-sm sm:text-base font-bold font-heading text-slate-900 leading-snug">
+                              {currentSlide.title}
+                            </h4>
+                            <p className="text-sm sm:text-[15px] text-slate-800 leading-[1.8] font-normal">
+                              {currentSlide.desc}
+                            </p>
+                            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                              {currentSlide.details}
+                            </p>
+                          </div>
+
+                          <div className="pt-2 border-t border-slate-100 space-y-1.5 flex flex-col lg:items-end">
+                            {currentSlide.highlights.map((h, hIdx) => (
+                              <div key={hIdx} className="flex items-start gap-2 text-xs sm:text-sm text-slate-700 lg:flex-row-reverse text-left lg:text-right">
+                                <CheckCircle2 className="w-4 h-4 text-[#0F58A8] shrink-0 mt-0.5" />
+                                <span className="leading-snug">{h}</span>
+                              </div>
+                            ))}
+                          </div>
+
+                          <div className="p-3 bg-blue-50/70 border-l-2 lg:border-l-0 lg:border-r-2 border-[#0F58A8] rounded-r lg:rounded-r-none lg:rounded-l text-xs sm:text-sm text-slate-800 font-medium leading-relaxed text-left lg:text-right">
+                            <strong className="text-slate-900">Pencapaian:</strong> {currentSlide.breakthrough}
+                          </div>
+                        </motion.div>
+
+                        <motion.div 
+                          initial={{ opacity: 0, y: 60, scale: 0.97 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: -100, scale: 0.97 }}
+                          transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                          className="lg:col-span-6 order-2 lg:order-2 flex justify-center lg:justify-start relative z-20"
+                        >
+                          <div className="relative p-2.5 sm:p-3 bg-white border border-slate-200/90 shadow-md rounded-lg max-w-md w-full group">
+                            <div className="overflow-hidden rounded aspect-[16/11] bg-slate-100">
+                              <img
+                                src={currentSlide.image}
+                                alt={currentSlide.year}
+                                className="w-full h-full object-cover select-none group-hover:scale-103 transition-transform duration-700 ease-out"
+                              />
+                            </div>
+                            <div className="pt-2 text-center text-xs font-heading font-medium text-slate-600">
+                              {currentSlide.imageCaption}
+                            </div>
+                          </div>
+                        </motion.div>
+                      </>
+                    )}
+
+                  </div>
+                )}
+
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+
+      {/* ═════════════════════════════════════════════════════════════════════ */}
+      {/* SECTION 2: DEWAN DIREKSI (KEMBALI KE SECTION NORMAL, SCROLLING BEBAS) */}
+      {/* ═════════════════════════════════════════════════════════════════════ */}
+      <section id="direksi" className="py-24 sm:py-28 bg-slate-50 border-t border-slate-200">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full space-y-12">
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <span className="text-xs font-bold font-heading uppercase tracking-widest text-[#0F58A8] block">
+              TATA KELOLA PERUSAHAAN & KEPEMIMPINAN
+            </span>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold font-heading text-slate-900 tracking-tight leading-tight uppercase">
+              Dewan Direksi & Kepemimpinan 2 Generasi
+            </h2>
+            <p className="text-sm sm:text-base text-slate-600 font-normal max-w-2xl mx-auto leading-relaxed">
+              Sinergi pengalaman lebih dari 20 tahun dalam riset kimia industri dengan manajemen modern berstandar ISO 9001:2015.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto divide-y md:divide-y-0 md:divide-x divide-slate-200 items-start">
+            {COMPANY_DATA.boardOfDirectors.map((person, pIdx) => (
+              <div
+                key={pIdx}
+                className={`space-y-4 ${pIdx === 1 ? 'md:pl-8 lg:pl-10 pt-8 md:pt-0' : 'md:pr-8 lg:pr-10'}`}
+              >
+                <div className="flex items-start gap-4">
+                  <div className="w-13 h-13 bg-white border border-slate-300 text-[#0F58A8] flex items-center justify-center font-heading font-bold text-lg shadow-xs shrink-0 rounded-lg">
+                    {person.name.split(' ').map((n) => n[0]).join('')}
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold font-heading text-slate-900 leading-snug">
+                      {person.name}
+                    </h3>
+                    <span className="text-xs sm:text-sm font-semibold text-[#0F58A8] block">
+                      {person.role}
+                    </span>
+                    <span className="text-xs text-slate-500 block pt-0.5 font-medium">
+                      Rekam Jejak: {person.experience}
+                    </span>
+                  </div>
+                </div>
+
+                <p className="text-sm text-slate-700 leading-relaxed font-normal">
+                  {person.bio}
+                </p>
+
+                <div className="space-y-2 pt-3 border-t border-slate-200">
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block font-heading">
+                    Fokus Tanggung Jawab:
+                  </span>
+                  <div className="space-y-1.5 text-xs sm:text-sm text-slate-700">
+                    {(person.responsibilities || [person.focus]).map((resp, rIdx) => (
+                      <div key={rIdx} className="flex items-start gap-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-[#0F58A8] shrink-0 mt-0.5" />
+                        <span className="leading-snug">{resp}</span>
+                      </div>
                     ))}
                   </div>
                 </div>
-              )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-              {/* 5. ESG & PENUTUP */}
-              {currentSlide.type === 'esg' && (
-                <div className="max-w-[1250px] mx-auto w-full space-y-8 text-center">
-                  <motion.div 
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -80 }}
-                    transition={{ duration: 0.85, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                    className="max-w-2xl mx-auto space-y-1.5"
-                  >
-                    <span className="text-xs font-bold font-heading uppercase tracking-widest text-[#0F58A8] block">
-                      PRINSIP INTEGRITAS & KEBERLANJUTAN
-                    </span>
-                    <h2 className="text-xl sm:text-2xl font-bold font-heading text-slate-900 tracking-tight leading-tight uppercase">
-                      4 Komitmen Fundamental Perusahaan
-                    </h2>
-                  </motion.div>
+      {/* ═════════════════════════════════════════════════════════════════════ */}
+      {/* SECTION 3: KOMITMEN ESG & PRINSIP INTEGRITAS (SECTION NORMAL)        */}
+      {/* ═════════════════════════════════════════════════════════════════════ */}
+      <section className="py-24 sm:py-28 bg-white border-t border-slate-200">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full space-y-12 text-center">
+          <div className="max-w-2xl mx-auto space-y-2">
+            <span className="text-xs font-bold font-heading uppercase tracking-widest text-[#0F58A8] block">
+              PRINSIP INTEGRITAS & KEBERLANJUTAN
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-bold font-heading text-slate-900 tracking-tight leading-tight uppercase">
+              4 Komitmen Fundamental Perusahaan
+            </h2>
+          </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 text-left pt-2">
-                    <motion.div 
-                      initial={{ opacity: 0, y: 35 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -70 }}
-                      transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                      className="p-4 rounded-lg bg-slate-50 border border-slate-200/80 space-y-1.5"
-                    >
-                      <strong className="text-xs sm:text-sm font-bold text-slate-900 block font-heading">
-                        1. Kejujuran Formulasi
-                      </strong>
-                      <p className="text-xs text-slate-600 leading-relaxed">
-                        Menolak filler garam murah atau pengencer air berlebih demi menjaga daya kerja mesin mitra.
-                      </p>
-                    </motion.div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+            <div className="p-6 rounded-xl bg-slate-50 border border-slate-200 space-y-2.5 shadow-2xs hover:shadow-md transition-shadow">
+              <strong className="text-sm sm:text-base font-bold text-slate-900 block font-heading">
+                1. Kejujuran Formulasi
+              </strong>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Menolak filler garam murah atau pengencer air berlebih demi menjaga daya kerja mesin mitra.
+              </p>
+            </div>
 
-                    <motion.div 
-                      initial={{ opacity: 0, y: 35 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -70 }}
-                      transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                      className="p-4 rounded-lg bg-emerald-50/60 border border-emerald-200/80 space-y-1.5"
-                    >
-                      <strong className="text-xs sm:text-sm font-bold text-slate-900 block font-heading">
-                        2. Tanggung Jawab IPAL
-                      </strong>
-                      <p className="text-xs text-slate-600 leading-relaxed">
-                        100% bebas fosfat (STPP-free) dan surfaktan biodegradasi &gt;90% aman biofilter perairan.
-                      </p>
-                    </motion.div>
+            <div className="p-6 rounded-xl bg-emerald-50/70 border border-emerald-200 space-y-2.5 shadow-2xs hover:shadow-md transition-shadow">
+              <strong className="text-sm sm:text-base font-bold text-slate-900 block font-heading">
+                2. Tanggung Jawab IPAL
+              </strong>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                100% bebas fosfat (STPP-free) dan surfaktan biodegradasi &gt;90% aman biofilter perairan.
+              </p>
+            </div>
 
-                    <motion.div 
-                      initial={{ opacity: 0, y: 35 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -70 }}
-                      transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                      className="p-4 rounded-lg bg-amber-50/60 border border-amber-200/80 space-y-1.5"
-                    >
-                      <strong className="text-xs sm:text-sm font-bold text-slate-900 block font-heading">
-                        3. Legalitas & Pajak
-                      </strong>
-                      <p className="text-xs text-slate-600 leading-relaxed">
-                        Izin OSS-RBA resmi, PKRT Kemenkes RI, faktur PPN 11%, dan kesiapan tender e-Katalog LKPP RI.
-                      </p>
-                    </motion.div>
+            <div className="p-6 rounded-xl bg-amber-50/70 border border-amber-200 space-y-2.5 shadow-2xs hover:shadow-md transition-shadow">
+              <strong className="text-sm sm:text-base font-bold text-slate-900 block font-heading">
+                3. Legalitas & Pajak
+              </strong>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Izin OSS-RBA resmi, PKRT Kemenkes RI, faktur PPN 11%, dan kesiapan tender e-Katalog LKPP RI.
+              </p>
+            </div>
 
-                    <motion.div 
-                      initial={{ opacity: 0, y: 35 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -70 }}
-                      transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                      className="p-4 rounded-lg bg-blue-50/60 border border-blue-200/80 space-y-1.5"
-                    >
-                      <strong className="text-xs sm:text-sm font-bold text-slate-900 block font-heading">
-                        4. Kontinuitas Pasokan
-                      </strong>
-                      <p className="text-xs text-slate-600 leading-relaxed">
-                        Kapasitas 500+ Ton/bulan menjamin kepastian pasokan rutin tanpa jeda operasional.
-                      </p>
-                    </motion.div>
-                  </div>
+            <div className="p-6 rounded-xl bg-blue-50/70 border border-blue-200 space-y-2.5 shadow-2xs hover:shadow-md transition-shadow">
+              <strong className="text-sm sm:text-base font-bold text-slate-900 block font-heading">
+                4. Kontinuitas Pasokan
+              </strong>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Kapasitas 500+ Ton/bulan menjamin kepastian pasokan rutin tanpa jeda operasional.
+              </p>
+            </div>
+          </div>
 
-                  {/* Call to Action Bar */}
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0.97 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.97 }}
-                    transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                    className="pt-4 flex items-center justify-center gap-4 flex-wrap"
-                  >
-                    <Link
-                      to="/contact"
-                      className="btn-fluid-primary text-xs sm:text-sm py-3 px-8 font-semibold"
-                    >
-                      <span>Mulai Kemitraan Formulasi</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </Link>
+          {/* Call to Action Bar */}
+          <div className="pt-8 flex items-center justify-center gap-4 flex-wrap">
+            <Link
+              to="/contact"
+              className="btn-fluid-primary text-xs sm:text-sm py-3.5 px-8 font-semibold shadow-md hover:shadow-lg"
+            >
+              <span>Mulai Kemitraan Formulasi</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
 
-                    <Link
-                      to="/products"
-                      className="btn-fluid-secondary text-xs sm:text-sm py-3 px-8 font-semibold"
-                    >
-                      <span>Lihat Katalog Produk</span>
-                    </Link>
-                  </motion.div>
-                </div>
-              )}
-
-            </motion.div>
-          </motion.div>
-        </AnimatePresence>
-      </div>
+            <Link
+              to="/products"
+              className="btn-fluid-secondary text-xs sm:text-sm py-3.5 px-8 font-semibold shadow-xs hover:shadow-md"
+            >
+              <span>Lihat Katalog Produk</span>
+            </Link>
+          </div>
+        </div>
+      </section>
     </main>
   )
 }
