@@ -2,7 +2,8 @@
 """
 PT Kediri Chemical Abadi
 Generator Halaman Sejarah (AboutPage.jsx)
-Fitur: 1 Layar 1 Slide Tahun Utuh dengan Animasi Scroll & Anchor Down Navigation
+Fitur: Garis Aliran Air 3D (3D Liquid Water Stream Conduit), 1 Layar 1 Slide Tahun,
+dan Efek Mengikuti Aliran Air dengan Anchor Down Navigasi
 Author: Yerikho Arfensias Effendi
 Company: PT Kediri Chemical Abadi
 """
@@ -40,7 +41,7 @@ const TIMELINE_SLIDES = [
     breakthrough: 'Formulasi surfaktan stabil air sadah pertama yang menekan pemborosan dosis hingga 40%.',
     image: '/images/kca_factory_reactors.jpg',
     imageCaption: 'Reaktor Pencampur Perdana KCA di Mojoroto, Kediri (Est. 2004)',
-    align: 'left' // text on right, photo on left
+    align: 'left'
   },
   {
     id: 'slide-2008',
@@ -58,7 +59,7 @@ const TIMELINE_SLIDES = [
     breakthrough: 'Pelopor formula deterjen ramah ekosistem air di Kediri dengan efisiensi dosis tinggi.',
     image: '/images/kca_factory_floor.jpg',
     imageCaption: 'Lini Manufaktur Formulasi Ramah Lingkungan Bebas Fosfat Berstandar Mutu',
-    align: 'right' // text on left, photo on right
+    align: 'right'
   },
   {
     id: 'slide-2014',
@@ -116,7 +117,6 @@ const TIMELINE_SLIDES = [
   }
 ]
 
-// Smooth Scroll Helper to Next Section
 function scrollToSection(id) {
   const el = document.getElementById(id)
   if (el) {
@@ -145,7 +145,6 @@ export default function AboutPage() {
       >
         <div className="max-w-[1300px] mx-auto px-4 sm:px-8 lg:px-12 w-full text-center space-y-6 sm:space-y-8 my-auto">
           
-          {/* Header Title Flanked by Two Subtle Lines */}
           <motion.div 
             initial={{ opacity: 0, y: -15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -159,7 +158,6 @@ export default function AboutPage() {
             <div className="h-[1.5px] bg-slate-300 w-16 sm:w-32 lg:w-48" />
           </motion.div>
 
-          {/* Panoramic Factory Mosaic Visual (Sido Muncul Collage Frame) */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -181,17 +179,19 @@ export default function AboutPage() {
 
         </div>
 
-        {/* Sido Muncul Anchor Down Button to Slide 01 */}
+        {/* Anchor Down to Slide 01 with Water Ripple Cue */}
         <div className="flex justify-center pt-2">
           <button
             onClick={() => scrollToSection('slide-01')}
-            className="flex flex-col items-center gap-1 text-slate-400 hover:text-[#0F58A8] transition-colors cursor-pointer group"
+            className="flex flex-col items-center gap-1.5 text-sky-600 hover:text-[#0F58A8] transition-all cursor-pointer group"
             aria-label="Scroll ke Narasi Pengantar"
           >
-            <span className="text-[11px] font-heading font-medium tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity">
-              Lanjut
+            <div className="w-8 h-8 rounded-full bg-sky-50 border border-sky-200 shadow-xs flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-50 transition-all">
+              <ChevronDown className="w-5 h-5 animate-bounce stroke-[2.5] text-[#0F58A8]" />
+            </div>
+            <span className="text-[11px] font-heading font-semibold tracking-wider uppercase text-slate-500 group-hover:text-[#0F58A8] transition-colors">
+              Ikuti Aliran Kisah
             </span>
-            <ChevronDown className="w-6 h-6 animate-bounce stroke-[2]" />
           </button>
         </div>
       </section>
@@ -238,23 +238,25 @@ export default function AboutPage() {
 
         </div>
 
-        {/* Sido Muncul Anchor Down Button to First Timeline Slide (2004) */}
+        {/* Anchor Down to Timeline 2004 */}
         <div className="flex justify-center pt-4">
           <button
             onClick={() => scrollToSection('slide-2004')}
-            className="flex flex-col items-center gap-1 text-slate-400 hover:text-[#0F58A8] transition-colors cursor-pointer group"
-            aria-label="Mulai Eksplorasi Garis Waktu"
+            className="flex flex-col items-center gap-1.5 text-sky-600 hover:text-[#0F58A8] transition-all cursor-pointer group"
+            aria-label="Mulai Garis Aliran Air Sejarah"
           >
-            <span className="text-[11px] font-heading font-medium tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity">
-              Mulai Garis Waktu
+            <div className="w-8 h-8 rounded-full bg-sky-50 border border-sky-200 shadow-xs flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-50 transition-all">
+              <ChevronDown className="w-5 h-5 animate-bounce stroke-[2.5] text-[#0F58A8]" />
+            </div>
+            <span className="text-[11px] font-heading font-semibold tracking-wider uppercase text-slate-500 group-hover:text-[#0F58A8] transition-colors">
+              Mulai Aliran Sejarah (2004)
             </span>
-            <ChevronDown className="w-6 h-6 animate-bounce stroke-[2]" />
           </button>
         </div>
       </section>
 
       {/* ========================================================================= */}
-      {/* SLIDES 02 - 06: 1 LAYAR 1 TAHUN DENGAN ANIMASI SCROLL & ANCHOR DOWN      */}
+      {/* SLIDES 02 - 06: 1 LAYAR 1 TAHUN DENGAN GARIS ALIRAN AIR 3D AKTIF          */}
       {/* ========================================================================= */}
       {TIMELINE_SLIDES.map((item, idx) => {
         const isEven = item.align === 'right'
@@ -265,13 +267,31 @@ export default function AboutPage() {
             id={item.id}
             className="min-h-screen flex flex-col justify-between py-12 sm:py-16 bg-white relative border-b border-slate-100 overflow-hidden"
           >
-            {/* Center Vertical Timeline Guide Line (Desktop Only) */}
-            <div className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] bg-slate-300/80 pointer-events-none" />
+            {/* ═════════════════════════════════════════════════════════ */}
+            {/* 3D LIQUID WATER STREAM CONDUIT (ALIRAN AIR SEJARAH)        */}
+            {/* ═════════════════════════════════════════════════════════ */}
+            <div className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-3 pointer-events-none z-10">
+              {/* Saluran Kaca Berdimensi 3D */}
+              <div className="w-full h-full liquid-3d-stream-conduit mx-auto" />
+              {/* Gelombang Aliran Air Cair Bergerak Terus Menerus Ke Bawah */}
+              <div className="absolute inset-0 w-full h-full liquid-3d-stream-flow opacity-75" />
+            </div>
 
-            <div className="max-w-[1250px] mx-auto px-4 sm:px-8 lg:px-12 w-full my-auto relative z-10">
+            <div className="max-w-[1250px] mx-auto px-4 sm:px-8 lg:px-12 w-full my-auto relative z-20">
               
-              {/* Central Node Bullet on Desktop */}
-              <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-[#0F58A8] border-4 border-white shadow-sm items-center justify-center z-20" />
+              {/* ═════════════════════════════════════════════════════════ */}
+              {/* 3D LIQUID WATER ORB NODE (TITIK BULAT AIR CAIR 3D)        */}
+              {/* ═════════════════════════════════════════════════════════ */}
+              <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-30">
+                <div className="relative">
+                  {/* Efek Ripple Air Halus Berpendar */}
+                  <div className="absolute -inset-1.5 rounded-full bg-sky-400/40 animate-ping opacity-60" />
+                  {/* Orb Tetesan Air 3D dengan Pantulan Cahaya Atas */}
+                  <div className="liquid-3d-bubble-node shadow-lg">
+                    <Droplets className="w-3.5 h-3.5 text-white/95 drop-shadow" />
+                  </div>
+                </div>
+              </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
                 
@@ -280,7 +300,6 @@ export default function AboutPage() {
                 {/* ───────────────────────────────────────────────────────── */}
                 {!isEven && (
                   <>
-                    {/* Sisi Kiri: Foto Polaroid/Matting Frame dengan Animasi */}
                     <motion.div 
                       initial={{ opacity: 0, x: -40, scale: 0.95 }}
                       whileInView={{ opacity: 1, x: 0, scale: 1 }}
@@ -302,7 +321,6 @@ export default function AboutPage() {
                       </div>
                     </motion.div>
 
-                    {/* Sisi Kanan: Tahun & Teks Narasi dengan Animasi */}
                     <motion.div 
                       initial={{ opacity: 0, x: 40, y: 15 }}
                       whileInView={{ opacity: 1, x: 0, y: 0 }}
@@ -314,8 +332,11 @@ export default function AboutPage() {
                         <span className="text-[11px] font-bold font-heading uppercase tracking-widest text-slate-500 block">
                           {item.badge}
                         </span>
-                        <h3 className="text-3xl sm:text-4xl lg:text-[44px] font-bold font-heading text-[#0F58A8] tracking-tight leading-none">
-                          {item.year}
+                        <h3 className="text-3xl sm:text-4xl lg:text-[44px] font-bold font-heading text-[#0F58A8] tracking-tight leading-none flex items-center gap-3">
+                          <span>{item.year}</span>
+                          <span className="text-xs font-mono font-normal px-2.5 py-0.5 rounded-full bg-sky-50 text-sky-700 border border-sky-200">
+                            Aliran Fase {idx + 1}
+                          </span>
                         </h3>
                       </div>
 
@@ -352,7 +373,6 @@ export default function AboutPage() {
                 {/* ───────────────────────────────────────────────────────── */}
                 {isEven && (
                   <>
-                    {/* Sisi Kiri: Tahun & Teks Narasi (Rata Kanan di Desktop) */}
                     <motion.div 
                       initial={{ opacity: 0, x: -40, y: 15 }}
                       whileInView={{ opacity: 1, x: 0, y: 0 }}
@@ -364,8 +384,11 @@ export default function AboutPage() {
                         <span className="text-[11px] font-bold font-heading uppercase tracking-widest text-slate-500 block">
                           {item.badge}
                         </span>
-                        <h3 className="text-3xl sm:text-4xl lg:text-[44px] font-bold font-heading text-[#0F58A8] tracking-tight leading-none">
-                          {item.year}
+                        <h3 className="text-3xl sm:text-4xl lg:text-[44px] font-bold font-heading text-[#0F58A8] tracking-tight leading-none flex items-center gap-3 lg:flex-row-reverse">
+                          <span>{item.year}</span>
+                          <span className="text-xs font-mono font-normal px-2.5 py-0.5 rounded-full bg-sky-50 text-sky-700 border border-sky-200">
+                            Aliran Fase {idx + 1}
+                          </span>
                         </h3>
                       </div>
 
@@ -395,7 +418,6 @@ export default function AboutPage() {
                       </div>
                     </motion.div>
 
-                    {/* Sisi Kanan: Foto Polaroid/Matting Frame */}
                     <motion.div 
                       initial={{ opacity: 0, x: 40, scale: 0.95 }}
                       whileInView={{ opacity: 1, x: 0, scale: 1 }}
@@ -423,17 +445,21 @@ export default function AboutPage() {
 
             </div>
 
-            {/* Sido Muncul Anchor Down Button to Next Slide */}
+            {/* ═════════════════════════════════════════════════════════ */}
+            {/* ANCHOR DOWN: IKUTI ALIRAN AIR KE TAHUN BERIKUTNYA          */}
+            {/* ═════════════════════════════════════════════════════════ */}
             <div className="flex justify-center pt-4 relative z-20">
               <button
                 onClick={() => scrollToSection(item.nextId)}
-                className="flex flex-col items-center gap-1 text-slate-400 hover:text-[#0F58A8] transition-colors cursor-pointer group"
+                className="flex flex-col items-center gap-1.5 text-sky-600 hover:text-[#0F58A8] transition-all cursor-pointer group"
                 aria-label={`Lanjut ke ${item.nextId}`}
               >
-                <span className="text-[11px] font-heading font-medium tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity">
-                  Tahun Berikutnya
+                <div className="w-8 h-8 rounded-full bg-sky-50 border border-sky-200 shadow-xs flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-50 transition-all">
+                  <ChevronDown className="w-5 h-5 animate-bounce stroke-[2.5] text-[#0F58A8]" />
+                </div>
+                <span className="text-[11px] font-heading font-semibold tracking-wider uppercase text-slate-500 group-hover:text-[#0F58A8] transition-colors">
+                  Ikuti Aliran Air ke {item.nextId === 'dewan-direksi' ? 'Manajemen Direksi' : 'Fase Berikutnya'}
                 </span>
-                <ChevronDown className="w-6 h-6 animate-bounce stroke-[2]" />
               </button>
             </div>
 
@@ -544,7 +570,7 @@ export default function AboutPage() {
             </div>
 
             <div className="space-y-1.5 border-l-2 border-amber-600 pl-3.5">
-              <strong className="text-xs font-bold text-slate-900 block font-heading">
+              <strong className="text-sm font-bold text-slate-900 block font-heading">
                 3. Akuntabilitas Legalitas & Pajak
               </strong>
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
@@ -553,7 +579,7 @@ export default function AboutPage() {
             </div>
 
             <div className="space-y-1.5 border-l-2 border-indigo-600 pl-3.5">
-              <strong className="text-xs font-bold text-slate-900 block font-heading">
+              <strong className="text-sm font-bold text-slate-900 block font-heading">
                 4. Kontinuitas Pasokan Massal
               </strong>
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
@@ -575,4 +601,4 @@ export default function AboutPage() {
 with open('src/pages/AboutPage.jsx', 'w', encoding='utf-8') as f:
     f.write(CODE)
 
-print("BERHASIL: AboutPage.jsx kini berformat 1 Layar 1 Slide Tahun Utuh dengan Animasi Scroll & Anchor Down!")
+print("BERHASIL: AboutPage.jsx kini berfitur Garis Aliran Air 3D yang hidup dan mengalir ke bawah!")
