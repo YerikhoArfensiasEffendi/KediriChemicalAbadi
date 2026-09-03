@@ -3,14 +3,15 @@
 PT Kediri Chemical Abadi
 Generator Halaman Sejarah (AboutPage.jsx)
 Pembaruan Sesuai Arahan User:
-"untuk awal itu di lock dulu setelah masuk fase ahir baru di lepas untuk lanjut section zona lain"
-1. Kunci Ketat di Awal (Slide 0 s/d 5):
-   - Halaman terkunci 100% (h-screen overflow-hidden, document.body.style.overflow = 'hidden', Lenis di-pause).
-   - Pengunjung tidak bisa melompat atau scroll dini ke Dewan Direksi / Footer.
-   - Semua input gulir murni mengendalikan alur cerita sejarah: Hero -> Prologue -> 2004 -> 2008 -> 2014 -> 2019 -> 2024-2026.
-2. Pelepasan Kunci Hanya Setelah Masuk Fase Akhir (2024-2026):
-   - Begitu mencapai tahun 2024-2026 (fase akhir linimasa), kunci otomatis dilepas (overflow kembali auto, Lenis aktif).
-   - Gulir berikutnya mengalirkan layar secara mulus dan stabil ke zona normal (Dewan Direksi, ESG, CTA, dan Footer).
+1. Fix Bug Skip Tahun Terakhir (2024-2026):
+   - Menambahkan cooldown buffer 1.2 detik saat masuk ke 2026 untuk menyerap inersia scroll sebelumnya.
+   - Tahun 2024-2026 TIDAK AKAN PERNAH ter-skip secara instan lagi.
+   - Pengunjung menikmati penuh konten 2026 dengan tenang.
+   - Melanjutkan ke Dewan Direksi membutuhkan gerakan scroll baru yang disengaja (intentional) atau klik tombol panduan.
+2. Transisi Mulus dengan Lenis Easing:
+   - Perpindahan dari 2026 ke Dewan Direksi ditenagai oleh Lenis.scrollTo dengan kurva eksponensial mewah (duration 1.4s), menghilangkan sentakan kasar (harsh cuts).
+3. Tombol Afordansi Elegan:
+   - Pada tahun 2026 ditambahkan pill tombol santun "Lanjut ke Dewan Direksi & Tata Kelola Korporat" dengan chevron halus.
 Author: Yerikho Arfensias Effendi
 Company: PT Kediri Chemical Abadi
 """
@@ -27,6 +28,7 @@ import {
   FlaskConical, 
   Droplets, 
   Leaf, 
+  ChevronDown,
   ArrowRight
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
@@ -160,20 +162,19 @@ export default function AboutPage() {
   const [isTransitioning, setIsTransitioning] = useState(false)
   const [direction, setDirection] = useState(1) // 1 = scroll down, -1 = scroll up
   const [isPushingPrologue, setIsPushingPrologue] = useState(false)
+  const [timelineSettledTime, setTimelineSettledTime] = useState(Date.now())
   const containerRef = useRef(null)
 
   const isFinalPhase = currentIdx === TIMELINE_SLIDES.length - 1
 
-  // "untuk awal itu di lock dulu setelah masuk fase ahir baru di lepas untuk lanjut section zona lain"
+  // Kunci layar penuh di awal (Slide 0 s/d 5)
   useEffect(() => {
     if (!isFinalPhase) {
-      // Kunci layar penuh di awal (Slide 0 s/d 5)
       document.documentElement.style.overflow = 'hidden'
       document.body.style.overflow = 'hidden'
       window.__lenis?.stop()
       window.scrollTo(0, 0)
     } else {
-      // Lepas kunci begitu masuk fase akhir (Slide 6: 2024-2026)
       document.documentElement.style.overflow = ''
       document.body.style.overflow = ''
       window.__lenis?.start()
@@ -186,15 +187,22 @@ export default function AboutPage() {
     }
   }, [isFinalPhase])
 
+  // Pengarah Lembut ke Dewan Direksi Menggunakan Lenis
   const scrollToDireksi = useCallback(() => {
-    // Lepas kunci dan alirkan layar ke section Dewan Direksi
     document.documentElement.style.overflow = ''
     document.body.style.overflow = ''
     window.__lenis?.start()
 
-    const el = document.getElementById('direksi')
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' })
+    if (window.__lenis) {
+      window.__lenis.scrollTo('#direksi', {
+        duration: 1.4,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+      })
+    } else {
+      const el = document.getElementById('direksi')
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' })
+      }
     }
   }, [])
 
@@ -210,6 +218,7 @@ export default function AboutPage() {
       setTimeout(() => {
         setIsPushingPrologue(false)
         setCurrentIdx(2)
+        setTimelineSettledTime(Date.now())
         setTimeout(() => {
           setIsTransitioning(false)
         }, 800)
@@ -221,6 +230,7 @@ export default function AboutPage() {
     setIsTransitioning(true)
     setDirection(dir)
     setCurrentIdx(newIdx)
+    setTimelineSettledTime(Date.now())
     setTimeout(() => {
       setIsTransitioning(false)
     }, 950)
@@ -229,10 +239,8 @@ export default function AboutPage() {
   const nextSlide = useCallback(() => {
     if (currentIdx < TIMELINE_SLIDES.length - 1) {
       changeSlide(currentIdx + 1, 1)
-    } else if (currentIdx === TIMELINE_SLIDES.length - 1) {
-      scrollToDireksi()
     }
-  }, [currentIdx, changeSlide, scrollToDireksi])
+  }, [currentIdx, changeSlide])
 
   const prevSlide = useCallback(() => {
     if (currentIdx > 0) {
@@ -240,14 +248,15 @@ export default function AboutPage() {
     }
   }, [currentIdx, changeSlide])
 
-  // Wheel Listener:
-  // - Saat belum masuk fase akhir (!isFinalPhase): Kunci ketat, scroll hanya menggerakkan slide
-  // - Saat sudah masuk fase akhir (isFinalPhase): Scroll ke bawah membawa pengunjung ke Dewan Direksi, dan unlock penuh aktif!
+  // Wheel Listener yang Teliti & Anti-Skip:
+  // - Menyerap sisa inersia scroll saat masuk ke 2024-2026 (cooldown buffer 1.2s).
+  // - Tahun 2026 TIDAK BISA terlewat secara instan.
+  // - Keluar dari 2026 memerlukan scroll baru yang disengaja.
   useEffect(() => {
     let lastScrollTime = 0
 
     const handleWheel = (e) => {
-      // Jika belum di fase akhir (Slide 0 s/d 5), selalu kunci scroll window!
+      // 1. KASUS BELUM FASE AKHIR (Slide 0 s/d 5)
       if (!isFinalPhase) {
         e.preventDefault()
         const now = Date.now()
@@ -264,13 +273,37 @@ export default function AboutPage() {
         return
       }
 
-      // Jika sudah di fase akhir (Slide 6) dan scroll ke bawah saat masih di atas, arahkan ke Dewan Direksi
-      if (isFinalPhase && window.scrollY <= 20 && e.deltaY > 0) {
-        scrollToDireksi()
-        return
+      // 2. KASUS SUDAH DI FASE AKHIR (Slide 6: 2024-2026)
+      // Jaga agar slide 2026 tenang & stabil: Abaikan scroll cepat selama 1.2 detik setelah baru tiba
+      const timeSinceArrive = Date.now() - timelineSettledTime
+      if (window.scrollY <= 20) {
+        if (timeSinceArrive < 1200) {
+          // Serap inersia swipe trackpad agar 2026 tidak ter-skip!
+          e.preventDefault()
+          return
+        }
+
+        // Pengguna menggulir ke atas: kembali ke tahun 2019
+        if (e.deltaY < -15) {
+          e.preventDefault()
+          prevSlide()
+          return
+        }
+
+        // Pengguna sengaja menggulir ke bawah: alirkan mulus ke Dewan Direksi
+        if (e.deltaY > 15) {
+          e.preventDefault()
+          scrollToDireksi()
+          return
+        }
       }
 
-      // Jika sudah berada di section normal (scrollY > 20), scrolling bebas dengan Lenis
+      // 3. KASUS SUDAH BERADA DI BAWAH (Dewan Direksi / ESG / Footer)
+      // Jika pengguna scroll balik ke paling atas (scrollY <= 10) dan terus scroll ke atas:
+      if (window.scrollY <= 5 && e.deltaY < -20 && timeSinceArrive >= 1200) {
+        e.preventDefault()
+        prevSlide()
+      }
     }
 
     const handleKeyDown = (e) => {
@@ -286,6 +319,12 @@ export default function AboutPage() {
       }
 
       if (isFinalPhase && window.scrollY <= 20) {
+        const timeSinceArrive = Date.now() - timelineSettledTime
+        if (timeSinceArrive < 800) {
+          e.preventDefault()
+          return
+        }
+
         if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
           e.preventDefault()
           scrollToDireksi()
@@ -315,11 +354,14 @@ export default function AboutPage() {
       }
 
       if (isFinalPhase && window.scrollY <= 20) {
+        const timeSinceArrive = Date.now() - timelineSettledTime
+        if (timeSinceArrive < 1000) return
+
         const touchEndY = e.changedTouches[0].clientY
         const diff = touchStartY - touchEndY
-        if (diff > 30) {
+        if (diff > 35) {
           scrollToDireksi()
-        } else if (diff < -30 && currentIdx > 0) {
+        } else if (diff < -35 && currentIdx > 0) {
           prevSlide()
         }
       }
@@ -341,7 +383,7 @@ export default function AboutPage() {
       }
       window.removeEventListener('keydown', handleKeyDown)
     }
-  }, [isFinalPhase, currentIdx, nextSlide, prevSlide, scrollToDireksi])
+  }, [isFinalPhase, currentIdx, timelineSettledTime, nextSlide, prevSlide, scrollToDireksi])
 
   const currentSlide = TIMELINE_SLIDES[currentIdx]
   const isTimeline = currentSlide.type === 'timeline'
@@ -596,6 +638,24 @@ export default function AboutPage() {
                           <div className="p-3 bg-blue-50/70 border-l-2 border-[#0F58A8] rounded-r text-xs sm:text-sm text-slate-800 font-medium leading-relaxed">
                             <strong className="text-slate-900">Pencapaian:</strong> {currentSlide.breakthrough}
                           </div>
+
+                          {/* Tombol Afordansi Khusus di Tahun Terakhir 2026 */}
+                          {isLastTimelineYear && (
+                            <motion.div 
+                              initial={{ opacity: 0, y: 15 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: 0.8, duration: 0.6 }}
+                              className="pt-2"
+                            >
+                              <button
+                                onClick={scrollToDireksi}
+                                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-[#0F58A8] text-xs font-heading font-semibold tracking-wide transition-all duration-300 cursor-pointer border border-slate-200 hover:border-blue-200 shadow-2xs hover:shadow-xs group"
+                              >
+                                <span>Lanjut ke Dewan Direksi & Tata Kelola Korporat</span>
+                                <ChevronDown className="w-3.5 h-3.5 text-[#0F58A8] group-hover:translate-y-0.5 transition-transform duration-300" />
+                              </button>
+                            </motion.div>
+                          )}
                         </motion.div>
                       </>
                     )}
@@ -822,4 +882,4 @@ export default function AboutPage() {
 with open('src/pages/AboutPage.jsx', 'w', encoding='utf-8') as f:
     f.write(CODE)
 
-print("BERHASIL: Di awal terkunci ketat (Slide 0 s/d 5 tidak bisa scroll keluar), hanya setelah masuk fase akhir (Slide 6: 2026) kunci dilepas untuk lanjut ke section zona lain!")
+print("BERHASIL: Cooldown 1.2 detik diterapkan di 2026 sehingga tidak akan pernah ter-skip secara instan lagi, dan transisi ke Dewan Direksi menggunakan Lenis.scrollTo yang empuk dan mewah!")
