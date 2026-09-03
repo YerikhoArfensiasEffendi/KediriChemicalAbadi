@@ -165,7 +165,7 @@ export default function AboutPage() {
     setCurrentIdx(newIdx)
     setTimeout(() => {
       setIsTransitioning(false)
-    }, 750) // Waktu transisi paralaks stabil
+    }, 850) // Waktu tenang & stabil
   }, [isTransitioning])
 
   const nextSlide = useCallback(() => {
@@ -195,7 +195,7 @@ export default function AboutPage() {
     const handleWheel = (e) => {
       e.preventDefault()
       const now = Date.now()
-      if (now - lastScrollTime < 700) return
+      if (now - lastScrollTime < 800) return
       
       if (Math.abs(e.deltaY) > 10) {
         lastScrollTime = now
@@ -269,6 +269,55 @@ export default function AboutPage() {
       </Helmet>
 
       {/* ═════════════════════════════════════════════════════════════════════ */}
+      {/* GARIS TENGAH PERMANEN (HANYA DI BAGIAN TIMELINE)                     */}
+      {/* GARIS BERDIRI TENANG DI BACKGROUND (z-0), TIDAK FADE & TIDAK RE-SCALE*/}
+      {/* ═════════════════════════════════════════════════════════════════════ */}
+      {isTimeline && (
+        <div className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] pointer-events-none z-0">
+          {/* Garis Dasar Abu-abu Halus */}
+          <div className="w-full h-full bg-slate-200" />
+          {/* Garis Aksen Biru Korporat Halus Menyatu dengan Website */}
+          <div className="absolute inset-0 w-full bg-[#0F58A8]/60" />
+        </div>
+      )}
+
+      {/* ═════════════════════════════════════════════════════════════════════ */}
+      {/* TITIK PEMBERHENTIAN (NODE BULLET) TEPAT DI TENGAH LAYAR (DEAD-CENTER) */}
+      {/* MENGALAMI EFEK BERGESER KE ATAS & MUNCUL BERGANTIAN DARI BAWAH        */}
+      {/* ═════════════════════════════════════════════════════════════════════ */}
+      {isTimeline && (
+        <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-0 pointer-events-none items-center justify-center">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`node-${currentSlide.id}`}
+              initial={{ 
+                opacity: 0, 
+                y: direction > 0 ? 40 : -40,
+                scale: 0.8
+              }}
+              animate={{ 
+                opacity: 1, 
+                y: 0,
+                scale: 1
+              }}
+              exit={{ 
+                opacity: 0, 
+                y: direction > 0 ? -40 : 40,
+                scale: 0.8
+              }}
+              transition={{ 
+                duration: 0.75, 
+                ease: [0.16, 1, 0.3, 1] 
+              }}
+              className="w-5 h-5 rounded-full border-2 border-[#0F58A8] bg-white flex items-center justify-center shadow-xs"
+            >
+              <div className="w-2 h-2 rounded-full bg-[#0F58A8]" />
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      )}
+
+      {/* ═════════════════════════════════════════════════════════════════════ */}
       {/* SIDEBAR NAVIGASI DOTS INDIKATOR                                     */}
       {/* ═════════════════════════════════════════════════════════════════════ */}
       <div className="hidden md:flex flex-col gap-2.5 fixed right-6 sm:right-8 top-1/2 -translate-y-1/2 z-40">
@@ -306,8 +355,8 @@ export default function AboutPage() {
             custom={direction}
             initial={{ 
               opacity: 0, 
-              y: direction > 0 ? 50 : -50,
-              scale: 0.985
+              y: direction > 0 ? 45 : -45,
+              scale: 0.99
             }}
             animate={{ 
               opacity: 1, 
@@ -316,60 +365,26 @@ export default function AboutPage() {
             }}
             exit={{ 
               opacity: 0, 
-              y: direction > 0 ? -50 : 50,
-              scale: 0.985
+              y: direction > 0 ? -45 : 45,
+              scale: 0.99
             }}
             transition={{ 
-              duration: 0.6, 
-              ease: [0.22, 1, 0.36, 1] 
+              duration: 0.8, 
+              ease: [0.16, 1, 0.3, 1] 
             }}
             className="w-full h-full flex items-center justify-center px-4 sm:px-8 lg:px-16 relative"
           >
-            {/* ─────────────────────────────────────────────────────────── */}
-            {/* GARIS TENGAH (HANYA DI BAGIAN TAHUN): MUNCUL DARI BAWAH KE  */}
-            {/* TITIK HENTI DEAD-CENTER DI TENGAH LAYAR                    */}
-            {/* ─────────────────────────────────────────────────────────── */}
-            {isTimeline && (
-              <div className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] pointer-events-none z-0">
-                {/* Garis Dasar Halus */}
-                <div className="w-full h-full bg-slate-200/80" />
-
-                {/* Garis Muncul Halus Mengalir dari Bawah ke Titik Henti Tengah */}
-                <motion.div 
-                  initial={{ scaleY: 0, originY: 1, opacity: 0 }}
-                  animate={{ scaleY: 1, originY: 1, opacity: 1 }}
-                  exit={{ opacity: 0, y: -40 }}
-                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                  className="absolute inset-0 w-full bg-[#0F58A8] origin-bottom"
-                />
-
-                {/* Titik Simpul Pemberhentian Tepat di Tengah (Dead-Center) */}
-                <motion.div 
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0, opacity: 0, y: -20 }}
-                  transition={{ duration: 0.4, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                  className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full border-2 border-[#0F58A8] bg-white flex items-center justify-center shadow-xs"
-                >
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#0F58A8]" />
-                </motion.div>
-              </div>
-            )}
-
-            {/* ─────────────────────────────────────────────────────────── */}
-            {/* KONTEN MASUK BERGANTIAN: FOTO DULU, BARU TULISAN LENGKAP     */}
-            {/* ─────────────────────────────────────────────────────────── */}
             <div className="max-w-6xl mx-auto w-full relative z-10">
 
               {/* 1. HERO SLIDE */}
               {currentSlide.type === 'hero' && (
                 <div className="max-w-5xl mx-auto w-full text-center space-y-6 sm:space-y-8">
-                  {/* Judul Muncul Halus */}
+                  {/* Judul Muncul Halus & Tenang */}
                   <motion.div 
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 25 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -30 }}
-                    transition={{ duration: 0.55, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                    exit={{ opacity: 0, y: -25 }}
+                    transition={{ duration: 0.75, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
                     className="flex items-center justify-center gap-4 sm:gap-8"
                   >
                     <div className="h-[1.5px] bg-slate-300 w-16 sm:w-32 lg:w-48" />
@@ -381,10 +396,10 @@ export default function AboutPage() {
 
                   {/* Foto Mosaik Muncul Paralaks dari Bawah */}
                   <motion.div 
-                    initial={{ opacity: 0, y: 40, scale: 0.97 }}
+                    initial={{ opacity: 0, y: 35, scale: 0.97 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -40, scale: 0.97 }}
-                    transition={{ duration: 0.65, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                    exit={{ opacity: 0, y: -35, scale: 0.97 }}
+                    transition={{ duration: 0.85, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
                     className="relative overflow-hidden rounded-xl border border-slate-200/90 shadow-md bg-slate-100 aspect-[21/9]"
                   >
                     <img
@@ -403,12 +418,12 @@ export default function AboutPage() {
               {/* 2. PROLOGUE / LATAR BELAKANG */}
               {currentSlide.type === 'prologue' && (
                 <div className="max-w-4xl mx-auto w-full text-center space-y-6">
-                  {/* Judul Muncul */}
+                  {/* Judul Muncul Tenang */}
                   <motion.div 
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 25 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -30 }}
-                    transition={{ duration: 0.55, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                    exit={{ opacity: 0, y: -25 }}
+                    transition={{ duration: 0.75, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
                     className="space-y-2.5"
                   >
                     <h2 className="text-base sm:text-lg lg:text-xl font-bold font-heading uppercase tracking-wider text-[#0F58A8]">
@@ -419,29 +434,29 @@ export default function AboutPage() {
                     </h3>
                   </motion.div>
 
-                  {/* Paragraf Muncul Mengalir Halus dari Bawah */}
+                  {/* Paragraf Muncul Mengalir Halus & Kalem */}
                   <div className="text-sm sm:text-[15.5px] text-slate-800 leading-[1.85] font-normal text-justify sm:text-center space-y-4 max-w-3xl mx-auto">
                     <motion.p
-                      initial={{ opacity: 0, y: 25 }}
+                      initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -25 }}
-                      transition={{ duration: 0.55, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.75, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
                     >
                       {currentSlide.desc1}
                     </motion.p>
                     <motion.p
-                      initial={{ opacity: 0, y: 25 }}
+                      initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -25 }}
-                      transition={{ duration: 0.55, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.75, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
                     >
                       {currentSlide.desc2}
                     </motion.p>
                     <motion.p
-                      initial={{ opacity: 0, y: 25 }}
+                      initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -25 }}
-                      transition={{ duration: 0.55, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.75, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
                     >
                       {currentSlide.desc3}
                     </motion.p>
@@ -449,19 +464,19 @@ export default function AboutPage() {
                 </div>
               )}
 
-              {/* 3. TIMELINE TAHUN: SEKUENSIAL HALUS (GARIS -> FOTO -> TULISAN) */}
+              {/* 3. TIMELINE TAHUN: MASUK BERGANTIAN (FOTO -> TULISAN) SECARA KALEM */}
               {currentSlide.type === 'timeline' && (
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center relative z-20">
                   
                   {/* GANJIL: FOTO KIRI, TULISAN KANAN */}
                   {currentSlide.align === 'left' && (
                     <>
-                      {/* LANGKAH 2: FOTO MUNCUL PARALAKS DARI BAWAH */}
+                      {/* LANGKAH 1: FOTO MUNCUL PARALAKS PERLAHAN DARI BAWAH */}
                       <motion.div 
-                        initial={{ opacity: 0, y: 40, scale: 0.96 }}
+                        initial={{ opacity: 0, y: 35, scale: 0.97 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: -40, scale: 0.96 }}
-                        transition={{ duration: 0.6, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                        exit={{ opacity: 0, y: -35, scale: 0.97 }}
+                        transition={{ duration: 0.85, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
                         className="lg:col-span-6 order-2 lg:order-1 flex justify-center lg:justify-end relative z-20"
                       >
                         <div className="relative p-2.5 sm:p-3 bg-white border border-slate-200/90 shadow-md rounded-lg max-w-md w-full group">
@@ -478,12 +493,12 @@ export default function AboutPage() {
                         </div>
                       </motion.div>
 
-                      {/* LANGKAH 3: TULISAN MUNCUL BERGANTIAN SECARA HALUS */}
+                      {/* LANGKAH 2: TULISAN MUNCUL BERGANTIAN SECARA TENANG */}
                       <motion.div 
-                        initial={{ opacity: 0, y: 35 }}
+                        initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -35 }}
-                        transition={{ duration: 0.6, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                        exit={{ opacity: 0, y: -30 }}
+                        transition={{ duration: 0.85, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
                         className="lg:col-span-6 order-1 lg:order-2 space-y-3.5 lg:pl-6 text-left relative z-20"
                       >
                         {/* Tahun & Badge */}
@@ -533,12 +548,12 @@ export default function AboutPage() {
                   {/* GENAP: TULISAN KIRI, FOTO KANAN */}
                   {currentSlide.align === 'right' && (
                     <>
-                      {/* LANGKAH 3: TULISAN MUNCUL BERGANTIAN SECARA HALUS (RATA KANAN) */}
+                      {/* LANGKAH 2: TULISAN MUNCUL BERGANTIAN SECARA TENANG (RATA KANAN) */}
                       <motion.div 
-                        initial={{ opacity: 0, y: 35 }}
+                        initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -35 }}
-                        transition={{ duration: 0.6, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                        exit={{ opacity: 0, y: -30 }}
+                        transition={{ duration: 0.85, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
                         className="lg:col-span-6 order-1 lg:order-1 space-y-3.5 lg:pr-6 text-left lg:text-right flex flex-col lg:items-end relative z-20"
                       >
                         {/* Tahun & Badge */}
@@ -583,12 +598,12 @@ export default function AboutPage() {
                         </div>
                       </motion.div>
 
-                      {/* LANGKAH 2: FOTO MUNCUL PARALAKS DARI BAWAH */}
+                      {/* LANGKAH 1: FOTO MUNCUL PARALAKS PERLAHAN DARI BAWAH */}
                       <motion.div 
-                        initial={{ opacity: 0, y: 40, scale: 0.96 }}
+                        initial={{ opacity: 0, y: 35, scale: 0.97 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: -40, scale: 0.96 }}
-                        transition={{ duration: 0.6, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                        exit={{ opacity: 0, y: -35, scale: 0.97 }}
+                        transition={{ duration: 0.85, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
                         className="lg:col-span-6 order-2 lg:order-2 flex justify-center lg:justify-start relative z-20"
                       >
                         <div className="relative p-2.5 sm:p-3 bg-white border border-slate-200/90 shadow-md rounded-lg max-w-md w-full group">
@@ -614,10 +629,10 @@ export default function AboutPage() {
               {currentSlide.type === 'directors' && (
                 <div className="max-w-[1200px] mx-auto w-full space-y-8">
                   <motion.div 
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 25 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -30 }}
-                    transition={{ duration: 0.55, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                    exit={{ opacity: 0, y: -25 }}
+                    transition={{ duration: 0.75, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
                     className="text-center max-w-3xl mx-auto space-y-2"
                   >
                     <span className="text-xs font-bold font-heading uppercase tracking-widest text-[#0F58A8] block">
@@ -635,10 +650,10 @@ export default function AboutPage() {
                     {COMPANY_DATA.boardOfDirectors.map((person, pIdx) => (
                       <motion.div
                         key={pIdx}
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={{ opacity: 0, y: 25 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -30 }}
-                        transition={{ duration: 0.55, delay: 0.25 + pIdx * 0.15, ease: [0.22, 1, 0.36, 1] }}
+                        exit={{ opacity: 0, y: -25 }}
+                        transition={{ duration: 0.75, delay: 0.25 + pIdx * 0.15, ease: [0.16, 1, 0.3, 1] }}
                         className={`space-y-4 ${pIdx === 1 ? 'md:pl-8 lg:pl-10 pt-6 md:pt-0' : 'md:pr-8 lg:pr-10'}`}
                       >
                         <div className="flex items-start gap-3.5">
@@ -685,10 +700,10 @@ export default function AboutPage() {
               {currentSlide.type === 'esg' && (
                 <div className="max-w-[1250px] mx-auto w-full space-y-8 text-center">
                   <motion.div 
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 25 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -30 }}
-                    transition={{ duration: 0.55, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                    exit={{ opacity: 0, y: -25 }}
+                    transition={{ duration: 0.75, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
                     className="max-w-2xl mx-auto space-y-1.5"
                   >
                     <span className="text-xs font-bold font-heading uppercase tracking-widest text-[#0F58A8] block">
@@ -701,10 +716,10 @@ export default function AboutPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 text-left pt-2">
                     <motion.div 
-                      initial={{ opacity: 0, y: 25 }}
+                      initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -25 }}
-                      transition={{ duration: 0.5, delay: 0.2 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                       className="p-4 rounded-lg bg-slate-50 border border-slate-200/80 space-y-1.5"
                     >
                       <strong className="text-xs sm:text-sm font-bold text-slate-900 block font-heading">
@@ -716,10 +731,10 @@ export default function AboutPage() {
                     </motion.div>
 
                     <motion.div 
-                      initial={{ opacity: 0, y: 25 }}
+                      initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -25 }}
-                      transition={{ duration: 0.5, delay: 0.3 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
                       className="p-4 rounded-lg bg-emerald-50/60 border border-emerald-200/80 space-y-1.5"
                     >
                       <strong className="text-xs sm:text-sm font-bold text-slate-900 block font-heading">
@@ -731,10 +746,10 @@ export default function AboutPage() {
                     </motion.div>
 
                     <motion.div 
-                      initial={{ opacity: 0, y: 25 }}
+                      initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -25 }}
-                      transition={{ duration: 0.5, delay: 0.4 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
                       className="p-4 rounded-lg bg-amber-50/60 border border-amber-200/80 space-y-1.5"
                     >
                       <strong className="text-xs sm:text-sm font-bold text-slate-900 block font-heading">
@@ -746,10 +761,10 @@ export default function AboutPage() {
                     </motion.div>
 
                     <motion.div 
-                      initial={{ opacity: 0, y: 25 }}
+                      initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -25 }}
-                      transition={{ duration: 0.5, delay: 0.5 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
                       className="p-4 rounded-lg bg-blue-50/60 border border-blue-200/80 space-y-1.5"
                     >
                       <strong className="text-xs sm:text-sm font-bold text-slate-900 block font-heading">
@@ -763,10 +778,10 @@ export default function AboutPage() {
 
                   {/* Call to Action Bar */}
                   <motion.div 
-                    initial={{ opacity: 0, scale: 0.96 }}
+                    initial={{ opacity: 0, scale: 0.97 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.96 }}
-                    transition={{ duration: 0.55, delay: 0.6 }}
+                    exit={{ opacity: 0, scale: 0.97 }}
+                    transition={{ duration: 0.7, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
                     className="pt-4 flex items-center justify-center gap-4 flex-wrap"
                   >
                     <Link
