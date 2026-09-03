@@ -308,18 +308,20 @@ export default function AboutPage() {
 
       {/* ═════════════════════════════════════════════════════════════════════ */}
       {/* GARIS TENGAH PERMANEN (HANYA DI BAGIAN TIMELINE)                     */}
-      {/* PADA 2026: BERHENTI DI TENGAH (h-1/2) SEBAGAI GARIS TERAKHIR!         */}
+      {/* PADA 2026: BERHENTI DI TITIK (bottom-1/2), TIDAK DI TEMBUS KE BAWAH!*/}
       {/* ═════════════════════════════════════════════════════════════════════ */}
       {isTimeline && (
         <motion.div 
           animate={isLeavingTimeline ? { y: -160, opacity: 0 } : { y: 0, opacity: 1 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] pointer-events-none z-0"
+          className={`hidden lg:block absolute left-1/2 -translate-x-1/2 top-0 ${
+            isLastTimelineYear ? 'bottom-1/2' : 'bottom-0'
+          } w-[2px] pointer-events-none z-0`}
         >
-          {/* Garis Dasar Abu-abu Halus: Jika slide terakhir 2026, berhenti di tengah (h-1/2)! */}
-          <div className={`w-full ${isLastTimelineYear ? 'h-1/2' : 'h-full'} bg-slate-200 transition-all duration-500`} />
+          {/* Garis Dasar Abu-abu Halus */}
+          <div className="w-full h-full bg-slate-200" />
           {/* Garis Aksen Biru Korporat Halus */}
-          <div className={`absolute inset-0 w-full ${isLastTimelineYear ? 'h-1/2' : 'h-full'} bg-[#0F58A8]/60 transition-all duration-500`} />
+          <div className="absolute top-0 left-0 right-0 bottom-0 w-full bg-[#0F58A8]/60" />
         </motion.div>
       )}
 
