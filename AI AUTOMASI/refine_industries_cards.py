@@ -1,4 +1,6 @@
-import { Helmet } from 'react-helmet-async'
+import os
+
+code = '''import { Helmet } from 'react-helmet-async'
 import { motion } from 'framer-motion'
 import { ShieldCheck, ArrowRight } from 'lucide-react'
 import IndustriesSection from '@/components/sections/IndustriesSection'
@@ -168,3 +170,9 @@ export default function IndustriesPage() {
     </main>
   )
 }
+'''
+
+with open('src/pages/IndustriesPage.jsx', 'w', encoding='utf-8') as f:
+    f.write(code)
+
+print('Updated src/pages/IndustriesPage.jsx successfully!')
