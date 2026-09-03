@@ -192,6 +192,14 @@ export default function AboutPage() {
     }
   }, [currentIdx, isAnimating, goToSlide])
 
+  // Pause global Lenis smooth scrolling while in Section-Locked AboutPage
+  useEffect(() => {
+    window.__lenis?.stop()
+    return () => {
+      window.__lenis?.start()
+    }
+  }, [])
+
   // Wheel Lock Listener: 1 Wheel Flick = 1 Move to Next/Prev Section
   useEffect(() => {
     let lastWheelTime = 0

@@ -2,6 +2,8 @@ import { Suspense, lazy, useEffect } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
 import { motion, AnimatePresence } from 'framer-motion'
+import Lenis from 'lenis'
+import 'lenis/dist/lenis.css'
 
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
@@ -30,9 +32,43 @@ function LoadingFallback() {
 function ScrollToTop() {
   const { pathname } = useLocation()
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+    if (window.__lenis) {
+      window.__lenis.scrollTo(0, { immediate: true })
+    } else {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+    }
   }, [pathname])
   return null
+}
+
+function useLenisScroll() {
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.15,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 0.95,
+      touchMultiplier: 1.6,
+      infinite: false,
+    })
+
+    window.__lenis = lenis
+
+    function raf(time) {
+      lenis.raf(time)
+      requestAnimationFrame(raf)
+    }
+
+    const rafId = requestAnimationFrame(raf)
+
+    return () => {
+      cancelAnimationFrame(rafId)
+      lenis.destroy()
+      delete window.__lenis
+    }
+  }, [])
 }
 
 function AnimatedRoutes() {
@@ -68,6 +104,8 @@ function AnimatedRoutes() {
 }
 
 export default function App() {
+  useLenisScroll()
+
   return (
     <HelmetProvider>
       <BrowserRouter>
