@@ -2,13 +2,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
   ArrowRight, 
-  CheckCircle2, 
-  ShieldCheck,
-  Award,
-  Layers,
-  Calculator,
-  FileCheck2,
-  FileText
+  CheckCircle2 
 } from 'lucide-react'
 import { PRODUCTS_DATA } from '@/data/productsData'
 import RFQModal from '@/components/ui/RFQModal'
@@ -135,9 +129,7 @@ const PACKAGING_VARIANTS = [
 
 export default function ProductShowcaseSection() {
   const [rfqOpen, setRfqOpen] = useState(false)
-  const [activeTab, setActiveTab] = useState('features')
   const [selectedPackaging, setSelectedPackaging] = useState(PACKAGING_VARIANTS[0])
-  const [laundryKg, setLaundryKg] = useState(300)
 
   const productsArray = Array.isArray(PRODUCTS_DATA) ? PRODUCTS_DATA : []
   const heroProduct = productsArray.find((p) => p.isHero) || productsArray[0] || {}
@@ -156,11 +148,6 @@ export default function ProductShowcaseSection() {
     const flagship = prods[0] || productsArray.find((p) => p.category === key)
     return flagship ? { ...flagship, categoryDisplayLabel: label } : null
   }).filter(Boolean)
-
-  // Dynamic dosage calculations
-  const kcaLitersPerDay = ((laundryKg * 12.5) / 1000).toFixed(1)
-  const competitorLitersPerDay = ((laundryKg * 40) / 1000).toFixed(1)
-  const savingsPct = Math.round((1 - 12.5 / 40) * 100)
 
   return (
     <>
@@ -287,187 +274,56 @@ export default function ProductShowcaseSection() {
                     </div>
                   </div>
 
-                  {/* Interactive Tab Switcher (Minimalist Underline Style) */}
-                  <div className="border-b border-slate-200 flex items-center gap-4 overflow-x-auto pb-px">
-                    <button
-                      onClick={() => setActiveTab('features')}
-                      className={`pb-2 text-xs font-bold font-heading uppercase tracking-wider transition-all border-b-2 cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${
-                        activeTab === 'features'
-                          ? 'border-[#0F58A8] text-[#0F58A8]'
-                          : 'border-transparent text-slate-500 hover:text-slate-900'
-                      }`}
-                    >
-                      <Layers className="w-3.5 h-3.5" />
-                      <span>Rekayasa &amp; Mekanisme Formulasi</span>
-                    </button>
+                  {/* Rekayasa & Keunggulan Formulasi (1 Informasi Terpadu Utuh) */}
+                  <div className="pt-2 border-t border-slate-200/80 space-y-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="border-l-2 border-[#0F58A8] pl-3.5 space-y-0.5">
+                        <strong className="text-xs font-bold text-slate-900 block font-heading">
+                          1. Sequestering Agent Murni
+                        </strong>
+                        <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                          Mengikat ion Ca²⁺ &amp; Mg²⁺ air tanah sadah agar molekul surfaktan aktif bekerja 100% tanpa pengendapan kerak.
+                        </p>
+                      </div>
 
-                    <button
-                      onClick={() => setActiveTab('specs')}
-                      className={`pb-2 text-xs font-bold font-heading uppercase tracking-wider transition-all border-b-2 cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${
-                        activeTab === 'specs'
-                          ? 'border-[#0F58A8] text-[#0F58A8]'
-                          : 'border-transparent text-slate-500 hover:text-slate-900'
-                      }`}
-                    >
-                      <FileCheck2 className="w-3.5 h-3.5" />
-                      <span>Lembar Data Teknis (TDS Matrix)</span>
-                    </button>
+                      <div className="border-l-2 border-emerald-600 pl-3.5 space-y-0.5">
+                        <strong className="text-xs font-bold text-slate-900 block font-heading">
+                          2. Dual Surfactant Non-Ionic &amp; Anionic
+                        </strong>
+                        <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                          Penetrasi serat mikro ganda memecah noda protein darah, lemak dapur, dan partikulat debu secara tuntas.
+                        </p>
+                      </div>
 
-                    <button
-                      onClick={() => setActiveTab('calculator')}
-                      className={`pb-2 text-xs font-bold font-heading uppercase tracking-wider transition-all border-b-2 cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${
-                        activeTab === 'calculator'
-                          ? 'border-[#0F58A8] text-[#0F58A8]'
-                          : 'border-transparent text-slate-500 hover:text-slate-900'
-                      }`}
-                    >
-                      <Calculator className="w-3.5 h-3.5" />
-                      <span>Kalkulator Dosis &amp; ROI Biaya</span>
-                    </button>
+                      <div className="border-l-2 border-amber-600 pl-3.5 space-y-0.5">
+                        <strong className="text-xs font-bold text-slate-900 block font-heading">
+                          3. Low-Foam Formula (Hemat Air)
+                        </strong>
+                        <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                          Busa rendah menjaga bantalan drum mesin cuci dan memotong 1 siklus bilas, menghemat air bersih hingga 25%.
+                        </p>
+                      </div>
+
+                      <div className="border-l-2 border-purple-600 pl-3.5 space-y-0.5">
+                        <strong className="text-xs font-bold text-slate-900 block font-heading">
+                          4. Anti-Redeposition Polymer
+                        </strong>
+                        <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                          Mengunci kotoran terlepas dalam air buangan agar tidak menempel kembali pada kain putih selama putaran ekstraksi.
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Ringkasan Parameter Uji Laboratorium (TDS) */}
+                    <div className="pt-2 border-t border-slate-100 flex items-center justify-between gap-3 text-[11px] text-slate-600 flex-wrap">
+                      <span>Bahan Aktif: <strong className="text-slate-900 font-bold">18%–22% Active Matter</strong></span>
+                      <span>pH (1% sol): <strong className="text-slate-900 font-bold">7.5–8.5</strong></span>
+                      <span>Biodegradasi: <strong className="text-emerald-700 font-bold">&gt;90% OECD 301D</strong></span>
+                      <span>Fosfat: <strong className="text-emerald-700 font-bold">0.0% STPP-Free</strong></span>
+                    </div>
                   </div>
 
-                  {/* Tab Content Display (Open Editorial Layout) */}
-                  <div className="min-h-[200px]">
-                    {/* TAB 1: Rekayasa Formulasi */}
-                    {activeTab === 'features' && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 6 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.25 }}
-                        className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-                      >
-                        <div className="border-l-2 border-[#0F58A8] pl-3.5 space-y-0.5">
-                          <strong className="text-xs font-bold text-slate-900 block font-heading">
-                            1. Sequestering Agent Murni
-                          </strong>
-                          <p className="text-xs text-slate-600 leading-relaxed font-normal">
-                            Mengikat ion Ca²⁺ &amp; Mg²⁺ air tanah sadah agar molekul surfaktan aktif bekerja 100% tanpa pengendapan kerak.
-                          </p>
-                        </div>
-
-                        <div className="border-l-2 border-emerald-600 pl-3.5 space-y-0.5">
-                          <strong className="text-xs font-bold text-slate-900 block font-heading">
-                            2. Dual Surfactant Non-Ionic &amp; Anionic
-                          </strong>
-                          <p className="text-xs text-slate-600 leading-relaxed font-normal">
-                            Penetrasi serat mikro ganda memecah noda protein darah, lemak dapur, dan partikulat debu secara tuntas.
-                          </p>
-                        </div>
-
-                        <div className="border-l-2 border-amber-600 pl-3.5 space-y-0.5">
-                          <strong className="text-xs font-bold text-slate-900 block font-heading">
-                            3. Low-Foam Formula (Hemat Air)
-                          </strong>
-                          <p className="text-xs text-slate-600 leading-relaxed font-normal">
-                            Busa rendah menjaga bantalan drum mesin cuci dan memotong 1 siklus bilas, menghemat air bersih hingga 25%.
-                          </p>
-                        </div>
-
-                        <div className="border-l-2 border-purple-600 pl-3.5 space-y-0.5">
-                          <strong className="text-xs font-bold text-slate-900 block font-heading">
-                            4. Anti-Redeposition Polymer
-                          </strong>
-                          <p className="text-xs text-slate-600 leading-relaxed font-normal">
-                            Mengunci kotoran terlepas dalam air buangan agar tidak menempel kembali pada kain putih selama putaran ekstraksi.
-                          </p>
-                        </div>
-                      </motion.div>
-                    )}
-
-                    {/* TAB 2: TDS Matrix Spesifikasi Laboratorium */}
-                    {activeTab === 'specs' && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 6 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.25 }}
-                        className="space-y-2 text-xs text-slate-700"
-                      >
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5 divide-y sm:divide-y-0 divide-slate-100">
-                          <div className="flex justify-between py-1 border-b border-slate-100">
-                            <span className="text-slate-500">Bahan Aktif Total:</span>
-                            <strong className="text-slate-900 font-bold">18% – 22% Active Matter</strong>
-                          </div>
-                          <div className="flex justify-between py-1 border-b border-slate-100">
-                            <span className="text-slate-500">Nilai pH Digital (1% Sol):</span>
-                            <strong className="text-slate-900 font-bold">7.5 – 8.5 (Netral Serat)</strong>
-                          </div>
-                          <div className="flex justify-between py-1 border-b border-slate-100">
-                            <span className="text-slate-500">Berat Jenis (25°C):</span>
-                            <strong className="text-slate-900 font-bold">1.02 – 1.05 g/cm³</strong>
-                          </div>
-                          <div className="flex justify-between py-1 border-b border-slate-100">
-                            <span className="text-slate-500">Standar IPAL (OECD 301D):</span>
-                            <strong className="text-emerald-700 font-bold">&gt;90% Biodegradable</strong>
-                          </div>
-                          <div className="flex justify-between py-1 border-b border-slate-100">
-                            <span className="text-slate-500">Kandungan Fosfat (STPP):</span>
-                            <strong className="text-emerald-700 font-bold">0.0% (100% Bebas Fosfat)</strong>
-                          </div>
-                          <div className="flex justify-between py-1 border-b border-slate-100">
-                            <span className="text-slate-500">Kelarutan Air Murni:</span>
-                            <strong className="text-slate-900 font-bold">100% Sempurna (Bebas Endapan)</strong>
-                          </div>
-                        </div>
-
-                        <div className="pt-2 text-[11px] text-slate-500 flex items-center gap-1.5">
-                          <Award className="w-3.5 h-3.5 text-[#0F58A8]" />
-                          <span>Setiap pengiriman batch disertai Certificate of Analysis (COA) resmi bertandatangan QC Manager KCA.</span>
-                        </div>
-                      </motion.div>
-                    )}
-
-                    {/* TAB 3: Interactive Dosage Calculator */}
-                    {activeTab === 'calculator' && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 6 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.25 }}
-                        className="space-y-4"
-                      >
-                        <div className="space-y-2">
-                          <div className="flex justify-between items-center text-xs">
-                            <span className="font-bold text-slate-800">
-                              Kapasitas Cuci Harian Fasilitas Anda:
-                            </span>
-                            <span className="font-mono font-extrabold text-[#0F58A8] text-sm bg-blue-50 px-2.5 py-0.5 border border-blue-200">
-                              {laundryKg} kg kain kering / hari
-                            </span>
-                          </div>
-                          <input
-                            type="range"
-                            min="50"
-                            max="2000"
-                            step="50"
-                            value={laundryKg}
-                            onChange={(e) => setLaundryKg(Number(e.target.value))}
-                            className="w-full accent-[#0F58A8] cursor-pointer h-1.5 bg-slate-200 rounded-none"
-                          />
-                        </div>
-
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
-                          <div className="border-l-2 border-[#0F58A8] pl-3 space-y-0.5">
-                            <span className="text-[10px] text-slate-500 block uppercase font-bold">Kebutuhan Cairan KCA:</span>
-                            <strong className="text-base font-extrabold text-[#0F58A8] block font-heading">{kcaLitersPerDay} Liter / Hari</strong>
-                            <span className="text-[10px] text-slate-500">Dosis 12.5 ml / kg</span>
-                          </div>
-
-                          <div className="border-l-2 border-slate-300 pl-3 space-y-0.5">
-                            <span className="text-[10px] text-slate-500 block uppercase font-bold">Deterjen Pasar Biasa:</span>
-                            <strong className="text-base font-extrabold text-slate-500 block font-heading">{competitorLitersPerDay} Liter / Hari</strong>
-                            <span className="text-[10px] text-slate-500">Dosis rata-rata 40 ml / kg</span>
-                          </div>
-
-                          <div className="border-l-2 border-emerald-600 pl-3 space-y-0.5">
-                            <span className="text-[10px] text-emerald-700 block uppercase font-bold">Efisiensi Kimia Bersih:</span>
-                            <strong className="text-base font-extrabold text-emerald-700 block font-heading">Hemat {savingsPct}% Volume</strong>
-                            <span className="text-[10px] text-emerald-600 font-medium">Bebas Limbah Kerak</span>
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </div>
-
-                  {/* Action Buttons (Sharp Square Direct Styling) */}
+                  {/* Action Buttons */}
                   <div className="pt-3 border-t border-slate-200 flex items-center gap-4 flex-wrap">
                     <button
                       onClick={() => setRfqOpen(true)}
@@ -477,10 +333,10 @@ export default function ProductShowcaseSection() {
                       <ArrowRight className="w-4 h-4" />
                     </button>
                     <a
-                      href="/contact"
+                      href="/calculator"
                       className="btn-fluid-secondary"
                     >
-                      <span>Konsultasi Formulasi</span>
+                      <span>Kalkulator &amp; Konsultasi Dosis</span>
                     </a>
                   </div>
 
