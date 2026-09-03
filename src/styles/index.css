@@ -52,59 +52,58 @@ h1, h2, h3, h4, h5, h6, .font-heading {
   background: #0F58A8;
 }
 
-/* 3D Liquid Water Stream Conduit (Garis Aliran Air Sejarah) */
+/* 3D Liquid Water Stream Conduit (Garis Aliran Air Sejarah - Terpadu & Halus) */
 @keyframes waterFlow {
   0% {
     background-position: 0 0;
   }
   100% {
-    background-position: 0 120px;
+    background-position: 0 100px;
   }
 }
 
 .liquid-3d-stream-conduit {
   position: relative;
-  width: 10px;
+  width: 6px;
   border-radius: 9999px;
   background: linear-gradient(
     90deg,
-    rgba(224, 242, 254, 0.6) 0%,
-    rgba(186, 230, 253, 0.8) 30%,
-    rgba(56, 189, 248, 0.9) 60%,
-    rgba(14, 165, 233, 0.7) 100%
+    rgba(224, 242, 254, 0.5) 0%,
+    rgba(186, 230, 253, 0.7) 50%,
+    rgba(224, 242, 254, 0.5) 100%
   );
   box-shadow: 
-    inset -1.5px 0 2px rgba(255, 255, 255, 0.9),
-    inset 1.5px 0 2px rgba(15, 88, 168, 0.4),
-    0 0 12px rgba(56, 189, 248, 0.35);
+    inset -1px 0 1.5px rgba(255, 255, 255, 0.8),
+    inset 1px 0 1.5px rgba(15, 88, 168, 0.2),
+    0 0 8px rgba(56, 189, 248, 0.2);
 }
 
 .liquid-3d-stream-flow {
   background: repeating-linear-gradient(
     180deg,
-    rgba(56, 189, 248, 0.85) 0px,
-    rgba(14, 165, 233, 0.95) 20px,
-    rgba(15, 88, 168, 1) 40px,
-    rgba(56, 189, 248, 0.85) 60px
+    rgba(56, 189, 248, 0.65) 0px,
+    rgba(14, 165, 233, 0.75) 25px,
+    rgba(15, 88, 168, 0.85) 50px,
+    rgba(56, 189, 248, 0.65) 75px
   );
-  background-size: 100% 60px;
-  animation: waterFlow 1.8s linear infinite;
+  background-size: 100% 75px;
+  animation: waterFlow 2s linear infinite;
   box-shadow: 
-    inset -1px 0 2px rgba(255, 255, 255, 1),
-    inset 1px 0 2px rgba(7, 17, 30, 0.45),
-    0 0 16px rgba(56, 189, 248, 0.6);
+    inset -0.5px 0 1px rgba(255, 255, 255, 0.9),
+    inset 0.5px 0 1px rgba(7, 17, 30, 0.25),
+    0 0 10px rgba(56, 189, 248, 0.35);
 }
 
 .liquid-3d-bubble-node {
-  width: 2rem;
-  height: 2rem;
+  width: 1.75rem;
+  height: 1.75rem;
   border-radius: 9999px;
-  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #7dd3fc 25%, #0284c7 65%, #075985 100%);
+  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #7dd3fc 30%, #0284c7 70%, #0c4a6e 100%);
   box-shadow: 
-    inset -2px -2px 4px rgba(7, 17, 30, 0.4),
-    inset 2px 2px 4px rgba(255, 255, 255, 0.95),
-    0 4px 12px rgba(15, 88, 168, 0.35),
-    0 0 18px rgba(56, 189, 248, 0.5);
+    inset -1.5px -1.5px 3px rgba(7, 17, 30, 0.3),
+    inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.95),
+    0 2px 8px rgba(15, 88, 168, 0.25),
+    0 0 12px rgba(56, 189, 248, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;

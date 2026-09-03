@@ -25,10 +25,9 @@ const SLIDES = [
     label: 'Pembuka',
     title: 'SEJARAH KAMI',
     subtitle: 'Fasilitas Reaktor Pencampur & Pusat Riset Formulasi • Mojoroto, Kediri',
-    image: '/images/kca_factory_reactors.jpg',
-    waterProgress: 8
+    image: '/images/kca_factory_reactors.jpg'
   },
-  // SLIDE 1: NARASI PENGANTAR (PROLOG)
+  // SLIDE 1: NARASI PENGANTAR (PROLOG / LATAR BELAKANG)
   {
     type: 'prologue',
     id: 'prologue',
@@ -36,19 +35,19 @@ const SLIDES = [
     title: 'PERJALANAN PANJANG DARI SEBUAH REAKTOR PEMBERSIH KONSENTRAT',
     subtitle: 'INDUSTRI KIMIA YANG BERMANFAAT BAGI MITRA BISNIS DAN LINGKUNGAN',
     desc1: 'Mengawali usaha dari sebuah unit reaktor pencampur sederhana di Mojoroto, Kota Kediri, Jawa Timur, di sinilah titik awal perjalanan usaha manufaktur kimia pembersih didirikan oleh Bapak Yan Effendi pada tahun 2004.',
-    desc2: 'Berangkat dari keprihatinan terhadap tingginya kesadahan air tanah lokal (>350 ppm CaCO₃) yang kerap menggagalkan efisiensi pencucian dan merusak mesin laundry, beliau mendedikasikan riset formulasi konsentrat murni yang stabil terhadap ion sadah.',
-    desc3: 'Komitmen mutu ini dilanjutkan dan diperkuat oleh Bapak Yerikho Arfensias Effendi melalui sertifikasi Sistem Manajemen Mutu ISO 9001:2015, izin edar PKRT Kemenkes RI, dan kapasitas produksi 500+ Ton/bulan.',
-    waterProgress: 18
+    desc2: 'Berangkat dari keprihatinan mendalam terhadap tingginya kesadahan air tanah lokal (>350 ppm CaCO₃) yang kerap mematikan daya pembersih deterjen dan merusak mesin cuci laundry lokal, beliau mendedikasikan riset formulasi konsentrat murni yang stabil terhadap ion sadah.',
+    desc3: 'Komitmen mutu ini dilanjutkan dan diperkuat oleh Bapak Yerikho Arfensias Effendi melalui sertifikasi Sistem Manajemen Mutu ISO 9001:2015, izin edar PKRT Kemenkes RI, dan kapasitas produksi massal melampaui 500+ Ton per bulan.'
   },
-  // SLIDE 2: TAHUN 2004
+  // SLIDE 2: TAHUN 2004 (GARIS DIMULAI DARI BAWAH KE ATAS)
   {
     type: 'timeline',
     id: '2004',
     label: '2004',
     year: '2004',
+    timelineStep: 1,
     badge: 'Fase 01 • Pendirian & Riset Air Sadah',
     title: 'Titik Mula di Mojoroto: Menaklukkan Kesadahan Air Jawa Timur',
-    desc: 'Didirikan oleh Yan Effendi di Mojoroto, Kota Kediri dengan modal 1 unit reaktor manual 500 Liter. Mengatasi kendala busa mati dan serat kain menguning akibat tingginya kesadahan air tanah Jawa Timur (>350 ppm CaCO₃).',
+    desc: 'Didirikan oleh Yan Effendi di Mojoroto, Kota Kediri dengan modal 1 unit reaktor manual 500 Liter. Menjawab kendala busa mati dan serat kain menguning akibat tingginya kesadahan air tanah Jawa Timur (>350 ppm CaCO₃).',
     details: 'Yan Effendi berhasil merekayasa formula agen pengkhelat murni (sequestering agent) pertama di Kediri yang mengikat ion kalsium & magnesium secara stabil tanpa merusak serat kain.',
     highlights: [
       'Operasional reaktor perdana 500L dengan kontrol pemanasan terukur',
@@ -59,7 +58,7 @@ const SLIDES = [
     image: '/images/kca_factory_reactors.jpg',
     imageCaption: 'Reaktor Pencampur Perdana KCA di Mojoroto, Kediri (Est. 2004)',
     align: 'left',
-    waterProgress: 32
+    lineHeightPct: 20
   },
   // SLIDE 3: TAHUN 2008
   {
@@ -67,6 +66,7 @@ const SLIDES = [
     id: '2008',
     label: '2008',
     year: '2008',
+    timelineStep: 2,
     badge: 'Fase 02 • Inovasi Hijau & Reaktor Stainless',
     title: 'Terobosan Formula 100% Bebas Fosfat & Tangki SS 316L Pertama',
     desc: 'Di tengah maraknya deterjen industri murah berbasis STPP (senyawa fosfat perusak ekosistem perairan), KCA mengambil komitmen tegas menghentikan total penggunaan bahan fosfat dan mengoperasikan reaktor Stainless Steel 316L pertama.',
@@ -80,7 +80,7 @@ const SLIDES = [
     image: '/images/kca_factory_floor.jpg',
     imageCaption: 'Lini Manufaktur Formulasi Ramah Lingkungan Bebas Fosfat Berstandar Mutu',
     align: 'right',
-    waterProgress: 46
+    lineHeightPct: 40
   },
   // SLIDE 4: TAHUN 2014
   {
@@ -88,6 +88,7 @@ const SLIDES = [
     id: '2014',
     label: '2014',
     year: '2014',
+    timelineStep: 3,
     badge: 'Fase 03 • Standarisasi Medis & Kelayakan IPAL',
     title: 'Penetrasi Rumah Sakit Rujukan & Kelayakan Biofilter IPAL KARS',
     desc: 'KCA memasuki sektor higienitas medis dengan memformulasi deterjen disinfektan dan alkali builder khusus pencucian linen ruang isolasi, bedah, dan rawat inap rumah sakit.',
@@ -101,7 +102,7 @@ const SLIDES = [
     image: '/images/product_jerigen5l.jpg',
     imageCaption: 'Produk Kimia Higienitas Medis & Pembersih Konsentrat Ramah Biofilter IPAL RS',
     align: 'left',
-    waterProgress: 60
+    lineHeightPct: 60
   },
   // SLIDE 5: TAHUN 2019
   {
@@ -109,6 +110,7 @@ const SLIDES = [
     id: '2019',
     label: '2019',
     year: '2019',
+    timelineStep: 4,
     badge: 'Fase 04 • Modernisasi Demin RO & Dedicated Line VIP',
     title: 'Instalasi Demin RO 50.000 L/Hari & Skema Reaktor Dedikasi',
     desc: 'Menjawab lonjakan kebutuhan maklon private label brand nasional, KCA membangun fasilitas pengolahan air Reverse Osmosis (RO) dan demineralisasi berkapasitas 50.000 Liter/hari (<5 ppm TDS).',
@@ -122,7 +124,7 @@ const SLIDES = [
     image: '/images/kca_factory_floor.jpg',
     imageCaption: 'Instalasi Pengolahan Air Demineralisasi RO 50.000 L/Hari & Reaktor Kapasitas 500+ Ton/Bln',
     align: 'right',
-    waterProgress: 74
+    lineHeightPct: 80
   },
   // SLIDE 6: TAHUN 2024-2026
   {
@@ -130,6 +132,7 @@ const SLIDES = [
     id: '2026',
     label: '2026',
     year: '2024–2026',
+    timelineStep: 5,
     badge: 'Fase 05 • Era Manajemen Modern & ISO 9001',
     title: 'Kepemimpinan Generasi Kedua, Standar ISO 9001 & Izin Edar PKRT',
     desc: 'Estafet kepemimpinan di bawah Yerikho Arfensias Effendi mempercepat transformasi tata kelola korporat, sertifikasi Sistem Manajemen Mutu ISO 9001:2015, dan integrasi rantai pasok digital.',
@@ -143,28 +146,26 @@ const SLIDES = [
     image: '/images/kca_packaging_lineup.png',
     imageCaption: 'Lini Produk Resmi & Fasilitas Lab PT Kediri Chemical Abadi Standar ISO 9001:2015',
     align: 'left',
-    waterProgress: 88
+    lineHeightPct: 100
   },
   // SLIDE 7: DEWAN DIREKSI & TATA KELOLA KORPORAT
   {
     type: 'directors',
     id: 'directors',
-    label: 'Direksi',
-    waterProgress: 94
+    label: 'Direksi'
   },
   // SLIDE 8: KOMITMEN ESG & PENUTUP
   {
     type: 'esg',
     id: 'esg',
-    label: 'Prinsip',
-    waterProgress: 100
+    label: 'Prinsip'
   }
 ]
 
 export default function AboutPage() {
   const [currentIdx, setCurrentIdx] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
-  const [scrollDirection, setScrollDirection] = useState(1) // 1 = down, -1 = up
+  const [scrollDirection, setScrollDirection] = useState(1)
   const containerRef = useRef(null)
 
   const goToSlide = useCallback((newIdx, dir = 1) => {
@@ -198,7 +199,7 @@ export default function AboutPage() {
     const handleWheel = (e) => {
       e.preventDefault()
       const now = Date.now()
-      if (now - lastWheelTime < 900) return // Debounce cooldown
+      if (now - lastWheelTime < 900) return
       lastWheelTime = now
 
       if (e.deltaY > 20) {
@@ -253,6 +254,7 @@ export default function AboutPage() {
   }, [nextSlide, prevSlide])
 
   const currentSlide = SLIDES[currentIdx]
+  const isTimeline = currentSlide.type === 'timeline'
 
   return (
     <main 
@@ -269,27 +271,33 @@ export default function AboutPage() {
       </Helmet>
 
       {/* ═════════════════════════════════════════════════════════════════════ */}
-      {/* 3D LIQUID WATER CONDUIT: AIR MENGALIR DAN MENUNTUN PERJALANAN       */}
+      {/* GARIS ALIRAN AIR 3D: DI PALING BELAKANG (z-0)                         */}
+      {/* HANYA MUNCUL DI SEJARAH & TAHUN, DARI BAWAH KE ATAS                   */}
       {/* ═════════════════════════════════════════════════════════════════════ */}
-      <div className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-20 bottom-16 w-3 pointer-events-none z-30">
-        {/* Pipa Kaca Statis 3D Sebagai Saluran Aliran */}
-        <div className="w-full h-full liquid-3d-stream-conduit mx-auto opacity-35" />
+      {isTimeline && (
+        <div className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-24 bottom-20 w-1.5 pointer-events-none z-0">
+          {/* Garis Dasar Pipa Kaca Halus */}
+          <div className="w-full h-full liquid-3d-stream-conduit mx-auto opacity-30" />
 
-        {/* Kolom Air Aktif yang Mengalir dan Berhenti di Section Terkini */}
-        <motion.div 
-          animate={{ height: `${currentSlide.waterProgress}%` }}
-          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute top-0 inset-x-0 w-full liquid-3d-stream-flow rounded-full origin-top"
-        >
-          {/* Kepala Tetesan Air 3D yang Menuntun Perjalanan ke Bawah */}
-          <div className="absolute -bottom-3.5 -left-1.5 w-6 h-6 rounded-full bg-cyan-100 border-2 border-white shadow-[0_0_18px_#0284c7] flex items-center justify-center">
-            <div className="w-2.5 h-2.5 rounded-full bg-[#0F58A8] animate-ping" />
-          </div>
-        </motion.div>
-      </div>
+          {/* Garis Aliran Air Aktif yang Muncul Mengalir dari BAWAH KE ATAS */}
+          <motion.div 
+            initial={{ scaleY: 0, originY: 1, opacity: 0 }}
+            animate={{ scaleY: 1, originY: 1, opacity: 1 }}
+            transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute inset-0 w-full rounded-full origin-bottom"
+          >
+            {/* Lapisan Air Bergerak Halus Menyatu dengan Palet Website */}
+            <motion.div 
+              animate={{ height: `${currentSlide.lineHeightPct || 20}%` }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              className="w-full liquid-3d-stream-flow rounded-full origin-top"
+            />
+          </motion.div>
+        </div>
+      )}
 
       {/* ═════════════════════════════════════════════════════════════════════ */}
-      {/* SIDEBAR NAVIGASI DOTS INDIKATOR (SIDO MUNCUL SLIDE DOTS)            */}
+      {/* SIDEBAR NAVIGASI DOTS INDIKATOR                                     */}
       {/* ═════════════════════════════════════════════════════════════════════ */}
       <div className="hidden md:flex flex-col gap-2.5 fixed right-6 sm:right-8 top-1/2 -translate-y-1/2 z-40">
         {SLIDES.map((slide, idx) => {
@@ -317,16 +325,16 @@ export default function AboutPage() {
       </div>
 
       {/* ═════════════════════════════════════════════════════════════════════ */}
-      {/* PANGGUNG PRESENTASI UTAMA DENGAN EFEK PARALAKS DAN ANIMASI POWERPOINT */}
+      {/* PANGGUNG PRESENTASI UTAMA (z-10 / DI DEPAN GARIS ALIRAN AIR)         */}
       {/* ═════════════════════════════════════════════════════════════════════ */}
-      <div className="flex-1 w-full h-full relative overflow-hidden flex items-center justify-center">
+      <div className="flex-1 w-full h-full relative overflow-hidden flex items-center justify-center z-10">
         <AnimatePresence mode="wait" custom={scrollDirection}>
           <motion.div
             key={currentSlide.id}
             custom={scrollDirection}
             initial={{ 
               opacity: 0, 
-              y: scrollDirection > 0 ? 80 : -80, 
+              y: scrollDirection > 0 ? 70 : -70, 
               scale: 0.98 
             }}
             animate={{ 
@@ -336,11 +344,11 @@ export default function AboutPage() {
             }}
             exit={{ 
               opacity: 0, 
-              y: scrollDirection > 0 ? -60 : 60, 
+              y: scrollDirection > 0 ? -50 : 50, 
               scale: 0.98 
             }}
             transition={{ 
-              duration: 0.7, 
+              duration: 0.65, 
               ease: [0.22, 1, 0.36, 1] 
             }}
             className="w-full h-full flex items-center justify-center px-4 sm:px-8 lg:px-16 relative z-10"
@@ -350,11 +358,10 @@ export default function AboutPage() {
             {/* ───────────────────────────────────────────────────────────── */}
             {currentSlide.type === 'hero' && (
               <div className="max-w-5xl mx-auto w-full text-center space-y-6 sm:space-y-8">
-                {/* Judul Masuk Otomatis Langkah 1 */}
                 <motion.div 
-                  initial={{ opacity: 0, y: -25 }}
+                  initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
                   className="flex items-center justify-center gap-4 sm:gap-8"
                 >
                   <div className="h-[1.5px] bg-slate-300 w-16 sm:w-32 lg:w-48" />
@@ -364,11 +371,10 @@ export default function AboutPage() {
                   <div className="h-[1.5px] bg-slate-300 w-16 sm:w-32 lg:w-48" />
                 </motion.div>
 
-                {/* Banner Mosaik Masuk Otomatis Langkah 2 dengan Efek Paralaks */}
                 <motion.div 
-                  initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                  initial={{ opacity: 0, scale: 0.95, y: 15 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.75, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
                   className="relative overflow-hidden rounded-xl border border-slate-200/90 shadow-md bg-slate-100 aspect-[21/9]"
                 >
                   <img
@@ -389,11 +395,10 @@ export default function AboutPage() {
             {/* ───────────────────────────────────────────────────────────── */}
             {currentSlide.type === 'prologue' && (
               <div className="max-w-4xl mx-auto w-full text-center space-y-6">
-                {/* Sub-judul Masuk Langkah 1 */}
                 <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
+                  transition={{ duration: 0.6, delay: 0.15 }}
                   className="space-y-2.5"
                 >
                   <h2 className="text-base sm:text-lg lg:text-xl font-bold font-heading uppercase tracking-wider text-[#0F58A8]">
@@ -404,26 +409,25 @@ export default function AboutPage() {
                   </h3>
                 </motion.div>
 
-                {/* Narasi 3 Paragraf Masuk Bergantian Langkah 2, 3, 4 */}
                 <div className="text-sm sm:text-[15.5px] text-slate-800 leading-[1.85] font-normal text-justify sm:text-center space-y-4 max-w-3xl mx-auto">
                   <motion.p
-                    initial={{ opacity: 0, y: 15 }}
+                    initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.35 }}
+                    transition={{ duration: 0.55, delay: 0.3 }}
                   >
                     {currentSlide.desc1}
                   </motion.p>
                   <motion.p
-                    initial={{ opacity: 0, y: 15 }}
+                    initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.5 }}
+                    transition={{ duration: 0.55, delay: 0.45 }}
                   >
                     {currentSlide.desc2}
                   </motion.p>
                   <motion.p
-                    initial={{ opacity: 0, y: 15 }}
+                    initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.65 }}
+                    transition={{ duration: 0.55, delay: 0.6 }}
                   >
                     {currentSlide.desc3}
                   </motion.p>
@@ -435,34 +439,34 @@ export default function AboutPage() {
             {/* 3. TIPE TIMELINE (TAHUN 2004, 2008, 2014, 2019, 2026)          */}
             {/* ───────────────────────────────────────────────────────────── */}
             {currentSlide.type === 'timeline' && (
-              <div className="max-w-[1250px] mx-auto w-full relative">
+              <div className="max-w-[1250px] mx-auto w-full relative z-20">
                 
-                {/* 3D Liquid Orb Node di Tengah Jalur Air */}
+                {/* 3D Liquid Orb Node Halus di Belakang Konten */}
                 <motion.div 
                   initial={{ scale: 0, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.25 }}
-                  className="hidden lg:flex absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-30"
+                  transition={{ duration: 0.4, delay: 0.2 }}
+                  className="hidden lg:flex absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-0 pointer-events-none"
                 >
                   <div className="relative">
-                    <div className="absolute -inset-1.5 rounded-full bg-sky-400/40 animate-ping opacity-60" />
-                    <div className="liquid-3d-bubble-node shadow-lg">
-                      <Droplets className="w-3.5 h-3.5 text-white/95 drop-shadow" />
+                    <div className="absolute -inset-1 rounded-full bg-sky-300/30 animate-ping opacity-50" />
+                    <div className="liquid-3d-bubble-node">
+                      <Droplets className="w-3 h-3 text-white/90 drop-shadow" />
                     </div>
                   </div>
                 </motion.div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center relative z-20">
                   
                   {/* KONDISI GANJIL: FOTO KIRI, TEKS KANAN */}
                   {currentSlide.align === 'left' && (
                     <>
                       {/* Foto Masuk dengan Efek Paralaks Halus */}
                       <motion.div 
-                        initial={{ opacity: 0, x: -60, scale: 0.94 }}
+                        initial={{ opacity: 0, x: -50, scale: 0.95 }}
                         animate={{ opacity: 1, x: 0, scale: 1 }}
-                        transition={{ duration: 0.75, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                        className="lg:col-span-6 order-2 lg:order-1 flex justify-center lg:justify-end"
+                        transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                        className="lg:col-span-6 order-2 lg:order-1 flex justify-center lg:justify-end relative z-20"
                       >
                         <div className="relative p-2.5 sm:p-3 bg-white border border-slate-200/90 shadow-md rounded-lg max-w-md w-full group">
                           <div className="overflow-hidden rounded aspect-[16/11] bg-slate-100">
@@ -479,7 +483,7 @@ export default function AboutPage() {
                       </motion.div>
 
                       {/* Teks Masuk Bergantian Otomatis Seperti PowerPoint */}
-                      <div className="lg:col-span-6 order-1 lg:order-2 space-y-3.5 lg:pl-6 text-left">
+                      <div className="lg:col-span-6 order-1 lg:order-2 space-y-3.5 lg:pl-6 text-left relative z-20">
                         {/* Step 1: Badge & Tahun */}
                         <motion.div 
                           initial={{ opacity: 0, y: 15 }}
@@ -548,7 +552,7 @@ export default function AboutPage() {
                   {currentSlide.align === 'right' && (
                     <>
                       {/* Teks Masuk Bergantian Otomatis Seperti PowerPoint */}
-                      <div className="lg:col-span-6 order-1 lg:order-1 space-y-3.5 lg:pr-6 text-left lg:text-right flex flex-col lg:items-end">
+                      <div className="lg:col-span-6 order-1 lg:order-1 space-y-3.5 lg:pr-6 text-left lg:text-right flex flex-col lg:items-end relative z-20">
                         {/* Step 1: Badge & Tahun */}
                         <motion.div 
                           initial={{ opacity: 0, y: 15 }}
@@ -613,10 +617,10 @@ export default function AboutPage() {
 
                       {/* Foto Masuk dengan Efek Paralaks Halus */}
                       <motion.div 
-                        initial={{ opacity: 0, x: 60, scale: 0.94 }}
+                        initial={{ opacity: 0, x: 50, scale: 0.95 }}
                         animate={{ opacity: 1, x: 0, scale: 1 }}
-                        transition={{ duration: 0.75, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                        className="lg:col-span-6 order-2 lg:order-2 flex justify-center lg:justify-start"
+                        transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                        className="lg:col-span-6 order-2 lg:order-2 flex justify-center lg:justify-start relative z-20"
                       >
                         <div className="relative p-2.5 sm:p-3 bg-white border border-slate-200/90 shadow-md rounded-lg max-w-md w-full group">
                           <div className="overflow-hidden rounded aspect-[16/11] bg-slate-100">
@@ -644,9 +648,9 @@ export default function AboutPage() {
             {currentSlide.type === 'directors' && (
               <div className="max-w-[1200px] mx-auto w-full space-y-8">
                 <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
+                  transition={{ duration: 0.6, delay: 0.15 }}
                   className="text-center max-w-3xl mx-auto space-y-2"
                 >
                   <span className="text-xs font-bold font-heading uppercase tracking-widest text-[#0F58A8] block">
@@ -664,9 +668,9 @@ export default function AboutPage() {
                   {COMPANY_DATA.boardOfDirectors.map((person, idx) => (
                     <motion.div
                       key={idx}
-                      initial={{ opacity: 0, y: 25 }}
+                      initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.65, delay: 0.35 + idx * 0.15 }}
+                      transition={{ duration: 0.6, delay: 0.3 + idx * 0.15 }}
                       className={`space-y-4 ${idx === 1 ? 'md:pl-8 lg:pl-10 pt-6 md:pt-0' : 'md:pr-8 lg:pr-10'}`}
                     >
                       <div className="flex items-start gap-3.5">
@@ -715,9 +719,9 @@ export default function AboutPage() {
             {currentSlide.type === 'esg' && (
               <div className="max-w-[1250px] mx-auto w-full space-y-8 text-center">
                 <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
+                  transition={{ duration: 0.6, delay: 0.15 }}
                   className="max-w-2xl mx-auto space-y-1.5"
                 >
                   <span className="text-xs font-bold font-heading uppercase tracking-widest text-[#0F58A8] block">
@@ -730,9 +734,9 @@ export default function AboutPage() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 text-left pt-2">
                   <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 18 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.3 }}
+                    transition={{ duration: 0.5, delay: 0.25 }}
                     className="p-4 rounded-lg bg-slate-50 border border-slate-200/80 space-y-1.5"
                   >
                     <strong className="text-xs sm:text-sm font-bold text-slate-900 block font-heading">
@@ -744,9 +748,9 @@ export default function AboutPage() {
                   </motion.div>
 
                   <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 18 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.4 }}
+                    transition={{ duration: 0.5, delay: 0.35 }}
                     className="p-4 rounded-lg bg-emerald-50/60 border border-emerald-200/80 space-y-1.5"
                   >
                     <strong className="text-xs sm:text-sm font-bold text-slate-900 block font-heading">
@@ -758,9 +762,9 @@ export default function AboutPage() {
                   </motion.div>
 
                   <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 18 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.5 }}
+                    transition={{ duration: 0.5, delay: 0.45 }}
                     className="p-4 rounded-lg bg-amber-50/60 border border-amber-200/80 space-y-1.5"
                   >
                     <strong className="text-xs sm:text-sm font-bold text-slate-900 block font-heading">
@@ -772,9 +776,9 @@ export default function AboutPage() {
                   </motion.div>
 
                   <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 18 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.6 }}
+                    transition={{ duration: 0.5, delay: 0.55 }}
                     className="p-4 rounded-lg bg-blue-50/60 border border-blue-200/80 space-y-1.5"
                   >
                     <strong className="text-xs sm:text-sm font-bold text-slate-900 block font-heading">
@@ -790,7 +794,7 @@ export default function AboutPage() {
                 <motion.div 
                   initial={{ opacity: 0, scale: 0.96 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: 0.7 }}
+                  transition={{ duration: 0.55, delay: 0.65 }}
                   className="pt-4 flex items-center justify-center gap-4 flex-wrap"
                 >
                   <Link
@@ -815,16 +819,14 @@ export default function AboutPage() {
       </div>
 
       {/* ═════════════════════════════════════════════════════════════════════ */}
-      {/* FLOATING SCROLL GUIDE (PANDUAN GULIR HALUS, TANPA TOMBOL KASAR)      */}
+      {/* FLOATING SCROLL GUIDE                                               */}
       {/* ═════════════════════════════════════════════════════════════════════ */}
       <div className="w-full pb-4 sm:pb-6 pt-2 flex items-center justify-between px-6 sm:px-12 relative z-30 pointer-events-none">
-        {/* Indikator Angka Slide */}
         <div className="text-xs font-mono font-bold text-slate-400">
           <span className="text-[#0F58A8] text-sm">{String(currentIdx + 1).padStart(2, '0')}</span>
           <span> / {String(SLIDES.length).padStart(2, '0')}</span>
         </div>
 
-        {/* Panduan Scroll Halus Berpendar */}
         <div className="flex items-center gap-2 text-slate-400">
           <div className="w-4 h-6 border-2 border-slate-400 rounded-full flex justify-center pt-1 shadow-2xs">
             <div className="w-1 h-1.5 bg-[#0F58A8] rounded-full animate-bounce" />
@@ -834,7 +836,6 @@ export default function AboutPage() {
           </span>
         </div>
 
-        {/* Status Indikator */}
         <div className="text-[11px] font-heading font-semibold uppercase text-slate-400">
           PT Kediri Chemical Abadi
         </div>
