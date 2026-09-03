@@ -366,7 +366,7 @@ export default function ProductShowcaseSection() {
             </div>
 
             {/* Satellite Catalog Cards: 1 Unggulan per Kategori Sektor */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-4 lg:gap-5">
               {categoryFlagshipProducts.map((p, idx) => {
                 const LogoComp = CATEGORY_LOGOS[p.category] || CorporateLogos.Reactor
                 const theme = SATELLITE_THEMES[p.category] || SATELLITE_THEMES['laundry']
@@ -378,12 +378,12 @@ export default function ProductShowcaseSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.35, delay: idx * 0.05 }}
-                    className={`bg-white border rounded-3xl transition-all duration-300 flex flex-col justify-between group relative overflow-hidden ${theme.border} shadow-lg shadow-blue-900/5 hover:shadow-xl hover:-translate-y-1`}
+                    className={`bg-white border rounded-2xl sm:rounded-3xl transition-all duration-300 flex flex-col justify-between group relative overflow-hidden ${theme.border} shadow-xs hover:shadow-md`}
                   >
                     {/* Top Color Accent Bar */}
                     <div className={`h-1.5 w-full ${theme.topBar}`} />
 
-                    <div className="p-4 sm:p-5 space-y-3.5 bg-gradient-to-b from-sky-50/40 via-white to-white">
+                    <div className="p-2.5 sm:p-4 space-y-2 sm:space-y-3 bg-gradient-to-b from-sky-50/40 via-white to-white">
                       
                       {/* Logo Icon Mark & Sector Category Label */}
                       <div className="flex items-center justify-between gap-1.5 pb-1 border-b border-slate-100">
@@ -401,27 +401,27 @@ export default function ProductShowcaseSection() {
                       </div>
 
                       {/* Pure 3D Product Image (No Box, Pure Floating Product) */}
-                      <div className="w-full h-36 sm:h-40 flex items-center justify-center overflow-hidden py-1 group-hover:scale-105 transition-transform duration-500">
+                      <div className="w-full h-24 sm:h-36 lg:h-40 flex items-center justify-center overflow-hidden py-0.5 group-hover:scale-105 transition-transform duration-500">
                         <img
                           src={p.image || '/images/product_jerigen5l.jpg'}
                           alt={p.title || p.name}
-                          className="w-full h-full object-contain filter drop-shadow-md select-none mix-blend-multiply"
+                          className="w-full h-full object-contain select-none mix-blend-multiply"
                           loading="lazy"
                         />
                       </div>
 
                       {/* Product Name & Description */}
                       <div className="space-y-1">
-                        <h4 className="text-sm sm:text-[14.5px] font-extrabold font-heading text-slate-900 group-hover:text-[#0F58A8] transition-colors leading-snug">
+                        <h4 className="text-xs sm:text-[14.5px] font-extrabold font-heading text-slate-900 group-hover:text-[#0F58A8] transition-colors leading-snug line-clamp-2">
                           {p.title || p.name}
                         </h4>
-                        <p className="text-[11px] sm:text-xs text-slate-600 leading-relaxed line-clamp-2 font-normal">
+                        <p className="hidden sm:block text-[11px] sm:text-xs text-slate-600 leading-relaxed line-clamp-2 font-normal">
                           {p.description}
                         </p>
                       </div>
 
                       {/* Spec Matrix */}
-                      <div className="grid grid-cols-2 gap-1.5 p-2 rounded-xl bg-sky-50/50 border border-sky-100 text-[11px]">
+                      <div className="grid grid-cols-2 gap-1 p-1.5 sm:p-2 rounded-lg bg-sky-50/50 border border-sky-100 text-[9.5px] sm:text-[11px]">
                         <div>
                           <span className="text-[9px] text-slate-500 block uppercase font-bold">Dosis:</span>
                           <span className="font-bold text-slate-900 truncate block font-heading text-[10.5px]">{p.dosage || '10 ml/kg'}</span>
@@ -434,13 +434,13 @@ export default function ProductShowcaseSection() {
                     </div>
 
                     {/* Bottom Action (Fluid Pill Button) */}
-                    <div className="p-3 bg-white border-t border-sky-100 flex items-center justify-between text-xs">
+                    <div className="p-2 sm:p-3 bg-white border-t border-sky-100 flex items-center justify-between text-xs">
                       <span className="text-slate-500 text-[10.5px] font-medium truncate max-w-[95px]">
                         {p.packaging || 'Jerigen 5L'}
                       </span>
                       <button
                         onClick={() => setRfqOpen(true)}
-                        className={`px-3 py-1.5 rounded-full text-xs font-bold font-heading uppercase tracking-wider transition-all flex items-center gap-1 cursor-pointer shadow-xs ${theme.btnBg}`}
+                        className={`px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg sm:rounded-full text-[10px] sm:text-xs font-bold font-heading uppercase tracking-wider transition-all flex items-center gap-1 cursor-pointer shadow-xs ${theme.btnBg}`}
                       >
                         <FileText className="w-3 h-3" />
                         <span>Minta RFQ</span>
