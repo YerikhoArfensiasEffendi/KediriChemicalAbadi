@@ -140,8 +140,20 @@ export default function ProductShowcaseSection() {
   const [laundryKg, setLaundryKg] = useState(300)
 
   const productsArray = Array.isArray(PRODUCTS_DATA) ? PRODUCTS_DATA : []
-  const heroProduct = productsArray.find((p) => p.isHero) || productsArray[0] || {}
-  const satelliteProducts = productsArray.filter((p) => !p.isHero)
+  // 1 Unggulan Terbaik dari Setiap Kategori Sektor
+  const CATEGORY_ORDER = [
+    { key: 'laundry', label: 'Laundry & Garmen' },
+    { key: 'housekeeping', label: 'Hotel & Housekeeping' },
+    { key: 'fnb', label: 'F&B & Restoran' },
+    { key: 'medis', label: 'Sanitasi Medis & RS' },
+    { key: 'otomotif', label: 'Pabrik & Otomotif' },
+  ]
+
+  const categoryFlagshipProducts = CATEGORY_ORDER.map(({ key, label }) => {
+    const prods = productsArray.filter((p) => p.category === key && !p.isHero)
+    const flagship = prods[0] || productsArray.find((p) => p.category === key)
+    return flagship ? { ...flagship, categoryDisplayLabel: label } : null
+  }).filter(Boolean)
 
   // Dynamic dosage calculations
   const kcaLitersPerDay = ((laundryKg * 12.5) / 1000).toFixed(1)
@@ -495,9 +507,9 @@ export default function ProductShowcaseSection() {
               </a>
             </div>
 
-            {/* Satellite Catalog Cards (Rounded-2xl, Fluid Water Accent) */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {satelliteProducts.slice(0, 4).map((p, idx) => {
+            {/* Satellite Catalog Cards: 1 Unggulan per Kategori Sektor */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
+              {categoryFlagshipProducts.map((p, idx) => {
                 const LogoComp = CATEGORY_LOGOS[p.category] || CorporateLogos.Reactor
                 const theme = SATELLITE_THEMES[p.category] || SATELLITE_THEMES['laundry']
 
@@ -513,20 +525,25 @@ export default function ProductShowcaseSection() {
                     {/* Top Color Accent Bar */}
                     <div className={`h-1.5 w-full ${theme.topBar}`} />
 
-                    <div className="p-5 space-y-4 bg-gradient-to-b from-sky-50/40 via-white to-white">
+                    <div className="p-4 sm:p-5 space-y-3.5 bg-gradient-to-b from-sky-50/40 via-white to-white">
                       
-                      {/* Logo Icon Mark & SKU Tag */}
-                      <div className="flex items-center justify-between">
-                        <div className="w-8 h-8 rounded-full bg-white border border-sky-100 flex items-center justify-center shadow-2xs">
-                          <LogoComp />
+                      {/* Logo Icon Mark & Sector Category Label */}
+                      <div className="flex items-center justify-between gap-1.5 pb-1 border-b border-slate-100">
+                        <div className="flex items-center gap-1.5 min-w-0">
+                          <div className="w-6 h-6 rounded-full bg-white border border-slate-200/90 flex items-center justify-center shadow-2xs shrink-0">
+                            <LogoComp />
+                          </div>
+                          <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-700 truncate">
+                            {p.categoryDisplayLabel}
+                          </span>
                         </div>
-                        <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-full border ${theme.skuBadge}`}>
+                        <span className={`text-[9.5px] font-mono font-bold px-2 py-0.5 rounded-full border shrink-0 ${theme.skuBadge}`}>
                           {p.sku || 'SKU'}
                         </span>
                       </div>
 
                       {/* Pure 3D Product Image (No Box, Pure Floating Product) */}
-                      <div className="w-full h-40 flex items-center justify-center overflow-hidden py-1 group-hover:scale-105 transition-transform duration-500">
+                      <div className="w-full h-36 sm:h-40 flex items-center justify-center overflow-hidden py-1 group-hover:scale-105 transition-transform duration-500">
                         <img
                           src={p.image || '/images/product_jerigen5l.jpg'}
                           alt={p.title || p.name}
@@ -537,35 +554,35 @@ export default function ProductShowcaseSection() {
 
                       {/* Product Name & Description */}
                       <div className="space-y-1">
-                        <h4 className="text-sm sm:text-base font-extrabold font-heading text-slate-900 group-hover:text-[#0F58A8] transition-colors leading-snug">
+                        <h4 className="text-sm sm:text-[14.5px] font-extrabold font-heading text-slate-900 group-hover:text-[#0F58A8] transition-colors leading-snug">
                           {p.title || p.name}
                         </h4>
-                        <p className="text-xs text-slate-600 leading-relaxed line-clamp-2 font-normal">
+                        <p className="text-[11px] sm:text-xs text-slate-600 leading-relaxed line-clamp-2 font-normal">
                           {p.description}
                         </p>
                       </div>
 
                       {/* Spec Matrix */}
-                      <div className="grid grid-cols-2 gap-2 p-2.5 rounded-xl bg-sky-50/50 border border-sky-100 text-[11px]">
+                      <div className="grid grid-cols-2 gap-1.5 p-2 rounded-xl bg-sky-50/50 border border-sky-100 text-[11px]">
                         <div>
                           <span className="text-[9px] text-slate-500 block uppercase font-bold">Dosis:</span>
-                          <span className="font-bold text-slate-900 truncate block font-heading">{p.dosage || '10 ml/kg'}</span>
+                          <span className="font-bold text-slate-900 truncate block font-heading text-[10.5px]">{p.dosage || '10 ml/kg'}</span>
                         </div>
                         <div>
                           <span className="text-[9px] text-slate-500 block uppercase font-bold">pH Range:</span>
-                          <span className="font-bold text-slate-900 truncate block font-heading">{p.phRange || 'Netral'}</span>
+                          <span className="font-bold text-slate-900 truncate block font-heading text-[10.5px]">{p.phRange || 'Netral'}</span>
                         </div>
                       </div>
                     </div>
 
                     {/* Bottom Action (Fluid Pill Button) */}
-                    <div className="p-3.5 bg-white border-t border-sky-100 flex items-center justify-between text-xs">
-                      <span className="text-slate-500 text-[11px] font-medium truncate max-w-[110px]">
-                        {p.packaging || 'Jerigen 5L - 200L'}
+                    <div className="p-3 bg-white border-t border-sky-100 flex items-center justify-between text-xs">
+                      <span className="text-slate-500 text-[10.5px] font-medium truncate max-w-[95px]">
+                        {p.packaging || 'Jerigen 5L'}
                       </span>
                       <button
                         onClick={() => setRfqOpen(true)}
-                        className={`px-4 py-1.5 rounded-full text-xs font-bold font-heading uppercase tracking-wider transition-all flex items-center gap-1 cursor-pointer shadow-xs ${theme.btnBg}`}
+                        className={`px-3 py-1.5 rounded-full text-xs font-bold font-heading uppercase tracking-wider transition-all flex items-center gap-1 cursor-pointer shadow-xs ${theme.btnBg}`}
                       >
                         <FileText className="w-3 h-3" />
                         <span>Minta RFQ</span>
