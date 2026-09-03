@@ -207,23 +207,6 @@ export default function HeroSection() {
                   {HERO_DATA.subtitle || 'Pusat riset dan manufaktur kimia pembersih konsentrat 100% non-fosfat berkapasitas 500+ Ton/bulan di Mojoroto, Kediri. Solusi pasokan massal B2B dan layanan maklon private label terpercaya.'}
                 </p>
 
-                {/* Fluid Pill Action Buttons (Water Sheen Theme) */}
-                <div className="pt-1 flex items-center gap-3 flex-wrap">
-                  <button
-                    onClick={() => setRfqOpen(true)}
-                    className="btn-fluid-primary text-xs sm:text-[13px] py-2.5 px-6 font-semibold"
-                  >
-                    <span>Minta Penawaran Resmi</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-
-                  <Link
-                    to="/contact"
-                    className="btn-fluid-secondary text-xs sm:text-[13px] py-2.5 px-6 font-semibold"
-                  >
-                    <span>Informasi Maklon</span>
-                  </Link>
-                </div>
 
                 {/* Sido Muncul Style Key Corporate Trust Accreditations */}
                 <div className="pt-4 border-t border-slate-200/80 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-xl">
