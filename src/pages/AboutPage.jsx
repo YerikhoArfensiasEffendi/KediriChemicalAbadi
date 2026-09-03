@@ -116,7 +116,7 @@ const TIMELINE_SLIDES = [
     imageCaption: 'Instalasi Pengolahan Air Demineralisasi RO 50.000 L/Hari & Reaktor Kapasitas 500+ Ton/Bln',
     align: 'right'
   },
-  // SLIDE 6: TAHUN 2024-2026 (SLIDE TAHUN TERAKHIR - TERMINASI)
+  // SLIDE 6: TAHUN 2024-2026 (FASE AKHIR LINIMASA)
   {
     type: 'timeline',
     id: '2026',
@@ -145,7 +145,36 @@ export default function AboutPage() {
   const [isPushingPrologue, setIsPushingPrologue] = useState(false)
   const containerRef = useRef(null)
 
+  const isFinalPhase = currentIdx === TIMELINE_SLIDES.length - 1
+
+  // "untuk awal itu di lock dulu setelah masuk fase ahir baru di lepas untuk lanjut section zona lain"
+  useEffect(() => {
+    if (!isFinalPhase) {
+      // Kunci layar penuh di awal (Slide 0 s/d 5)
+      document.documentElement.style.overflow = 'hidden'
+      document.body.style.overflow = 'hidden'
+      window.__lenis?.stop()
+      window.scrollTo(0, 0)
+    } else {
+      // Lepas kunci begitu masuk fase akhir (Slide 6: 2024-2026)
+      document.documentElement.style.overflow = ''
+      document.body.style.overflow = ''
+      window.__lenis?.start()
+    }
+
+    return () => {
+      document.documentElement.style.overflow = ''
+      document.body.style.overflow = ''
+      window.__lenis?.start()
+    }
+  }, [isFinalPhase])
+
   const scrollToDireksi = useCallback(() => {
+    // Lepas kunci dan alirkan layar ke section Dewan Direksi
+    document.documentElement.style.overflow = ''
+    document.body.style.overflow = ''
+    window.__lenis?.start()
+
     const el = document.getElementById('direksi')
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' })
@@ -184,7 +213,6 @@ export default function AboutPage() {
     if (currentIdx < TIMELINE_SLIDES.length - 1) {
       changeSlide(currentIdx + 1, 1)
     } else if (currentIdx === TIMELINE_SLIDES.length - 1) {
-      // Pada slide terakhir linimasa (2026), scroll berikutnya mengalirkan layar ke Dewan Direksi!
       scrollToDireksi()
     }
   }, [currentIdx, changeSlide, scrollToDireksi])
@@ -195,54 +223,59 @@ export default function AboutPage() {
     }
   }, [currentIdx, changeSlide])
 
-  // Wheel Listener Adaptif:
-  // - Saat di linimasa (scrollY <= 20): kontrol perpindahan slide 0 s/d 6
-  // - Pada slide 2026 saat scroll down: scroll mulus ke Dewan Direksi (#direksi)
-  // - Saat sudah berada di Dewan Direksi ke bawah (scrollY > 20): scrolling normal bebas dengan Lenis
+  // Wheel Listener:
+  // - Saat belum masuk fase akhir (!isFinalPhase): Kunci ketat, scroll hanya menggerakkan slide
+  // - Saat sudah masuk fase akhir (isFinalPhase): Scroll ke bawah membawa pengunjung ke Dewan Direksi, dan unlock penuh aktif!
   useEffect(() => {
     let lastScrollTime = 0
 
     const handleWheel = (e) => {
-      // Jika pengguna sudah berada di section normal (Dewan Direksi / ESG / Footer), biarkan scroll normal!
-      if (window.scrollY > 20) {
+      // Jika belum di fase akhir (Slide 0 s/d 5), selalu kunci scroll window!
+      if (!isFinalPhase) {
+        e.preventDefault()
+        const now = Date.now()
+        if (now - lastScrollTime < 850) return
+        
+        if (Math.abs(e.deltaY) > 10) {
+          lastScrollTime = now
+          if (e.deltaY > 0) {
+            nextSlide()
+          } else if (e.deltaY < 0 && currentIdx > 0) {
+            prevSlide()
+          }
+        }
         return
       }
 
-      // Jika berada di slide terakhir (2026) dan scroll ke bawah, arahkan ke Dewan Direksi!
-      if (currentIdx === TIMELINE_SLIDES.length - 1 && e.deltaY > 0) {
+      // Jika sudah di fase akhir (Slide 6) dan scroll ke bawah saat masih di atas, arahkan ke Dewan Direksi
+      if (isFinalPhase && window.scrollY <= 20 && e.deltaY > 0) {
         scrollToDireksi()
         return
       }
 
-      // Di dalam linimasa, kontrol perpindahan slide
-      e.preventDefault()
-      const now = Date.now()
-      if (now - lastScrollTime < 850) return
-      
-      if (Math.abs(e.deltaY) > 10) {
-        lastScrollTime = now
-        if (e.deltaY > 0) {
-          nextSlide()
-        } else if (e.deltaY < 0 && currentIdx > 0) {
-          prevSlide()
-        }
-      }
+      // Jika sudah berada di section normal (scrollY > 20), scrolling bebas dengan Lenis
     }
 
     const handleKeyDown = (e) => {
-      if (window.scrollY > 20) return
-
-      if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
-        if (currentIdx < TIMELINE_SLIDES.length - 1) {
+      if (!isFinalPhase) {
+        if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
           e.preventDefault()
           nextSlide()
-        } else {
+        } else if ((e.key === 'ArrowUp' || e.key === 'PageUp') && currentIdx > 0) {
+          e.preventDefault()
+          prevSlide()
+        }
+        return
+      }
+
+      if (isFinalPhase && window.scrollY <= 20) {
+        if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
           e.preventDefault()
           scrollToDireksi()
+        } else if ((e.key === 'ArrowUp' || e.key === 'PageUp') && currentIdx > 0) {
+          e.preventDefault()
+          prevSlide()
         }
-      } else if ((e.key === 'ArrowUp' || e.key === 'PageUp') && currentIdx > 0) {
-        e.preventDefault()
-        prevSlide()
       }
     }
 
@@ -251,14 +284,25 @@ export default function AboutPage() {
       touchStartY = e.touches[0].clientY
     }
     const handleTouchEnd = (e) => {
-      if (window.scrollY > 20) return
+      if (!isFinalPhase) {
+        const touchEndY = e.changedTouches[0].clientY
+        const diff = touchStartY - touchEndY
+        if (Math.abs(diff) > 25) {
+          if (diff > 0) {
+            nextSlide()
+          } else if (diff < 0 && currentIdx > 0) {
+            prevSlide()
+          }
+        }
+        return
+      }
 
-      const touchEndY = e.changedTouches[0].clientY
-      const diff = touchStartY - touchEndY
-      if (Math.abs(diff) > 25) {
-        if (diff > 0) {
-          nextSlide()
-        } else if (diff < 0 && currentIdx > 0) {
+      if (isFinalPhase && window.scrollY <= 20) {
+        const touchEndY = e.changedTouches[0].clientY
+        const diff = touchStartY - touchEndY
+        if (diff > 30) {
+          scrollToDireksi()
+        } else if (diff < -30 && currentIdx > 0) {
           prevSlide()
         }
       }
@@ -280,14 +324,18 @@ export default function AboutPage() {
       }
       window.removeEventListener('keydown', handleKeyDown)
     }
-  }, [currentIdx, nextSlide, prevSlide, scrollToDireksi])
+  }, [isFinalPhase, currentIdx, nextSlide, prevSlide, scrollToDireksi])
 
   const currentSlide = TIMELINE_SLIDES[currentIdx]
   const isTimeline = currentSlide.type === 'timeline'
   const isLastTimelineYear = currentSlide.id === '2026'
 
   return (
-    <main className="w-full bg-white text-slate-900 select-none relative">
+    <main 
+      className={`w-full bg-white text-slate-900 select-none relative ${
+        !isFinalPhase ? 'h-screen overflow-hidden' : 'min-h-screen'
+      }`}
+    >
       <Helmet>
         <title>Sejarah & Profil Perusahaan — PT Kediri Chemical Abadi</title>
         <meta
@@ -298,7 +346,7 @@ export default function AboutPage() {
       </Helmet>
 
       {/* ═════════════════════════════════════════════════════════════════════ */}
-      {/* SECTION 1: LINIMASA SEJARAH SINEMATIK (SLIDE 0 S/D 6: 2026)          */}
+      {/* SECTION 1: LINIMASA SEJARAH (TERKUNCI DI AWAL SLIDE 0 S/D 5)         */}
       {/* ═════════════════════════════════════════════════════════════════════ */}
       <div 
         ref={containerRef}
@@ -616,7 +664,7 @@ export default function AboutPage() {
       </div>
 
       {/* ═════════════════════════════════════════════════════════════════════ */}
-      {/* SECTION 2: DEWAN DIREKSI (KEMBALI KE SECTION NORMAL, SCROLLING BEBAS) */}
+      {/* SECTION 2: DEWAN DIREKSI (HANYA MUNCUL/SCROLLABLE SETELAH FASE AKHIR) */}
       {/* ═════════════════════════════════════════════════════════════════════ */}
       <section id="direksi" className="py-24 sm:py-28 bg-slate-50 border-t border-slate-200">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full space-y-12">
