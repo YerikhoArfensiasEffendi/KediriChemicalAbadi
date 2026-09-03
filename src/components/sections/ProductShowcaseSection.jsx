@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
   ArrowRight, 
-  CheckCircle2 
+  CheckCircle2,
+  FileText
 } from 'lucide-react'
 import { PRODUCTS_DATA } from '@/data/productsData'
 import RFQModal from '@/components/ui/RFQModal'
