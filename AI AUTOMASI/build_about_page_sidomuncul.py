@@ -3,9 +3,14 @@
 PT Kediri Chemical Abadi
 Generator Halaman Sejarah (AboutPage.jsx)
 Pembaruan Sesuai Arahan User:
-1. Garis Tengah Permanen & Tenang: Garis tidak fade dan tidak mengulang muncul dari bawah lagi. Berdiri kokoh dan tenang di latar belakang (z-0).
-2. Titik Pemberhentian (Node Bullet) Bergeser: Titik node geser ke atas dan muncul bergantian dari bawah secara mulus dan berhenti tepat di tengah layar (dead-center).
-3. Animasi Konten Super Halus, Kalem & Tenang: Pacing diperlambat dan dibuat anggun (0.85s - 0.95s dengan kurva fisika organik). Foto dan tulisan melayang masuk secara lembut tanpa terburu-buru.
+1. Fade Out Lebih Pelan & Lebih Jauh ke Atas (y: -120px):
+   - Konten yang keluar melayang jauh lebih tinggi ke atas (-120px) dengan peluruhan opacity yang sangat lembut dan gradual (durasi 0.85s - 0.95s).
+   - Efek pergeseran scroll ke atas kini benar-benar terasa nyata, empuk, dan bernapas.
+2. Konten Masuk dari Bawah (y: +100px ➔ 0):
+   - Konten baru naik secara anggun dari bawah (+100px) secara bertahap dan tenang.
+3. Titik Pemberhentian (Node Bullet) di Tengah:
+   - Node meluncur naik ke atas (-90px) dan node baru meluncur masuk dari bawah (+90px) berhenti tepat di tengah layar.
+4. Garis Tengah Statis & Tenang di Latar Belakang (z-0).
 Author: Yerikho Arfensias Effendi
 Company: PT Kediri Chemical Abadi
 """
@@ -177,7 +182,7 @@ export default function AboutPage() {
     setCurrentIdx(newIdx)
     setTimeout(() => {
       setIsTransitioning(false)
-    }, 850) // Waktu tenang & stabil
+    }, 950) // Waktu napas transisi lembut
   }, [isTransitioning])
 
   const nextSlide = useCallback(() => {
@@ -207,7 +212,7 @@ export default function AboutPage() {
     const handleWheel = (e) => {
       e.preventDefault()
       const now = Date.now()
-      if (now - lastScrollTime < 800) return
+      if (now - lastScrollTime < 850) return
       
       if (Math.abs(e.deltaY) > 10) {
         lastScrollTime = now
@@ -295,7 +300,7 @@ export default function AboutPage() {
 
       {/* ═════════════════════════════════════════════════════════════════════ */}
       {/* TITIK PEMBERHENTIAN (NODE BULLET) TEPAT DI TENGAH LAYAR (DEAD-CENTER) */}
-      {/* MENGALAMI EFEK BERGESER KE ATAS & MUNCUL BERGANTIAN DARI BAWAH        */}
+      {/* MELUNCUR NAIK TINGGI KE ATAS (-90PX) & MUNCUL DARI BAWAH (+90PX)     */}
       {/* ═════════════════════════════════════════════════════════════════════ */}
       {isTimeline && (
         <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-0 pointer-events-none items-center justify-center">
@@ -304,21 +309,21 @@ export default function AboutPage() {
               key={`node-${currentSlide.id}`}
               initial={{ 
                 opacity: 0, 
-                y: direction > 0 ? 40 : -40,
-                scale: 0.8
+                y: direction > 0 ? 80 : -80,
+                scale: 0.75
               }}
               animate={{ 
                 opacity: 1, 
-                y: 0,
-                scale: 1
+                y: 0, 
+                scale: 1 
               }}
               exit={{ 
                 opacity: 0, 
-                y: direction > 0 ? -40 : 40,
-                scale: 0.8
+                y: direction > 0 ? -80 : 80,
+                scale: 0.75
               }}
               transition={{ 
-                duration: 0.75, 
+                duration: 0.85, 
                 ease: [0.16, 1, 0.3, 1] 
               }}
               className="w-5 h-5 rounded-full border-2 border-[#0F58A8] bg-white flex items-center justify-center shadow-xs"
@@ -358,7 +363,7 @@ export default function AboutPage() {
       </div>
 
       {/* ═════════════════════════════════════════════════════════════════════ */}
-      {/* PANGGUNG PRESENTASI PARALAKS DENGAN FADE OUT NAIK & FADE IN DARI BAWAH*/}
+      {/* PANGGUNG PRESENTASI: FADE OUT LEBIH PELAN & LEBIH JAUH KE ATAS (-120PX)*/}
       {/* ═════════════════════════════════════════════════════════════════════ */}
       <div className="flex-1 w-full h-full relative overflow-hidden flex items-center justify-center">
         <AnimatePresence mode="wait" custom={direction}>
@@ -367,8 +372,8 @@ export default function AboutPage() {
             custom={direction}
             initial={{ 
               opacity: 0, 
-              y: direction > 0 ? 45 : -45,
-              scale: 0.99
+              y: direction > 0 ? 90 : -90,
+              scale: 0.985
             }}
             animate={{ 
               opacity: 1, 
@@ -377,11 +382,11 @@ export default function AboutPage() {
             }}
             exit={{ 
               opacity: 0, 
-              y: direction > 0 ? -45 : 45,
-              scale: 0.99
+              y: direction > 0 ? -120 : 120, // Melayang lebih tinggi ke atas!
+              scale: 0.985
             }}
             transition={{ 
-              duration: 0.8, 
+              duration: 0.88, 
               ease: [0.16, 1, 0.3, 1] 
             }}
             className="w-full h-full flex items-center justify-center px-4 sm:px-8 lg:px-16 relative"
@@ -393,10 +398,10 @@ export default function AboutPage() {
                 <div className="max-w-5xl mx-auto w-full text-center space-y-6 sm:space-y-8">
                   {/* Judul Muncul Halus & Tenang */}
                   <motion.div 
-                    initial={{ opacity: 0, y: 25 }}
+                    initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -25 }}
-                    transition={{ duration: 0.75, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                    exit={{ opacity: 0, y: -80 }}
+                    transition={{ duration: 0.85, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
                     className="flex items-center justify-center gap-4 sm:gap-8"
                   >
                     <div className="h-[1.5px] bg-slate-300 w-16 sm:w-32 lg:w-48" />
@@ -408,10 +413,10 @@ export default function AboutPage() {
 
                   {/* Foto Mosaik Muncul Paralaks dari Bawah */}
                   <motion.div 
-                    initial={{ opacity: 0, y: 35, scale: 0.97 }}
+                    initial={{ opacity: 0, y: 60, scale: 0.97 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -35, scale: 0.97 }}
-                    transition={{ duration: 0.85, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                    exit={{ opacity: 0, y: -100, scale: 0.97 }}
+                    transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
                     className="relative overflow-hidden rounded-xl border border-slate-200/90 shadow-md bg-slate-100 aspect-[21/9]"
                   >
                     <img
@@ -432,10 +437,10 @@ export default function AboutPage() {
                 <div className="max-w-4xl mx-auto w-full text-center space-y-6">
                   {/* Judul Muncul Tenang */}
                   <motion.div 
-                    initial={{ opacity: 0, y: 25 }}
+                    initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -25 }}
-                    transition={{ duration: 0.75, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                    exit={{ opacity: 0, y: -80 }}
+                    transition={{ duration: 0.85, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
                     className="space-y-2.5"
                   >
                     <h2 className="text-base sm:text-lg lg:text-xl font-bold font-heading uppercase tracking-wider text-[#0F58A8]">
@@ -449,26 +454,26 @@ export default function AboutPage() {
                   {/* Paragraf Muncul Mengalir Halus & Kalem */}
                   <div className="text-sm sm:text-[15.5px] text-slate-800 leading-[1.85] font-normal text-justify sm:text-center space-y-4 max-w-3xl mx-auto">
                     <motion.p
-                      initial={{ opacity: 0, y: 20 }}
+                      initial={{ opacity: 0, y: 35 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      transition={{ duration: 0.75, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                      exit={{ opacity: 0, y: -70 }}
+                      transition={{ duration: 0.85, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
                     >
                       {currentSlide.desc1}
                     </motion.p>
                     <motion.p
-                      initial={{ opacity: 0, y: 20 }}
+                      initial={{ opacity: 0, y: 35 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      transition={{ duration: 0.75, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                      exit={{ opacity: 0, y: -70 }}
+                      transition={{ duration: 0.85, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
                     >
                       {currentSlide.desc2}
                     </motion.p>
                     <motion.p
-                      initial={{ opacity: 0, y: 20 }}
+                      initial={{ opacity: 0, y: 35 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      transition={{ duration: 0.75, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                      exit={{ opacity: 0, y: -70 }}
+                      transition={{ duration: 0.85, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
                     >
                       {currentSlide.desc3}
                     </motion.p>
@@ -483,12 +488,12 @@ export default function AboutPage() {
                   {/* GANJIL: FOTO KIRI, TULISAN KANAN */}
                   {currentSlide.align === 'left' && (
                     <>
-                      {/* LANGKAH 1: FOTO MUNCUL PARALAKS PERLAHAN DARI BAWAH */}
+                      {/* LANGKAH 1: FOTO MUNCUL PARALAKS PERLAHAN DARI BAWAH, KELUAR NAIK KE ATAS (-100PX) */}
                       <motion.div 
-                        initial={{ opacity: 0, y: 35, scale: 0.97 }}
+                        initial={{ opacity: 0, y: 60, scale: 0.97 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: -35, scale: 0.97 }}
-                        transition={{ duration: 0.85, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                        exit={{ opacity: 0, y: -100, scale: 0.97 }}
+                        transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
                         className="lg:col-span-6 order-2 lg:order-1 flex justify-center lg:justify-end relative z-20"
                       >
                         <div className="relative p-2.5 sm:p-3 bg-white border border-slate-200/90 shadow-md rounded-lg max-w-md w-full group">
@@ -505,12 +510,12 @@ export default function AboutPage() {
                         </div>
                       </motion.div>
 
-                      {/* LANGKAH 2: TULISAN MUNCUL BERGANTIAN SECARA TENANG */}
+                      {/* LANGKAH 2: TULISAN MUNCUL BERGANTIAN SECARA TENANG, KELUAR NAIK KE ATAS (-90PX) */}
                       <motion.div 
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={{ opacity: 0, y: 50 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -30 }}
-                        transition={{ duration: 0.85, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                        exit={{ opacity: 0, y: -90 }}
+                        transition={{ duration: 0.9, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
                         className="lg:col-span-6 order-1 lg:order-2 space-y-3.5 lg:pl-6 text-left relative z-20"
                       >
                         {/* Tahun & Badge */}
@@ -560,12 +565,12 @@ export default function AboutPage() {
                   {/* GENAP: TULISAN KIRI, FOTO KANAN */}
                   {currentSlide.align === 'right' && (
                     <>
-                      {/* LANGKAH 2: TULISAN MUNCUL BERGANTIAN SECARA TENANG (RATA KANAN) */}
+                      {/* LANGKAH 2: TULISAN MUNCUL BERGANTIAN SECARA TENANG (RATA KANAN), KELUAR NAIK KE ATAS (-90PX) */}
                       <motion.div 
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={{ opacity: 0, y: 50 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -30 }}
-                        transition={{ duration: 0.85, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                        exit={{ opacity: 0, y: -90 }}
+                        transition={{ duration: 0.9, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
                         className="lg:col-span-6 order-1 lg:order-1 space-y-3.5 lg:pr-6 text-left lg:text-right flex flex-col lg:items-end relative z-20"
                       >
                         {/* Tahun & Badge */}
@@ -610,12 +615,12 @@ export default function AboutPage() {
                         </div>
                       </motion.div>
 
-                      {/* LANGKAH 1: FOTO MUNCUL PARALAKS PERLAHAN DARI BAWAH */}
+                      {/* LANGKAH 1: FOTO MUNCUL PARALAKS PERLAHAN DARI BAWAH, KELUAR NAIK KE ATAS (-100PX) */}
                       <motion.div 
-                        initial={{ opacity: 0, y: 35, scale: 0.97 }}
+                        initial={{ opacity: 0, y: 60, scale: 0.97 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: -35, scale: 0.97 }}
-                        transition={{ duration: 0.85, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                        exit={{ opacity: 0, y: -100, scale: 0.97 }}
+                        transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
                         className="lg:col-span-6 order-2 lg:order-2 flex justify-center lg:justify-start relative z-20"
                       >
                         <div className="relative p-2.5 sm:p-3 bg-white border border-slate-200/90 shadow-md rounded-lg max-w-md w-full group">
@@ -641,10 +646,10 @@ export default function AboutPage() {
               {currentSlide.type === 'directors' && (
                 <div className="max-w-[1200px] mx-auto w-full space-y-8">
                   <motion.div 
-                    initial={{ opacity: 0, y: 25 }}
+                    initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -25 }}
-                    transition={{ duration: 0.75, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                    exit={{ opacity: 0, y: -80 }}
+                    transition={{ duration: 0.85, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
                     className="text-center max-w-3xl mx-auto space-y-2"
                   >
                     <span className="text-xs font-bold font-heading uppercase tracking-widest text-[#0F58A8] block">
@@ -662,10 +667,10 @@ export default function AboutPage() {
                     {COMPANY_DATA.boardOfDirectors.map((person, pIdx) => (
                       <motion.div
                         key={pIdx}
-                        initial={{ opacity: 0, y: 25 }}
+                        initial={{ opacity: 0, y: 40 }}
                         animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -25 }}
-                        transition={{ duration: 0.75, delay: 0.25 + pIdx * 0.15, ease: [0.16, 1, 0.3, 1] }}
+                        exit={{ opacity: 0, y: -80 }}
+                        transition={{ duration: 0.85, delay: 0.25 + pIdx * 0.15, ease: [0.16, 1, 0.3, 1] }}
                         className={`space-y-4 ${pIdx === 1 ? 'md:pl-8 lg:pl-10 pt-6 md:pt-0' : 'md:pr-8 lg:pr-10'}`}
                       >
                         <div className="flex items-start gap-3.5">
@@ -712,10 +717,10 @@ export default function AboutPage() {
               {currentSlide.type === 'esg' && (
                 <div className="max-w-[1250px] mx-auto w-full space-y-8 text-center">
                   <motion.div 
-                    initial={{ opacity: 0, y: 25 }}
+                    initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -25 }}
-                    transition={{ duration: 0.75, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                    exit={{ opacity: 0, y: -80 }}
+                    transition={{ duration: 0.85, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
                     className="max-w-2xl mx-auto space-y-1.5"
                   >
                     <span className="text-xs font-bold font-heading uppercase tracking-widest text-[#0F58A8] block">
@@ -728,10 +733,10 @@ export default function AboutPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 text-left pt-2">
                     <motion.div 
-                      initial={{ opacity: 0, y: 20 }}
+                      initial={{ opacity: 0, y: 35 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                      exit={{ opacity: 0, y: -70 }}
+                      transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                       className="p-4 rounded-lg bg-slate-50 border border-slate-200/80 space-y-1.5"
                     >
                       <strong className="text-xs sm:text-sm font-bold text-slate-900 block font-heading">
@@ -743,10 +748,10 @@ export default function AboutPage() {
                     </motion.div>
 
                     <motion.div 
-                      initial={{ opacity: 0, y: 20 }}
+                      initial={{ opacity: 0, y: 35 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                      exit={{ opacity: 0, y: -70 }}
+                      transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
                       className="p-4 rounded-lg bg-emerald-50/60 border border-emerald-200/80 space-y-1.5"
                     >
                       <strong className="text-xs sm:text-sm font-bold text-slate-900 block font-heading">
@@ -758,10 +763,10 @@ export default function AboutPage() {
                     </motion.div>
 
                     <motion.div 
-                      initial={{ opacity: 0, y: 20 }}
+                      initial={{ opacity: 0, y: 35 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                      exit={{ opacity: 0, y: -70 }}
+                      transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
                       className="p-4 rounded-lg bg-amber-50/60 border border-amber-200/80 space-y-1.5"
                     >
                       <strong className="text-xs sm:text-sm font-bold text-slate-900 block font-heading">
@@ -773,10 +778,10 @@ export default function AboutPage() {
                     </motion.div>
 
                     <motion.div 
-                      initial={{ opacity: 0, y: 20 }}
+                      initial={{ opacity: 0, y: 35 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                      exit={{ opacity: 0, y: -70 }}
+                      transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
                       className="p-4 rounded-lg bg-blue-50/60 border border-blue-200/80 space-y-1.5"
                     >
                       <strong className="text-xs sm:text-sm font-bold text-slate-900 block font-heading">
@@ -793,7 +798,7 @@ export default function AboutPage() {
                     initial={{ opacity: 0, scale: 0.97 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.97 }}
-                    transition={{ duration: 0.7, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                    transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
                     className="pt-4 flex items-center justify-center gap-4 flex-wrap"
                   >
                     <Link
@@ -849,4 +854,4 @@ export default function AboutPage() {
 with open('src/pages/AboutPage.jsx', 'w', encoding='utf-8') as f:
     f.write(CODE)
 
-print("BERHASIL: AboutPage.jsx kini beranimasi Kalem & Lambat Tenang, Garis Statis Tenang, dan Titik Pemberhentian Geser Naik/Turun di Tengah!")
+print("BERHASIL: Konten keluar melayang lebih tinggi ke atas (-120px) dengan fade lebih pelan (0.88s - 0.95s), pergeseran scroll sangat terasa dan mulus!")
