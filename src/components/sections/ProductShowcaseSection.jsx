@@ -528,12 +528,12 @@ export default function ProductShowcaseSection() {
                         </span>
                       </div>
 
-                      {/* Photo Thumbnail Stage */}
-                      <div className="w-full h-36 bg-white/80 border border-sky-100 rounded-2xl p-2.5 flex items-center justify-center overflow-hidden shadow-2xs group-hover:scale-102 transition-transform duration-500">
+                      {/* Pure 3D Product Image (No Box, Pure Floating Product) */}
+                      <div className="w-full h-40 flex items-center justify-center overflow-hidden py-1 group-hover:scale-105 transition-transform duration-500">
                         <img
                           src={p.image || '/images/product_jerigen5l.jpg'}
                           alt={p.title || p.name}
-                          className="w-full h-full object-contain filter drop-shadow-sm select-none"
+                          className="w-full h-full object-contain filter drop-shadow-md select-none mix-blend-multiply"
                           loading="lazy"
                         />
                       </div>

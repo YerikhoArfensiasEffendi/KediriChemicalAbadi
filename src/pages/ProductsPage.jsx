@@ -212,15 +212,22 @@ export default function ProductsPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.3 }}
-                    className={`bg-white border rounded-3xl transition-all duration-300 flex flex-col justify-between group relative overflow-hidden ${theme.border} shadow-lg shadow-blue-900/5 hover:shadow-xl hover:-translate-y-1`}
+                    className="flex flex-col justify-between group relative transition-all duration-300 space-y-4 p-2 sm:p-3"
                   >
-                    {/* Top Color Accent Strip */}
-                    <div className={`h-1.5 w-full ${theme.topBar}`} />
-
-                    <div className="p-5 sm:p-6 space-y-4 bg-gradient-to-b from-sky-50/40 via-white to-white">
+                    <div className="space-y-4">
                       
+                      {/* Pure 3D Product Image (No Box, No Background, Pure Floating Product) */}
+                      <div className="w-full h-48 sm:h-56 flex items-center justify-center overflow-hidden py-2 group-hover:scale-105 transition-transform duration-500">
+                        <img
+                          src={product.image || '/images/product_jerigen5l.jpg'}
+                          alt={product.title}
+                          className="w-full h-full object-contain filter drop-shadow-md select-none mix-blend-multiply"
+                          loading="lazy"
+                        />
+                      </div>
+
                       {/* Top Bar: SKU & Badge */}
-                      <div className="flex items-center justify-between gap-2 border-b border-sky-100 pb-3">
+                      <div className="flex items-center justify-between gap-2 border-b border-slate-200/80 pb-2.5">
                         <span className={`text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full border ${theme.skuBadge}`}>
                           {product.sku}
                         </span>
@@ -231,29 +238,18 @@ export default function ProductsPage() {
                         )}
                       </div>
 
-                      {/* Product Header: 3D Photo Stage & Title */}
-                      <div className="space-y-3">
-                        <div className="w-full h-36 bg-white/80 border border-sky-100 rounded-2xl p-3 flex items-center justify-center overflow-hidden shadow-2xs group-hover:scale-102 transition-transform duration-500">
-                          <img
-                            src={product.image || '/images/product_jerigen5l.jpg'}
-                            alt={product.title}
-                            className="w-full h-full object-contain filter drop-shadow-md select-none"
-                            loading="lazy"
-                          />
-                        </div>
-
-                        <div className="space-y-1">
-                          <h3 className="font-heading font-extrabold text-sm sm:text-base text-slate-900 group-hover:text-[#0F58A8] transition-colors leading-snug">
-                            {product.title}
-                          </h3>
-                          <p className="text-xs text-slate-600 leading-relaxed font-normal line-clamp-2">
-                            {product.description}
-                          </p>
-                        </div>
+                      {/* Title & Description */}
+                      <div className="space-y-1">
+                        <h3 className="font-heading font-extrabold text-base sm:text-lg text-slate-900 group-hover:text-[#0F58A8] transition-colors leading-snug">
+                          {product.title}
+                        </h3>
+                        <p className="text-xs text-slate-600 leading-relaxed font-normal line-clamp-2">
+                          {product.description}
+                        </p>
                       </div>
 
                       {/* 4-Grid Technical Specification Matrix */}
-                      <div className="grid grid-cols-2 gap-2 p-3 rounded-2xl bg-sky-50/50 border border-sky-100 text-xs">
+                      <div className="grid grid-cols-2 gap-2 p-3 rounded-xl bg-slate-50/80 border border-slate-200/70 text-xs">
                         <div className="space-y-0.5">
                           <span className="text-[9px] text-slate-500 block uppercase font-bold tracking-wider">
                             Bahan Aktif:
@@ -305,11 +301,11 @@ export default function ProductsPage() {
 
                     </div>
 
-                    {/* Card Action: RFQ Button & WhatsApp (Fluid Pill) */}
-                    <div className="p-4 bg-white border-t border-sky-100 flex items-center gap-2">
+                    {/* Action Buttons */}
+                    <div className="pt-2 flex items-center gap-2">
                       <button
                         onClick={() => handleOpenRfq(product)}
-                        className={`flex-1 h-10 px-3 rounded-full text-xs font-bold font-heading uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-xs ${theme.btnBg}`}
+                        className={`flex-1 h-10 px-3 rounded-xl text-xs font-bold font-heading uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-xs ${theme.btnBg}`}
                       >
                         <FileText className="w-3.5 h-3.5" />
                         <span>Minta RFQ</span>
@@ -319,7 +315,7 @@ export default function ProductsPage() {
                         href={`https://wa.me/${waNumber}?text=${encodeURIComponent(`Halo Tim Formulator PT Kediri Chemical Abadi, saya ingin konsultasi teknis mengenai produk: ${product.title} (SKU: ${product.sku}).`)}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="h-10 px-3.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 rounded-full text-xs font-bold transition-colors flex items-center justify-center cursor-pointer shadow-2xs"
+                        className="h-10 px-3.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 rounded-xl text-xs font-bold transition-colors flex items-center justify-center cursor-pointer shadow-2xs"
                         title="Konsultasi via WhatsApp"
                       >
                         <Phone className="w-4 h-4 text-emerald-600" />
