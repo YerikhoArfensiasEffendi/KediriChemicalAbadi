@@ -52,62 +52,34 @@ h1, h2, h3, h4, h5, h6, .font-heading {
   background: #0F58A8;
 }
 
-/* 3D Liquid Water Stream Conduit (Garis Aliran Air Sejarah - Terpadu & Halus) */
-@keyframes waterFlow {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 0 100px;
-  }
-}
-
-.liquid-3d-stream-conduit {
+/* Corporate History Timeline Guide Line (Menyatu Alami dengan Website) */
+.timeline-guide-line {
   position: relative;
-  width: 6px;
+  width: 2px;
+  background-color: #E2E8F0;
   border-radius: 9999px;
-  background: linear-gradient(
-    90deg,
-    rgba(224, 242, 254, 0.5) 0%,
-    rgba(186, 230, 253, 0.7) 50%,
-    rgba(224, 242, 254, 0.5) 100%
-  );
-  box-shadow: 
-    inset -1px 0 1.5px rgba(255, 255, 255, 0.8),
-    inset 1px 0 1.5px rgba(15, 88, 168, 0.2),
-    0 0 8px rgba(56, 189, 248, 0.2);
 }
 
-.liquid-3d-stream-flow {
-  background: repeating-linear-gradient(
-    180deg,
-    rgba(56, 189, 248, 0.65) 0px,
-    rgba(14, 165, 233, 0.75) 25px,
-    rgba(15, 88, 168, 0.85) 50px,
-    rgba(56, 189, 248, 0.65) 75px
-  );
-  background-size: 100% 75px;
-  animation: waterFlow 2s linear infinite;
-  box-shadow: 
-    inset -0.5px 0 1px rgba(255, 255, 255, 0.9),
-    inset 0.5px 0 1px rgba(7, 17, 30, 0.25),
-    0 0 10px rgba(56, 189, 248, 0.35);
+.timeline-guide-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, #38BDF8 0%, #0F58A8 100%);
+  border-radius: 9999px;
 }
 
-.liquid-3d-bubble-node {
-  width: 1.75rem;
-  height: 1.75rem;
+.timeline-bullet-node {
+  width: 1.25rem;
+  height: 1.25rem;
   border-radius: 9999px;
-  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #7dd3fc 30%, #0284c7 70%, #0c4a6e 100%);
-  box-shadow: 
-    inset -1.5px -1.5px 3px rgba(7, 17, 30, 0.3),
-    inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.95),
-    0 2px 8px rgba(15, 88, 168, 0.25),
-    0 0 12px rgba(56, 189, 248, 0.3);
+  background-color: #FFFFFF;
+  border: 2px solid #0F58A8;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+  box-shadow: 0 1px 3px rgba(15, 88, 168, 0.15);
 }
 
 /* Fluid Water Button with Gloss Sheen Effect */
