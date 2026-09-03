@@ -1,4 +1,6 @@
-/**
+import os
+
+consultation_data_code = '''/**
  * PT KEDIRI CHEMICAL ABADI — MASTER CONSULTATION, DOSAGE CALCULATOR & TECHNICAL KNOWLEDGE BASE
  * Standar Manajemen Mutu ISO 9001:2015
  * Penanggung Jawab Formulasi: Yerikho Arfensias Effendi
@@ -297,3 +299,9 @@ Seluruh lini produk PT Kediri Chemical Abadi 100% Bebas Fosfat / STPP-Free:
 - Menjamin hasil uji laboratorium IPAL mitra rumah sakit dan industri selalu berada di bawah ambang batas baku mutu resmi pemerintah.`
   }
 ]
+'''
+
+with open('src/data/consultationData.js', 'w', encoding='utf-8') as f:
+    f.write(consultation_data_code)
+
+print('Updated src/data/consultationData.js successfully!')

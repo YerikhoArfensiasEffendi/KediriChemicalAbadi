@@ -1,4 +1,6 @@
-import { useState, useMemo } from 'react'
+import os
+
+calculator_page_code = '''import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Helmet } from 'react-helmet-async'
 import { 
@@ -722,3 +724,9 @@ Mohon informasi penawaran resmi (RFQ) dan sampel uji coba pabrik.`
     </>
   )
 }
+'''
+
+with open('src/pages/CalculatorPage.jsx', 'w', encoding='utf-8') as f:
+    f.write(calculator_page_code)
+
+print('Updated src/pages/CalculatorPage.jsx successfully!')
