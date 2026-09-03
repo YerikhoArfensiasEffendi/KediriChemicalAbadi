@@ -793,10 +793,10 @@ export default function AboutPage() {
       </section>
 
       {/* ═════════════════════════════════════════════════════════════════════ */}
-      {/* SECTION 3: KOMITMEN ESG & PRINSIP INTEGRITAS (SECTION NORMAL)        */}
+      {/* SECTION 3: KOMITMEN ESG & SIGNATURE S-CURVE TRANSITION KE FOOTER     */}
       {/* ═════════════════════════════════════════════════════════════════════ */}
-      <section className="py-24 sm:py-28 bg-white border-t border-slate-200">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full space-y-12 text-center">
+      <section className="pt-24 sm:pt-28 pb-32 sm:pb-36 lg:pb-40 bg-white border-t border-slate-200 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full space-y-12 text-center relative z-10">
           <div className="max-w-2xl mx-auto space-y-2">
             <span className="text-xs font-bold font-heading uppercase tracking-widest text-[#0F58A8] block">
               PRINSIP INTEGRITAS & KEBERLANJUTAN
@@ -861,6 +861,22 @@ export default function AboutPage() {
               <span>Lihat Katalog Produk</span>
             </Link>
           </div>
+        </div>
+
+        {/* ═════════════════════════════════════════════════════════════════════ */}
+        {/* SIGNATURE SEAMLESS S-CURVE WAVE TRANSITION INTO NAVY FOOTER (#0A192F) */}
+        {/* ═════════════════════════════════════════════════════════════════════ */}
+        <div className="absolute bottom-0 inset-x-0 pointer-events-none leading-none z-20">
+          <svg
+            className="w-full h-12 sm:h-16 lg:h-20 text-[#0A192F] block -mb-[1px]"
+            viewBox="0 0 1440 120"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M0,32 C320,95 640,0 960,65 C1200,110 1360,50 1440,60 L1440,120 L0,120 Z"
+              fill="currentColor"
+            />
+          </svg>
         </div>
       </section>
     </main>

@@ -3,15 +3,9 @@
 PT Kediri Chemical Abadi
 Generator Halaman Sejarah (AboutPage.jsx)
 Pembaruan Sesuai Arahan User:
-"bikin stop disini dulu jadi ga langung di lepas lock nya setelah sampe disni dan sudah tampil semua baru bisa scroll lanjutan lepas lock nya"
-
-1. Berhenti & Kunci Tetap Aktif di 2024-2026 (Stop Disini Dulu):
-   - Saat tiba di tahun 2024-2026, lock TIDAK langsung dilepas!
-   - Layar tetap terkunci penuh (h-screen overflow-hidden, body overflow hidden).
-   - Pengunjung berhenti dan menikmati seluruh konten 2024-2026 sampai selesai tampil sempurna.
-2. Pelepasan Lock Hanya Pada Scroll Lanjutan:
-   - Setelah konten 2024-2026 selesai tampil semua (isReadyToUnlock = true), pengunjung melakukan "scroll lanjutan" ke bawah (atau klik tombol).
-   - Hanya pada tindakan sadar lanjutan tersebut, lock dilepas (isUnlocked = true) dan layar meluncur mulus ke Dewan Direksi!
+"kembalikan s curve ku"
+- Mengembalikan transisi signature gelombang S-Curve (Seamless S-Curve Wave) pada bagian bawah Section 3 tepat sebelum Navy Footer (#0A192F).
+- S-Curve menghubungkan latar putih ke navy footer secara organik dan elegan (estetika ombak kimia/air murni KCA).
 Author: Yerikho Arfensias Effendi
 Company: PT Kediri Chemical Abadi
 """
@@ -811,10 +805,10 @@ export default function AboutPage() {
       </section>
 
       {/* ═════════════════════════════════════════════════════════════════════ */}
-      {/* SECTION 3: KOMITMEN ESG & PRINSIP INTEGRITAS (SECTION NORMAL)        */}
+      {/* SECTION 3: KOMITMEN ESG & SIGNATURE S-CURVE TRANSITION KE FOOTER     */}
       {/* ═════════════════════════════════════════════════════════════════════ */}
-      <section className="py-24 sm:py-28 bg-white border-t border-slate-200">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full space-y-12 text-center">
+      <section className="pt-24 sm:pt-28 pb-32 sm:pb-36 lg:pb-40 bg-white border-t border-slate-200 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full space-y-12 text-center relative z-10">
           <div className="max-w-2xl mx-auto space-y-2">
             <span className="text-xs font-bold font-heading uppercase tracking-widest text-[#0F58A8] block">
               PRINSIP INTEGRITAS & KEBERLANJUTAN
@@ -880,6 +874,22 @@ export default function AboutPage() {
             </Link>
           </div>
         </div>
+
+        {/* ═════════════════════════════════════════════════════════════════════ */}
+        {/* SIGNATURE SEAMLESS S-CURVE WAVE TRANSITION INTO NAVY FOOTER (#0A192F) */}
+        {/* ═════════════════════════════════════════════════════════════════════ */}
+        <div className="absolute bottom-0 inset-x-0 pointer-events-none leading-none z-20">
+          <svg
+            className="w-full h-12 sm:h-16 lg:h-20 text-[#0A192F] block -mb-[1px]"
+            viewBox="0 0 1440 120"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M0,32 C320,95 640,0 960,65 C1200,110 1360,50 1440,60 L1440,120 L0,120 Z"
+              fill="currentColor"
+            />
+          </svg>
+        </div>
       </section>
     </main>
   )
@@ -889,4 +899,4 @@ export default function AboutPage() {
 with open('src/pages/AboutPage.jsx', 'w', encoding='utf-8') as f:
     f.write(CODE)
 
-print("BERHASIL: 2024-2026 berhenti dan lock tetap aktif sampai seluruh konten tampil sempurna. Baru pada scroll lanjutan berikutnya lock dilepas!")
+print("BERHASIL: Signature S-Curve Wave transition ke Navy Footer (#0A192F) telah dikembalikan dengan sempurna!")
