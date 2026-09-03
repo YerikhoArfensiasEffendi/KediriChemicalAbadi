@@ -1,4 +1,15 @@
-import { Helmet } from 'react-helmet-async'
+# -*- coding: utf-8 -*-
+"""
+PT Kediri Chemical Abadi
+Script Generator Halaman Sejarah Perusahaan (AboutPage.jsx)
+Mengikuti Standar Desain Sido Muncul (sidomuncul.co.id/id/history.html)
+Author: Yerikho Arfensias Effendi
+Company: PT Kediri Chemical Abadi
+"""
+
+import os
+
+CODE = """import { Helmet } from 'react-helmet-async'
 import { motion } from 'framer-motion'
 import { 
   Building2, 
@@ -453,3 +464,9 @@ export default function AboutPage() {
     </main>
   )
 }
+"""
+
+with open('src/pages/AboutPage.jsx', 'w', encoding='utf-8') as f:
+    f.write(CODE)
+
+print("SUKSES: AboutPage.jsx berhasil diperbarui sesuai standar sejarah Sido Muncul!")
