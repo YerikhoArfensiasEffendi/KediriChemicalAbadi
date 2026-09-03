@@ -581,19 +581,19 @@ export default function CompliancePage() {
                     viewport={{ once: true, margin: "-40px" }}
                     whileHover={{ y: -6, transition: { type: 'spring', stiffness: 350, damping: 22 } }}
                     transition={{ duration: 0.6, delay: idx * 0.09, ease: [0.16, 1, 0.3, 1] }}
-                    className="bg-white rounded-3xl p-6 border border-sky-100 shadow-lg shadow-blue-900/5 hover:shadow-xl transition-all flex flex-col justify-between space-y-5 relative group"
+                    className="bg-white rounded-xl p-5 sm:p-6 border border-slate-200/90 shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-5 relative group"
                   >
                     {/* Circle Number Badge (Top Left) */}
                     <div className="flex items-center justify-between">
-                      <div className={`w-8 h-8 rounded-full ${step.badgeBg} text-white flex items-center justify-center font-heading font-extrabold text-xs shadow-xs`}>
+                      <div className={`w-7 h-7 rounded-md ${step.badgeBg} text-white flex items-center justify-center font-mono font-bold text-xs shadow-xs`}>
                         {step.step}
                       </div>
                     </div>
 
                     {/* Centered Large Icon */}
                     <div className="flex flex-col items-center text-center space-y-3 pt-1">
-                      <div className="p-3.5 rounded-2xl bg-sky-50/70 border border-sky-100 flex items-center justify-center group-hover:scale-105 transition-transform">
-                        <IconComp className={`w-10 h-10 ${step.textColor} stroke-[1.5]`} />
+                      <div className={`w-14 h-14 rounded-lg ${step.iconContainerBg} border flex items-center justify-center group-hover:scale-105 transition-transform shadow-2xs`}>
+                        <IconComp className={`w-8 h-8 ${step.textColor}`} />
                       </div>
 
                       {/* Phase Tag */}
@@ -640,10 +640,10 @@ export default function CompliancePage() {
             {/* ------------------------------------------------------------- */}
             {/* 2. MIDDLE ROW: HASIL TAHAPAN (CONNECTED DELIVERABLES)         */}
             {/* ------------------------------------------------------------- */}
-            <div className="bg-white rounded-3xl border border-sky-100 p-4 sm:p-5 shadow-lg shadow-blue-900/5 flex flex-col lg:flex-row items-stretch lg:items-center gap-4">
+            <div className="bg-white rounded-xl border border-slate-200/90 p-4 sm:p-5 shadow-sm flex flex-col lg:flex-row items-stretch lg:items-center gap-4">
               
               {/* Left Badge Ribbon */}
-              <div className="bg-gradient-to-r from-[#0F58A8] to-[#0284C7] text-white px-5 py-3 rounded-2xl flex items-center justify-center shrink-0 lg:w-36 text-center shadow-xs">
+              <div className="bg-[#0A192F] text-white px-5 py-3 rounded-lg flex items-center justify-center shrink-0 lg:w-36 text-center shadow-xs">
                 <span className="font-heading font-black text-xs uppercase tracking-wider block">
                   HASIL<br className="hidden lg:block" /> TAHAPAN
                 </span>
@@ -657,7 +657,7 @@ export default function CompliancePage() {
 
                   return (
                     <div key={idx} className="flex items-center gap-2">
-                      <div className="p-3 rounded-2xl bg-sky-50/50 border border-sky-100 flex items-center gap-2.5 flex-1 min-h-[58px] shadow-2xs">
+                      <div className="p-3 rounded-lg bg-slate-50 border border-slate-200/80 flex items-center gap-2.5 flex-1 min-h-[58px]">
                         <div className={`w-8 h-8 rounded-xl bg-white border border-sky-100 flex items-center justify-center shrink-0 ${step.textColor}`}>
                           <DelivIcon className="w-4 h-4" />
                         </div>
@@ -681,7 +681,7 @@ export default function CompliancePage() {
             {/* ------------------------------------------------------------- */}
             {/* 3. BOTTOM ROW: PRINSIP PENDUKUNG (CORE PILLARS)              */}
             {/* ------------------------------------------------------------- */}
-            <div className="bg-white rounded-3xl border border-sky-100 p-4 sm:p-5 shadow-lg shadow-blue-900/5 flex flex-col lg:flex-row items-stretch lg:items-center gap-4">
+            <div className="bg-white rounded-xl border border-slate-200/90 p-4 sm:p-5 shadow-sm flex flex-col lg:flex-row items-stretch lg:items-center gap-4">
               
               {/* Left Badge Ribbon */}
               <div className="bg-slate-900 text-white px-5 py-3 rounded-2xl flex items-center justify-center shrink-0 lg:w-36 text-center shadow-xs">
