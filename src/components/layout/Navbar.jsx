@@ -49,7 +49,7 @@ export default function Navbar() {
         {/* ═══════════════════════════════════════════════════════════ */}
         <div className="flex items-center gap-2 lg:gap-3">
           
-          {/* Desktop Navigation Links (Sido Muncul Style: Montserrat, Uppercase, Active Underline) */}
+          {/* Desktop Navigation Links */}
           <nav className="hidden lg:flex items-center gap-1 xl:gap-1.5">
             {NAVIGATION_DATA.navLinks.map((link) => (
               <NavLink
@@ -58,10 +58,10 @@ export default function Navbar() {
                 end={link.to === '/'}
                 className={({ isActive }) =>
                   cn(
-                    'px-3 py-1.5 text-[11px] xl:text-[11.5px] font-heading uppercase tracking-wider transition-all duration-200 cursor-pointer relative font-bold',
+                    'px-3 py-1.5 text-[11px] xl:text-[11.5px] font-heading uppercase tracking-wider transition-all duration-200 cursor-pointer relative',
                     isActive
-                      ? 'text-[#0F58A8] font-black after:content-[\'\'] after:absolute after:bottom-[-2px] after:inset-x-2.5 after:h-[2px] after:bg-[#0F58A8] after:rounded-full'
-                      : 'text-slate-800 hover:text-[#0F58A8] hover:bg-slate-50 rounded-md'
+                      ? 'text-[#0F58A8] font-semibold after:content-[\'\'] after:absolute after:bottom-[-2px] after:inset-x-2.5 after:h-[2px] after:bg-[#0F58A8] after:rounded-full'
+                      : 'text-slate-700 font-medium hover:text-[#0F58A8] hover:bg-slate-50 rounded-md'
                   )
                 }
               >
@@ -73,10 +73,10 @@ export default function Navbar() {
           {/* Divider */}
           <div className="hidden lg:block h-3.5 w-px bg-slate-200 mx-1" />
 
-          {/* CTA Hubungi Lab (Sido Muncul Style: Bold Royal Blue Button) */}
+          {/* CTA Hubungi Lab */}
           <Link
             to="/contact"
-            className="h-9 px-4 bg-[#0F58A8] hover:bg-blue-700 active:bg-blue-800 text-white rounded-md text-[11px] font-heading font-extrabold uppercase tracking-wider inline-flex items-center gap-1.5 transition-all shadow-xs cursor-pointer"
+            className="h-9 px-4 bg-[#0F58A8] hover:bg-blue-700 active:bg-blue-800 text-white rounded-md text-[11px] font-heading font-semibold uppercase tracking-wider inline-flex items-center gap-1.5 transition-all shadow-xs cursor-pointer"
           >
             <span>Hubungi Lab</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
@@ -118,10 +118,10 @@ export default function Navbar() {
                   onClick={() => setMobileOpen(false)}
                   className={({ isActive }) =>
                     cn(
-                      'px-4 py-2.5 rounded-lg text-xs font-heading uppercase tracking-wider transition-all font-bold',
+                      'px-4 py-2.5 rounded-lg text-xs font-heading uppercase tracking-wider transition-all',
                       isActive
-                        ? 'text-white bg-[#0F58A8] font-extrabold'
-                        : 'text-slate-700 hover:bg-slate-100 hover:text-[#0F58A8]'
+                        ? 'text-white bg-[#0F58A8] font-semibold'
+                        : 'text-slate-700 font-medium hover:bg-slate-100 hover:text-[#0F58A8]'
                     )
                   }
                 >
@@ -133,7 +133,7 @@ export default function Navbar() {
                 <Link
                   to="/contact"
                   onClick={() => setMobileOpen(false)}
-                  className="w-full h-11 bg-[#0F58A8] hover:bg-blue-700 text-white rounded-lg text-xs font-heading font-extrabold uppercase tracking-wider flex items-center justify-center gap-2 shadow-2xs"
+                  className="w-full h-10 bg-[#0F58A8] hover:bg-blue-700 text-white rounded-lg text-xs font-heading font-semibold uppercase tracking-wider flex items-center justify-center gap-2 shadow-2xs"
                 >
                   <span>Hubungi Lab &amp; Konsultasi B2B</span>
                   <ArrowUpRight className="w-4 h-4" />
