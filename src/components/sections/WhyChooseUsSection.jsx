@@ -110,11 +110,9 @@ export default function WhyChooseUsSection() {
                 return (
                   <div key={idx} className="space-y-1.5 group">
                     
-                    {/* Header Row: Fine Outline Icon on Left + Micro-tag on Right */}
+                    {/* Header Row: Seamless Raw Icon + Micro-tag */}
                     <div className="flex items-center justify-between">
-                      <div className="w-7 h-7 rounded-md bg-sky-50/80 border border-sky-100 flex items-center justify-center shrink-0 shadow-2xs group-hover:bg-blue-50 transition-colors">
-                        <Icon className={`w-3.5 h-3.5 ${feat.iconColor} stroke-[1.75]`} />
-                      </div>
+                      <Icon className={`w-5 h-5 sm:w-5.5 sm:h-5.5 ${feat.iconColor} stroke-[1.85] group-hover:scale-110 transition-transform duration-300`} />
                       <span className="text-[9.5px] sm:text-[10px] font-mono font-medium text-slate-400">
                         {feat.tag}
                       </span>
