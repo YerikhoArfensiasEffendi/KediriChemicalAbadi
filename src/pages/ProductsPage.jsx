@@ -182,7 +182,6 @@ export default function ProductsPage() {
           const sectorProducts = products.filter((p) => p.category === sector.id)
           if (sectorProducts.length === 0) return null
 
-          const IconComp = sector.icon
           const theme = sector.theme
 
           return (
@@ -191,22 +190,10 @@ export default function ProductsPage() {
               id={sector.id}
               className="max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-14 xl:px-20 w-full space-y-8"
             >
-              {/* Sector Header Block */}
-              <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-4 border-b border-sky-100">
-                <div className="space-y-1 max-w-2xl">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-sky-50 border border-sky-100 flex items-center justify-center shrink-0 text-[#0F58A8]">
-                      <IconComp />
-                    </div>
-                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full">
-                      {sector.badge}
-                    </span>
-                    <span className={`text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full border ${theme.skuBadge}`}>
-                      {sectorProducts.length} Produk
-                    </span>
-                  </div>
-
-                  <h2 className="text-xl sm:text-2xl font-extrabold font-heading text-slate-900 tracking-tight">
+              {/* Sector Header Block: Judul Paling Atas */}
+              <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-4 border-b border-slate-200/80">
+                <div className="space-y-1.5 max-w-2xl">
+                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-black font-heading text-slate-900 tracking-tight">
                     {sector.name}
                   </h2>
                 </div>
