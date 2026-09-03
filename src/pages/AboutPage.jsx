@@ -401,7 +401,7 @@ export default function AboutPage() {
               )}
 
               {/* 2. PROLOGUE / LATAR BELAKANG */}
-              {slide.type === 'prologue' && (
+              {currentSlide.type === 'prologue' && (
                 <div className="max-w-4xl mx-auto w-full text-center space-y-6">
                   {/* Judul Muncul */}
                   <motion.div 
@@ -450,7 +450,7 @@ export default function AboutPage() {
               )}
 
               {/* 3. TIMELINE TAHUN: SEKUENSIAL HALUS (GARIS -> FOTO -> TULISAN) */}
-              {slide.type === 'timeline' && (
+              {currentSlide.type === 'timeline' && (
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center relative z-20">
                   
                   {/* GANJIL: FOTO KIRI, TULISAN KANAN */}
@@ -611,7 +611,7 @@ export default function AboutPage() {
               )}
 
               {/* 4. DIREKSI */}
-              {slide.type === 'directors' && (
+              {currentSlide.type === 'directors' && (
                 <div className="max-w-[1200px] mx-auto w-full space-y-8">
                   <motion.div 
                     initial={{ opacity: 0, y: 30 }}
@@ -682,7 +682,7 @@ export default function AboutPage() {
               )}
 
               {/* 5. ESG & PENUTUP */}
-              {slide.type === 'esg' && (
+              {currentSlide.type === 'esg' && (
                 <div className="max-w-[1250px] mx-auto w-full space-y-8 text-center">
                   <motion.div 
                     initial={{ opacity: 0, y: 30 }}

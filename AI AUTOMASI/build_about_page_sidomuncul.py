@@ -1,23 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-PT Kediri Chemical Abadi
-Generator Halaman Sejarah (AboutPage.jsx)
-Pembaruan Sesuai Arahan User:
-1. Transisi Sangat Halus (Fluid Cinematic Parallax):
-   - Konten sebelumnya fade out dan melayang naik ke atas secara bertahap saat di-scroll.
-   - Konten berikutnya masuk perlahan dari bawah (y: 60 -> 0) dengan efek paralaks yang stabil dan tenang.
-2. Urutan Masuk Bergantian yang Teratur:
-   - Langkah 1: Garis tengah muncul halus meluncur dari bawah ke titik henti di tengah (center node).
-   - Langkah 2: Asset foto manufaktur/reaktor masuk fade in dari bawah dengan paralaks lembut.
-   - Langkah 3: Tulisan (tahun, judul, narasi, pencapaian) masuk bergantian melengkapi layar.
-3. Saat di-scroll lagi: Gambar dan tulisan secara bergantian menghilang fade out naik ke atas.
-4. Titik henti (node) selalu berada tepat di tengah layar (dead-center) untuk efek stabil.
-5. Cukup 1 sentuhan scroll ringan untuk berpindah (ringan, responsif, tidak patah-patah).
-Author: Yerikho Arfensias Effendi
-Company: PT Kediri Chemical Abadi
-"""
-
-CODE = """import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
@@ -420,7 +401,7 @@ export default function AboutPage() {
               )}
 
               {/* 2. PROLOGUE / LATAR BELAKANG */}
-              {slide.type === 'prologue' && (
+              {currentSlide.type === 'prologue' && (
                 <div className="max-w-4xl mx-auto w-full text-center space-y-6">
                   {/* Judul Muncul */}
                   <motion.div 
@@ -469,7 +450,7 @@ export default function AboutPage() {
               )}
 
               {/* 3. TIMELINE TAHUN: SEKUENSIAL HALUS (GARIS -> FOTO -> TULISAN) */}
-              {slide.type === 'timeline' && (
+              {currentSlide.type === 'timeline' && (
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center relative z-20">
                   
                   {/* GANJIL: FOTO KIRI, TULISAN KANAN */}
@@ -630,7 +611,7 @@ export default function AboutPage() {
               )}
 
               {/* 4. DIREKSI */}
-              {slide.type === 'directors' && (
+              {currentSlide.type === 'directors' && (
                 <div className="max-w-[1200px] mx-auto w-full space-y-8">
                   <motion.div 
                     initial={{ opacity: 0, y: 30 }}
@@ -701,7 +682,7 @@ export default function AboutPage() {
               )}
 
               {/* 5. ESG & PENUTUP */}
-              {slide.type === 'esg' && (
+              {currentSlide.type === 'esg' && (
                 <div className="max-w-[1250px] mx-auto w-full space-y-8 text-center">
                   <motion.div 
                     initial={{ opacity: 0, y: 30 }}
@@ -836,9 +817,3 @@ export default function AboutPage() {
     </main>
   )
 }
-"""
-
-with open('src/pages/AboutPage.jsx', 'w', encoding='utf-8') as f:
-    f.write(CODE)
-
-print("BERHASIL: AboutPage.jsx kini beranimasi Paralaks Halus (Fade Out Naik, Fade In Bawah Bergantian), Garis ke Titik Tengah, Urutan Foto -> Tulisan, dan 1 Scroll Ringan!")
