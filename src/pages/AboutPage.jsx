@@ -156,17 +156,37 @@ export default function AboutPage() {
   const [currentIdx, setCurrentIdx] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
   const [direction, setDirection] = useState(1) // 1 = scroll down, -1 = scroll up
+  const [isPushingPrologue, setIsPushingPrologue] = useState(false)
   const containerRef = useRef(null)
 
   const changeSlide = useCallback((newIdx, dir = 1) => {
-    if (newIdx < 0 || newIdx >= SLIDES.length || isTransitioning) return
+    if (newIdx < 0 || newIdx >= SLIDES.length || isTransitioning || isPushingPrologue) return
+
+    // JEMBATAN SINEMATIK: Dari Latar Belakang (1) ke Tahun 2004 (2)
+    // Garis muncul terlebih dahulu dari bawah mendorong latar belakang naik sampai fade out
+    if (currentIdx === 1 && newIdx === 2 && dir === 1) {
+      setIsTransitioning(true)
+      setIsPushingPrologue(true)
+      setDirection(1)
+
+      setTimeout(() => {
+        setIsPushingPrologue(false)
+        setCurrentIdx(2)
+        setTimeout(() => {
+          setIsTransitioning(false)
+        }, 800)
+      }, 700) // Waktu dorong garis sampai teks latar belakang fade out
+      return
+    }
+
+    // Pergantian Slide Standar
     setIsTransitioning(true)
     setDirection(dir)
     setCurrentIdx(newIdx)
     setTimeout(() => {
       setIsTransitioning(false)
-    }, 950) // Waktu napas transisi lembut
-  }, [isTransitioning])
+    }, 950)
+  }, [currentIdx, isTransitioning, isPushingPrologue])
 
   const nextSlide = useCallback(() => {
     if (currentIdx < SLIDES.length - 1) {
@@ -283,7 +303,7 @@ export default function AboutPage() {
 
       {/* ═════════════════════════════════════════════════════════════════════ */}
       {/* TITIK PEMBERHENTIAN (NODE BULLET) TEPAT DI TENGAH LAYAR (DEAD-CENTER) */}
-      {/* MELUNCUR NAIK TINGGI KE ATAS (-90PX) & MUNCUL DARI BAWAH (+90PX)     */}
+      {/* MELUNCUR NAIK TINGGI KE ATAS (-80PX) & MUNCUL DARI BAWAH (+80PX)     */}
       {/* ═════════════════════════════════════════════════════════════════════ */}
       {isTimeline && (
         <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-0 pointer-events-none items-center justify-center">
@@ -365,7 +385,7 @@ export default function AboutPage() {
             }}
             exit={{ 
               opacity: 0, 
-              y: direction > 0 ? -120 : 120, // Melayang lebih tinggi ke atas!
+              y: direction > 0 ? -120 : 120,
               scale: 0.985
             }}
             transition={{ 
@@ -417,50 +437,43 @@ export default function AboutPage() {
 
               {/* 2. PROLOGUE / LATAR BELAKANG */}
               {currentSlide.type === 'prologue' && (
-                <div className="max-w-4xl mx-auto w-full text-center space-y-6">
-                  {/* Judul Muncul Tenang */}
-                  <motion.div 
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -80 }}
-                    transition={{ duration: 0.85, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                    className="space-y-2.5"
-                  >
-                    <h2 className="text-base sm:text-lg lg:text-xl font-bold font-heading uppercase tracking-wider text-[#0F58A8]">
-                      {currentSlide.title}
-                    </h2>
-                    <h3 className="text-sm sm:text-base font-bold font-heading uppercase tracking-wide text-slate-900">
-                      {currentSlide.subtitle}
-                    </h3>
-                  </motion.div>
+                <div className="max-w-4xl mx-auto w-full text-center space-y-6 relative">
+                  {/* GARIS PENDORONG YANG MUNCUL TERLEBIH DAHULU MENUJU TAHUN 2004 */}
+                  {isPushingPrologue && (
+                    <div className="hidden lg:block fixed left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] pointer-events-none z-0">
+                      <div className="w-full h-full bg-slate-200" />
+                      <motion.div
+                        initial={{ scaleY: 0, originY: 1 }}
+                        animate={{ scaleY: 1, originY: 1 }}
+                        transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+                        className="absolute inset-0 w-full bg-[#0F58A8] origin-bottom shadow-xs"
+                      />
+                    </div>
+                  )}
 
-                  {/* Paragraf Muncul Mengalir Halus & Kalem */}
-                  <div className="text-sm sm:text-[15.5px] text-slate-800 leading-[1.85] font-normal text-justify sm:text-center space-y-4 max-w-3xl mx-auto">
-                    <motion.p
-                      initial={{ opacity: 0, y: 35 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -70 }}
-                      transition={{ duration: 0.85, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                    >
-                      {currentSlide.desc1}
-                    </motion.p>
-                    <motion.p
-                      initial={{ opacity: 0, y: 35 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -70 }}
-                      transition={{ duration: 0.85, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                    >
-                      {currentSlide.desc2}
-                    </motion.p>
-                    <motion.p
-                      initial={{ opacity: 0, y: 35 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -70 }}
-                      transition={{ duration: 0.85, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
-                    >
-                      {currentSlide.desc3}
-                    </motion.p>
-                  </div>
+                  {/* KONTEN LATAR BELAKANG TERDORONG NAIK HINGGA FADE OUT */}
+                  <motion.div
+                    animate={isPushingPrologue ? { y: -180, opacity: 0 } : { y: 0, opacity: 1 }}
+                    transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+                    className="space-y-6 relative z-10"
+                  >
+                    {/* Judul */}
+                    <div className="space-y-2.5">
+                      <h2 className="text-base sm:text-lg lg:text-xl font-bold font-heading uppercase tracking-wider text-[#0F58A8]">
+                        {currentSlide.title}
+                      </h2>
+                      <h3 className="text-sm sm:text-base font-bold font-heading uppercase tracking-wide text-slate-900">
+                        {currentSlide.subtitle}
+                      </h3>
+                    </div>
+
+                    {/* Paragraf Latar Belakang */}
+                    <div className="text-sm sm:text-[15.5px] text-slate-800 leading-[1.85] font-normal text-justify sm:text-center space-y-4 max-w-3xl mx-auto">
+                      <p>{currentSlide.desc1}</p>
+                      <p>{currentSlide.desc2}</p>
+                      <p>{currentSlide.desc3}</p>
+                    </div>
+                  </motion.div>
                 </div>
               )}
 
