@@ -196,52 +196,52 @@ export default function HeroSection() {
                 }}
                 className="lg:col-span-6 xl:col-span-6 flex flex-col justify-center space-y-6"
               >
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold font-heading text-slate-900 tracking-tight leading-[1.15]">
+                <h1 className="text-xl sm:text-2xl lg:text-3xl xl:text-[34px] font-black font-heading text-slate-900 tracking-tight leading-[1.2]">
                   Mitra Terpercaya Manufaktur &amp;{' '}
                   <span className="text-[#0F58A8]">
                     Formulasi Kimia Industri
                   </span>
                 </h1>
 
-                <p className="text-slate-700 text-xs sm:text-sm lg:text-base leading-relaxed max-w-xl font-normal">
+                <p className="text-slate-700 text-xs sm:text-[13.5px] leading-relaxed max-w-lg font-normal">
                   {HERO_DATA.subtitle || 'Pusat riset dan manufaktur kimia pembersih konsentrat 100% non-fosfat berkapasitas 500+ Ton/bulan di Mojoroto, Kediri. Solusi pasokan massal B2B dan layanan maklon private label terpercaya.'}
                 </p>
 
                 {/* Fluid Pill Action Buttons (Water Sheen Theme) */}
-                <div className="pt-2 flex items-center gap-3 flex-wrap">
+                <div className="pt-1 flex items-center gap-2.5 flex-wrap">
                   <button
                     onClick={() => setRfqOpen(true)}
-                    className="btn-fluid-primary"
+                    className="btn-fluid-primary text-xs py-2 px-5"
                   >
                     <span>Minta Penawaran Resmi</span>
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </button>
 
                   <Link
                     to="/contact"
-                    className="btn-fluid-secondary"
+                    className="btn-fluid-secondary text-xs py-2 px-5"
                   >
                     <span>Informasi Maklon</span>
                   </Link>
                 </div>
 
                 {/* Sido Muncul Style Key Corporate Trust Accreditations */}
-                <div className="pt-4 border-t border-slate-200/80 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-xl">
+                <div className="pt-3.5 border-t border-slate-200/80 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-lg">
                   <div>
-                    <span className="block text-base sm:text-lg font-black font-heading text-[#0F58A8]">500+ TON</span>
-                    <span className="text-[10px] sm:text-[11px] font-semibold text-slate-600 uppercase tracking-tight block font-heading">Reaktor Stainless/Bln</span>
+                    <span className="block text-sm sm:text-[15px] font-black font-heading text-[#0F58A8]">500+ TON</span>
+                    <span className="text-[9.5px] font-semibold text-slate-500 uppercase tracking-tight block font-heading">Reaktor Stainless/Bln</span>
                   </div>
                   <div>
-                    <span className="block text-base sm:text-lg font-black font-heading text-emerald-700">100% NON-P</span>
-                    <span className="text-[10px] sm:text-[11px] font-semibold text-slate-600 uppercase tracking-tight block font-heading">Bebas Fosfat Ramah IPAL</span>
+                    <span className="block text-sm sm:text-[15px] font-black font-heading text-emerald-700">100% NON-P</span>
+                    <span className="text-[9.5px] font-semibold text-slate-500 uppercase tracking-tight block font-heading">Bebas Fosfat IPAL Safe</span>
                   </div>
                   <div>
-                    <span className="block text-base sm:text-lg font-black font-heading text-slate-900">ISO 9001</span>
-                    <span className="text-[10px] sm:text-[11px] font-semibold text-slate-600 uppercase tracking-tight block font-heading">Titrasi Digital Lab QC</span>
+                    <span className="block text-sm sm:text-[15px] font-black font-heading text-slate-900">ISO 9001</span>
+                    <span className="text-[9.5px] font-semibold text-slate-500 uppercase tracking-tight block font-heading">Titrasi Lab QC</span>
                   </div>
                   <div>
-                    <span className="block text-base sm:text-lg font-black font-heading text-sky-700">EST. 2004</span>
-                    <span className="text-[10px] sm:text-[11px] font-semibold text-slate-600 uppercase tracking-tight block font-heading">Pabrik Mojoroto, Kediri</span>
+                    <span className="block text-sm sm:text-[15px] font-black font-heading text-sky-700">EST. 2004</span>
+                    <span className="text-[9.5px] font-semibold text-slate-500 uppercase tracking-tight block font-heading">Mojoroto, Kediri</span>
                   </div>
                 </div>
               </motion.div>

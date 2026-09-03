@@ -21,20 +21,20 @@ export default function CTASection() {
             transition={{ duration: 0.4 }}
             className="max-w-3xl mx-auto space-y-6"
           >
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-heading text-slate-900 tracking-tight leading-tight">
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-black font-heading text-slate-900 tracking-tight leading-tight uppercase">
               Siap Mengoptimalkan Efisiensi Kimia Pembersih Fasilitas Anda?
             </h2>
 
-            <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-normal max-w-2xl mx-auto">
+            <p className="text-slate-600 text-xs sm:text-[13px] leading-relaxed font-normal max-w-2xl mx-auto">
               Dapatkan formulasi konsentrat bebas fosfat yang ramah IPAL, harga pabrik kompetitif tangan pertama, serta kepastian kontinuitas pasokan massal 500+ Ton/bulan dari PT Kediri Chemical Abadi.
             </p>
 
-            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
               <button
                 onClick={() => setRfqOpen(true)}
-                className="btn-fluid-primary w-full sm:w-auto h-12 px-8"
+                className="btn-fluid-primary w-full sm:w-auto h-10 px-6 text-xs"
               >
-                <Send className="w-4 h-4" />
+                <Send className="w-3.5 h-3.5" />
                 <span>Minta Penawaran Resmi (RFQ)</span>
               </button>
 
@@ -42,7 +42,7 @@ export default function CTASection() {
                 href={`https://wa.me/${waNumber}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-fluid-secondary w-full sm:w-auto h-12 px-8"
+                className="btn-fluid-secondary w-full sm:w-auto h-10 px-6 text-xs"
               >
                 <Phone className="w-4 h-4 text-[#0F58A8]" />
                 <span>WhatsApp: {waDisplay}</span>

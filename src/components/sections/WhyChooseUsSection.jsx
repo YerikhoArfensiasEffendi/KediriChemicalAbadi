@@ -89,44 +89,44 @@ export default function WhyChooseUsSection() {
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           >
             {/* Main Headline & Supporting Paragraph (Sido Muncul Editorial Style) */}
-            <div className="space-y-3">
-              <span className="text-xs font-bold font-heading uppercase tracking-widest text-[#0F58A8] block">
+            <div className="space-y-2.5">
+              <span className="text-[10.5px] sm:text-[11px] font-bold font-heading uppercase tracking-widest text-[#0F58A8] block">
                 STANDAR MANUFAKTUR &amp; KEMITRAAN B2B TERPERCAYA
               </span>
 
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black font-heading text-slate-900 tracking-tight leading-[1.2] uppercase">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-black font-heading text-slate-900 tracking-tight leading-[1.25] uppercase">
                 SOLUSI FORMULASI KIMIA &amp; KEBERSIHAN INDUSTRI
               </h2>
 
-              <p className="text-slate-700 text-sm sm:text-[15px] leading-relaxed font-normal max-w-2xl">
+              <p className="text-slate-700 text-xs sm:text-[13px] leading-relaxed font-normal max-w-2xl">
                 Didirikan sejak 2004, PT Kediri Chemical Abadi telah menjadi mitra manufaktur kimia pembersih bagi ratusan rumah sakit rujukan, perhotelan nasional, sentra laundry komersial, dan industri manufaktur. Kami mengintegrasikan riset formulasi konsentrat murni bebas fosfat dengan lini pencampuran Stainless Steel 316L berstandar mutu ISO 9001:2015.
               </p>
             </div>
 
             {/* 2x2 Borderless Feature Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-7 pt-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5 pt-2">
               {FEATURES.map((feat, idx) => {
                 const Icon = feat.icon
                 return (
-                  <div key={idx} className="space-y-2 group">
+                  <div key={idx} className="space-y-1.5 group">
                     
                     {/* Header Row: Fine Outline Icon on Left + Micro-tag on Right */}
                     <div className="flex items-center justify-between">
-                      <div className="w-8 h-8 rounded-lg bg-sky-50/80 border border-sky-100 flex items-center justify-center shrink-0 shadow-2xs group-hover:bg-blue-50 transition-colors">
-                        <Icon className={`w-4 h-4 ${feat.iconColor} stroke-[1.75]`} />
+                      <div className="w-7 h-7 rounded-md bg-sky-50/80 border border-sky-100 flex items-center justify-center shrink-0 shadow-2xs group-hover:bg-blue-50 transition-colors">
+                        <Icon className={`w-3.5 h-3.5 ${feat.iconColor} stroke-[1.75]`} />
                       </div>
-                      <span className="text-[10px] sm:text-[11px] font-mono font-medium text-slate-400">
+                      <span className="text-[9.5px] sm:text-[10px] font-mono font-medium text-slate-400">
                         {feat.tag}
                       </span>
                     </div>
 
                     {/* Bold Title */}
-                    <h3 className="text-sm sm:text-base font-bold font-heading text-slate-900 leading-snug">
+                    <h3 className="text-xs sm:text-[13.5px] font-bold font-heading text-slate-900 leading-snug">
                       {feat.title}
                     </h3>
 
                     {/* Concise Body Text */}
-                    <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                    <p className="text-[11px] sm:text-xs text-slate-600 leading-relaxed font-normal">
                       {feat.desc}
                     </p>
 

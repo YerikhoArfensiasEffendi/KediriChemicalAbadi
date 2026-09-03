@@ -164,16 +164,16 @@ export default function ProductShowcaseSection() {
         <div className="max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-14 xl:px-20 w-full space-y-14 relative z-10">
           
           {/* Section Header: Direct Title & Subline (Sido Muncul Corporate Standard) */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-slate-200">
-            <div className="space-y-2 max-w-3xl">
-              <span className="text-xs font-bold font-heading uppercase tracking-widest text-[#0F58A8] block">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-5 border-b border-slate-200">
+            <div className="space-y-1.5 max-w-3xl">
+              <span className="text-[10.5px] sm:text-[11px] font-bold font-heading uppercase tracking-widest text-[#0F58A8] block">
                 KATALOG PRODUK &amp; SPESIFIKASI FORMULASI
               </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black font-heading text-slate-900 tracking-tight leading-tight uppercase">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-black font-heading text-slate-900 tracking-tight leading-tight uppercase">
                 Lini Produk Kimia Pembersih Konsentrat Murni
               </h2>
             </div>
-            <p className="text-xs sm:text-sm text-slate-700 max-w-md font-normal leading-relaxed">
+            <p className="text-xs sm:text-[13px] text-slate-700 max-w-md font-normal leading-relaxed">
               Diformulasikan dari bahan aktif surfaktan murni tanpa filler, 100% bebas fosfat, hemat dosis per siklus pencucian, dan teruji ramah biofilter IPAL rumah sakit.
             </p>
           </div>
@@ -267,11 +267,11 @@ export default function ProductShowcaseSection() {
                 <div className="lg:col-span-7 space-y-5">
                   
                   {/* Title & Narrative Overview (Direct Title - No Eyebrow Tag) */}
-                  <div className="space-y-2">
-                    <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-heading text-slate-900 tracking-tight leading-tight">
+                  <div className="space-y-1.5">
+                    <h3 className="text-lg sm:text-xl lg:text-2xl font-black font-heading text-slate-900 tracking-tight leading-snug">
                       {heroProduct.title || heroProduct.name}
                     </h3>
-                    <p className="text-slate-700 text-xs sm:text-[13px] leading-relaxed font-normal">
+                    <p className="text-slate-700 text-xs sm:text-[12.5px] leading-relaxed font-normal">
                       Deterjen cair konsentrat rendah busa (*low-foam*) dengan rekayasa agen pengkhelat murni (*sequestering agent*) yang menaklukkan kesadahan air tanah tinggi Jawa Timur (&gt;350 ppm CaCO₃). Mencegah pengapuran elemen pemanas mesin cuci industri dan menjaga kelembutan serat linen hingga 50x siklus cuci.
                     </p>
                   </div>
