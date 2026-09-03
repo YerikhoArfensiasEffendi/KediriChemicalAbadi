@@ -163,15 +163,18 @@ export default function ProductShowcaseSection() {
 
         <div className="max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-14 xl:px-20 w-full space-y-14 relative z-10">
           
-          {/* Section Header: Direct Title & Subline (No Eyebrow Tag) */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-sky-100">
+          {/* Section Header: Direct Title & Subline (Sido Muncul Corporate Standard) */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-slate-200">
             <div className="space-y-2 max-w-3xl">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-heading text-slate-900 tracking-tight leading-tight">
-                Lini Produk Kimia Pembersih Industri Konsentrat Murni
+              <span className="text-xs font-bold font-heading uppercase tracking-widest text-[#0F58A8] block">
+                KATALOG PRODUK &amp; SPESIFIKASI FORMULASI
+              </span>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black font-heading text-slate-900 tracking-tight leading-tight uppercase">
+                Lini Produk Kimia Pembersih Konsentrat Murni
               </h2>
             </div>
-            <p className="text-xs sm:text-sm text-slate-600 max-w-md font-normal leading-relaxed">
-              Diformulasikan dari bahan aktif surfaktan murni tanpa bahan pengisi (*filler*), 100% bebas fosfat, hemat dosis per siklus pencucian, dan teruji ramah biofilter IPAL rumah sakit.
+            <p className="text-xs sm:text-sm text-slate-700 max-w-md font-normal leading-relaxed">
+              Diformulasikan dari bahan aktif surfaktan murni tanpa filler, 100% bebas fosfat, hemat dosis per siklus pencucian, dan teruji ramah biofilter IPAL rumah sakit.
             </p>
           </div>
 

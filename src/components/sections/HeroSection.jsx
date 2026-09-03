@@ -224,6 +224,26 @@ export default function HeroSection() {
                     <span>Informasi Maklon</span>
                   </Link>
                 </div>
+
+                {/* Sido Muncul Style Key Corporate Trust Accreditations */}
+                <div className="pt-4 border-t border-slate-200/80 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-xl">
+                  <div>
+                    <span className="block text-base sm:text-lg font-black font-heading text-[#0F58A8]">500+ TON</span>
+                    <span className="text-[10px] sm:text-[11px] font-semibold text-slate-600 uppercase tracking-tight block font-heading">Reaktor Stainless/Bln</span>
+                  </div>
+                  <div>
+                    <span className="block text-base sm:text-lg font-black font-heading text-emerald-700">100% NON-P</span>
+                    <span className="text-[10px] sm:text-[11px] font-semibold text-slate-600 uppercase tracking-tight block font-heading">Bebas Fosfat Ramah IPAL</span>
+                  </div>
+                  <div>
+                    <span className="block text-base sm:text-lg font-black font-heading text-slate-900">ISO 9001</span>
+                    <span className="text-[10px] sm:text-[11px] font-semibold text-slate-600 uppercase tracking-tight block font-heading">Titrasi Digital Lab QC</span>
+                  </div>
+                  <div>
+                    <span className="block text-base sm:text-lg font-black font-heading text-sky-700">EST. 2004</span>
+                    <span className="text-[10px] sm:text-[11px] font-semibold text-slate-600 uppercase tracking-tight block font-heading">Pabrik Mojoroto, Kediri</span>
+                  </div>
+                </div>
               </motion.div>
 
               <div className="hidden lg:block lg:col-span-6 xl:col-span-6" />

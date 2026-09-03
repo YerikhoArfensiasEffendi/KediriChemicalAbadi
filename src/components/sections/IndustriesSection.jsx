@@ -144,15 +144,18 @@ export default function IndustriesSection() {
           />
         </div>
 
-        {/* Section Header (No Eyebrow Tag) */}
+        {/* Section Header (Sido Muncul Corporate Standard) */}
         <div className="max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-14 xl:px-20 w-full mb-10 sm:mb-14 relative z-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-sky-100">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-slate-200">
             <div className="space-y-2 max-w-2xl">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-heading text-slate-900 tracking-tight leading-tight">
+              <span className="text-xs font-bold font-heading uppercase tracking-widest text-[#0F58A8] block">
+                PENETRASI PASAR &amp; SEKTOR BISNIS
+              </span>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black font-heading text-slate-900 tracking-tight leading-tight uppercase">
                 {sectionTitle || 'Sektor Industri yang Kami Layani'}
               </h2>
             </div>
-            <p className="text-xs sm:text-sm text-slate-600 max-w-lg font-normal leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-700 max-w-lg font-normal leading-relaxed">
               {sectionSubtitle || 'Formulasi kimia pembersih khusus yang dirancang presisi untuk spesifikasi teknis, kepatuhan IPAL, dan efisiensi operasional setiap sektor bisnis.'}
             </p>
           </div>

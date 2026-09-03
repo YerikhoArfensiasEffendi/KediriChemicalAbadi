@@ -49,8 +49,8 @@ export default function Navbar() {
         {/* ═══════════════════════════════════════════════════════════ */}
         <div className="flex items-center gap-2 lg:gap-3">
           
-          {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-1">
+          {/* Desktop Navigation Links (Sido Muncul Style: Montserrat, Uppercase, Active Underline) */}
+          <nav className="hidden lg:flex items-center gap-1.5 xl:gap-2">
             {NAVIGATION_DATA.navLinks.map((link) => (
               <NavLink
                 key={link.to}
@@ -58,10 +58,10 @@ export default function Navbar() {
                 end={link.to === '/'}
                 className={({ isActive }) =>
                   cn(
-                    'px-3.5 py-1.5 rounded-md text-xs font-heading uppercase tracking-wider transition-all duration-200 cursor-pointer font-bold',
+                    'px-3.5 py-2 text-[12px] xl:text-[12.5px] font-heading uppercase tracking-wider transition-all duration-200 cursor-pointer relative font-bold',
                     isActive
-                      ? 'text-white bg-[#0F58A8] shadow-2xs font-extrabold'
-                      : 'text-slate-700 hover:text-[#0F58A8] hover:bg-slate-100/90'
+                      ? 'text-[#0F58A8] font-black after:content-[\'\'] after:absolute after:bottom-[-2px] after:inset-x-3 after:h-[2.5px] after:bg-[#0F58A8] after:rounded-full'
+                      : 'text-slate-800 hover:text-[#0F58A8] hover:bg-slate-50 rounded-md'
                   )
                 }
               >
@@ -73,13 +73,13 @@ export default function Navbar() {
           {/* Divider */}
           <div className="hidden lg:block h-4 w-px bg-slate-200 mx-1" />
 
-          {/* CTA Hubungi Lab (Tegas & Presisi) */}
+          {/* CTA Hubungi Lab (Sido Muncul Style: Bold Royal Blue Button) */}
           <Link
             to="/contact"
-            className="h-9 px-4.5 bg-[#0F58A8] hover:bg-blue-700 active:bg-blue-800 text-white rounded-md text-xs font-heading font-extrabold uppercase tracking-wider inline-flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer"
+            className="h-10 px-5.5 bg-[#0F58A8] hover:bg-blue-700 active:bg-blue-800 text-white rounded-md text-xs font-heading font-extrabold uppercase tracking-wider inline-flex items-center gap-2 transition-all shadow-xs cursor-pointer"
           >
             <span>Hubungi Lab</span>
-            <ArrowUpRight className="w-3.5 h-3.5" />
+            <ArrowUpRight className="w-4 h-4" />
           </Link>
 
           {/* Mobile Hamburger Toggle */}

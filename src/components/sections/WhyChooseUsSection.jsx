@@ -88,14 +88,18 @@ export default function WhyChooseUsSection() {
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           >
-            {/* Main Headline & Supporting Paragraph */}
-            <div className="space-y-3.5">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-heading text-slate-900 tracking-tight leading-tight uppercase">
-                SOLUSI SABUN &amp; KEBERSIHAN PROFESIONAL
+            {/* Main Headline & Supporting Paragraph (Sido Muncul Editorial Style) */}
+            <div className="space-y-3">
+              <span className="text-xs font-bold font-heading uppercase tracking-widest text-[#0F58A8] block">
+                STANDAR MANUFAKTUR &amp; KEMITRAAN B2B TERPERCAYA
+              </span>
+
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black font-heading text-slate-900 tracking-tight leading-[1.2] uppercase">
+                SOLUSI FORMULASI KIMIA &amp; KEBERSIHAN INDUSTRI
               </h2>
 
-              <p className="text-slate-600 text-xs sm:text-sm lg:text-[14px] leading-relaxed font-normal max-w-2xl">
-                Didirikan sejak 2004, PT Kediri Chemical Abadi telah menjadi mitra manufaktur kimia pembersih bagi ratusan rumah sakit, perhotelan nasional, sentra laundry komersial, dan industri manufaktur. Kami mengintegrasikan riset formulasi bebas fosfat dengan lini pencampuran presisi tinggi berstandar mutu ISO 9001:2015.
+              <p className="text-slate-700 text-sm sm:text-[15px] leading-relaxed font-normal max-w-2xl">
+                Didirikan sejak 2004, PT Kediri Chemical Abadi telah menjadi mitra manufaktur kimia pembersih bagi ratusan rumah sakit rujukan, perhotelan nasional, sentra laundry komersial, dan industri manufaktur. Kami mengintegrasikan riset formulasi konsentrat murni bebas fosfat dengan lini pencampuran Stainless Steel 316L berstandar mutu ISO 9001:2015.
               </p>
             </div>
 
