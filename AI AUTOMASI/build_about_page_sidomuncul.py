@@ -3,15 +3,12 @@
 PT Kediri Chemical Abadi
 Generator Halaman Sejarah (AboutPage.jsx)
 Pembaruan Sesuai Arahan User:
-"setelah section ini, garis akan muncul terlebih dahulu mendorong latar belakang ini ke atas sampai fade out, baru masuk ke tahun jadi tidak ada effect kasar"
-1. Efek Jembatan Sinematik (Prologue -> Tahun 2004):
-   - Garis tengah vertikal melesat tumbuh dari bawah viewport ke atas.
-   - Bersamaan dengan itu, narasi Latar Belakang terdorong ke atas (y: -180px) hingga fade out sepenuhnya.
-   - Setelah latar belakang terdorong pudar purna (650ms), layar beralih ke Tahun 2004.
-2. Di Tahun 2004:
-   - Garis sudah berada di posisinya (mulus tanpa kedip/jump).
-   - Titik simpul (node) mekar di tengah (dead-center).
-   - Foto manufaktur dan penjelasan detail 2004 masuk secara anggun.
+1. Garis Terakhir di Tahun 2024-2026:
+   - Pada slide terakhir linimasa (2024-2026), garis berhenti tepat di tengah layar (h-1/2) pada titik simpul (node). Tidak ada garis yang tembus ke bawah lagi.
+   - Titik simpul 2026 dilengkapi aksen ring terminasi (ring-4 ring-blue-100) sebagai tanda tonggak masa kini.
+2. Animasi Meninggalkan Garis Saat Scroll ke Direksi:
+   - Saat di-scroll dari 2026 ke Direksi, garis dan titik simpul bersama konten 2026 melayang naik ke atas (-160px) secara mulus dan memudar ("meninggalkan garisnya").
+   - Layar kemudian berpindah secara stabil, bersih, dan berwibawa ke section Dewan Direksi & Tata Kelola Korporat.
 Author: Yerikho Arfensias Effendi
 Company: PT Kediri Chemical Abadi
 """
@@ -136,7 +133,7 @@ const SLIDES = [
     imageCaption: 'Instalasi Pengolahan Air Demineralisasi RO 50.000 L/Hari & Reaktor Kapasitas 500+ Ton/Bln',
     align: 'right'
   },
-  // SLIDE 6: TAHUN 2024-2026
+  // SLIDE 6: TAHUN 2024-2026 (SLIDE TAHUN TERAKHIR)
   {
     type: 'timeline',
     id: '2026',
@@ -175,13 +172,13 @@ export default function AboutPage() {
   const [isTransitioning, setIsTransitioning] = useState(false)
   const [direction, setDirection] = useState(1) // 1 = scroll down, -1 = scroll up
   const [isPushingPrologue, setIsPushingPrologue] = useState(false)
+  const [isLeavingTimeline, setIsLeavingTimeline] = useState(false)
   const containerRef = useRef(null)
 
   const changeSlide = useCallback((newIdx, dir = 1) => {
-    if (newIdx < 0 || newIdx >= SLIDES.length || isTransitioning || isPushingPrologue) return
+    if (newIdx < 0 || newIdx >= SLIDES.length || isTransitioning || isPushingPrologue || isLeavingTimeline) return
 
-    // JEMBATAN SINEMATIK: Dari Latar Belakang (1) ke Tahun 2004 (2)
-    // Garis muncul terlebih dahulu dari bawah mendorong latar belakang naik sampai fade out
+    // JEMBATAN MASUK SINEMATIK: Dari Latar Belakang (1) ke Tahun 2004 (2)
     if (currentIdx === 1 && newIdx === 2 && dir === 1) {
       setIsTransitioning(true)
       setIsPushingPrologue(true)
@@ -193,7 +190,24 @@ export default function AboutPage() {
         setTimeout(() => {
           setIsTransitioning(false)
         }, 800)
-      }, 700) // Waktu dorong garis sampai teks latar belakang fade out
+      }, 700)
+      return
+    }
+
+    // JEMBATAN KELUAR SINEMATIK: Dari Tahun Terakhir 2026 (6) ke Direksi (7)
+    // Garis terakhir dan konten 2026 melayang naik meninggalkan linimasa sebelum masuk Direksi
+    if (currentIdx === 6 && newIdx === 7 && dir === 1) {
+      setIsTransitioning(true)
+      setIsLeavingTimeline(true)
+      setDirection(1)
+
+      setTimeout(() => {
+        setIsLeavingTimeline(false)
+        setCurrentIdx(7)
+        setTimeout(() => {
+          setIsTransitioning(false)
+        }, 850)
+      }, 700)
       return
     }
 
@@ -204,7 +218,7 @@ export default function AboutPage() {
     setTimeout(() => {
       setIsTransitioning(false)
     }, 950)
-  }, [currentIdx, isTransitioning, isPushingPrologue])
+  }, [currentIdx, isTransitioning, isPushingPrologue, isLeavingTimeline])
 
   const nextSlide = useCallback(() => {
     if (currentIdx < SLIDES.length - 1) {
@@ -291,6 +305,7 @@ export default function AboutPage() {
 
   const currentSlide = SLIDES[currentIdx]
   const isTimeline = currentSlide.type === 'timeline'
+  const isLastTimelineYear = currentSlide.id === '2026'
 
   return (
     <main 
@@ -308,15 +323,19 @@ export default function AboutPage() {
 
       {/* ═════════════════════════════════════════════════════════════════════ */}
       {/* GARIS TENGAH PERMANEN (HANYA DI BAGIAN TIMELINE)                     */}
-      {/* GARIS BERDIRI TENANG DI BACKGROUND (z-0), TIDAK FADE & TIDAK RE-SCALE*/}
+      {/* PADA 2026: BERHENTI DI TENGAH (h-1/2) SEBAGAI GARIS TERAKHIR!         */}
       {/* ═════════════════════════════════════════════════════════════════════ */}
       {isTimeline && (
-        <div className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] pointer-events-none z-0">
-          {/* Garis Dasar Abu-abu Halus */}
-          <div className="w-full h-full bg-slate-200" />
-          {/* Garis Aksen Biru Korporat Halus Menyatu dengan Website */}
-          <div className="absolute inset-0 w-full bg-[#0F58A8]/60" />
-        </div>
+        <motion.div 
+          animate={isLeavingTimeline ? { y: -160, opacity: 0 } : { y: 0, opacity: 1 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] pointer-events-none z-0"
+        >
+          {/* Garis Dasar Abu-abu Halus: Jika slide terakhir 2026, berhenti di tengah (h-1/2)! */}
+          <div className={`w-full ${isLastTimelineYear ? 'h-1/2' : 'h-full'} bg-slate-200 transition-all duration-500`} />
+          {/* Garis Aksen Biru Korporat Halus */}
+          <div className={`absolute inset-0 w-full ${isLastTimelineYear ? 'h-1/2' : 'h-full'} bg-[#0F58A8]/60 transition-all duration-500`} />
+        </motion.div>
       )}
 
       {/* ═════════════════════════════════════════════════════════════════════ */}
@@ -324,7 +343,11 @@ export default function AboutPage() {
       {/* MELUNCUR NAIK TINGGI KE ATAS (-80PX) & MUNCUL DARI BAWAH (+80PX)     */}
       {/* ═════════════════════════════════════════════════════════════════════ */}
       {isTimeline && (
-        <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-0 pointer-events-none items-center justify-center">
+        <motion.div 
+          animate={isLeavingTimeline ? { y: -160, opacity: 0 } : { y: 0, opacity: 1 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="hidden lg:flex absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-0 pointer-events-none items-center justify-center"
+        >
           <AnimatePresence mode="wait">
             <motion.div
               key={`node-${currentSlide.id}`}
@@ -347,12 +370,14 @@ export default function AboutPage() {
                 duration: 0.85, 
                 ease: [0.16, 1, 0.3, 1] 
               }}
-              className="w-5 h-5 rounded-full border-2 border-[#0F58A8] bg-white flex items-center justify-center shadow-xs"
+              className={`w-5 h-5 rounded-full border-2 border-[#0F58A8] bg-white flex items-center justify-center shadow-xs ${
+                isLastTimelineYear ? 'ring-4 ring-blue-100/90' : ''
+              }`}
             >
               <div className="w-2 h-2 rounded-full bg-[#0F58A8]" />
             </motion.div>
           </AnimatePresence>
-        </div>
+        </motion.div>
       )}
 
       {/* ═════════════════════════════════════════════════════════════════════ */}
@@ -412,7 +437,11 @@ export default function AboutPage() {
             }}
             className="w-full h-full flex items-center justify-center px-4 sm:px-8 lg:px-16 relative"
           >
-            <div className="max-w-6xl mx-auto w-full relative z-10">
+            <motion.div 
+              animate={isLeavingTimeline ? { y: -160, opacity: 0 } : {}}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="max-w-6xl mx-auto w-full relative z-10"
+            >
 
               {/* 1. HERO SLIDE */}
               {currentSlide.type === 'hero' && (
@@ -540,7 +569,7 @@ export default function AboutPage() {
                           <h3 className="text-3xl sm:text-4xl lg:text-[44px] font-bold font-heading text-[#0F58A8] tracking-tight leading-none flex items-center gap-3">
                             <span>{currentSlide.year}</span>
                             <span className="text-xs font-mono font-normal px-2.5 py-0.5 rounded-full bg-blue-50 text-[#0F58A8] border border-blue-200">
-                              Tonggak Sejarah
+                              {isLastTimelineYear ? 'Masa Kini & Masa Depan' : 'Tonggak Sejarah'}
                             </span>
                           </h3>
                         </div>
@@ -833,7 +862,7 @@ export default function AboutPage() {
                 </div>
               )}
 
-            </div>
+            </motion.div>
           </motion.div>
         </AnimatePresence>
       </div>
@@ -868,4 +897,4 @@ export default function AboutPage() {
 with open('src/pages/AboutPage.jsx', 'w', encoding='utf-8') as f:
     f.write(CODE)
 
-print("BERHASIL: Garis muncul terlebih dahulu melesat dari bawah mendorong narasi Latar Belakang ke atas hingga fade out, lalu masuk ke tahun secara mulus tanpa efek kasar!")
+print("BERHASIL: Garis terakhir berhenti di tengah pada tahun 2026, dan saat di-scroll melayang anggun naik meninggalkan garisnya menuju Dewan Direksi secara stabil!")
