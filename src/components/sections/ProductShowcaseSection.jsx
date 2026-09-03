@@ -140,6 +140,8 @@ export default function ProductShowcaseSection() {
   const [laundryKg, setLaundryKg] = useState(300)
 
   const productsArray = Array.isArray(PRODUCTS_DATA) ? PRODUCTS_DATA : []
+  const heroProduct = productsArray.find((p) => p.isHero) || productsArray[0] || {}
+
   // 1 Unggulan Terbaik dari Setiap Kategori Sektor
   const CATEGORY_ORDER = [
     { key: 'laundry', label: 'Laundry & Garmen' },
