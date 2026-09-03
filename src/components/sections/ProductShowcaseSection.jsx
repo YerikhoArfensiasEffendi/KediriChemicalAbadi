@@ -127,10 +127,10 @@ const CATEGORY_LOGOS = {
 }
 
 const PACKAGING_VARIANTS = [
-  { id: '5l', label: 'Jerigen 5L', subtitle: 'Klinik & Laundry Komersial', image: '/images/product_jerigen5l.jpg' },
-  { id: '20l', label: 'Jerigen 20L', subtitle: 'Hotel & RS Rujukan', image: '/images/product_jerigen20l.jpg' },
-  { id: '200l', label: 'Drum 200L', subtitle: 'Sentra Pabrik & Industri', image: '/images/product_drum200l.jpg' },
-  { id: 'lineup', label: 'Lini Lengkap PKRT', subtitle: 'Standar Izin Edar Kemenkes RI', image: '/images/kca_packaging_lineup.png' },
+  { id: '5l', label: '5L', fullName: 'Jerigen 5L', image: '/images/product_jerigen5l.jpg' },
+  { id: '20l', label: '20L', fullName: 'Jerigen 20L', image: '/images/product_jerigen20l.jpg' },
+  { id: '200l', label: '200L', fullName: 'Drum 200L', image: '/images/product_drum200l.jpg' },
+  { id: 'lineup', label: 'Semua Jenis', fullName: 'Lini Lengkap Kemasan', image: '/images/kca_packaging_lineup.png' },
 ]
 
 export default function ProductShowcaseSection() {
@@ -206,30 +206,35 @@ export default function ProductShowcaseSection() {
                     </AnimatePresence>
                   </div>
 
-                  {/* Packaging Variant Switcher (Fluid Pill Buttons) */}
-                  <div className="space-y-1.5">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block font-heading">
-                      Pilihan Kemasan Pabrik:
+                  {/* Compact Elegant Packaging Variant Switcher (Pill Buttons with Photo Icons) */}
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 pt-1">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 font-heading shrink-0">
+                      Pilihan Kemasan:
                     </span>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                      {PACKAGING_VARIANTS.map((v) => (
-                        <button
-                          key={v.id}
-                          onClick={() => setSelectedPackaging(v)}
-                          className={`px-3 py-2 text-center rounded-xl border transition-all cursor-pointer ${
-                            selectedPackaging.id === v.id
-                              ? 'bg-gradient-to-r from-[#0F58A8] to-[#0284C7] text-white border-transparent shadow-sm'
-                              : 'bg-white text-slate-700 border-sky-100 hover:border-sky-300 hover:bg-sky-50/50'
-                          }`}
-                        >
-                          <strong className="text-[11px] font-bold block font-heading truncate">
-                            {v.label}
-                          </strong>
-                          <span className={`text-[9px] block truncate ${selectedPackaging.id === v.id ? 'text-blue-100' : 'text-slate-500'}`}>
-                            {v.subtitle.split('&')[0]}
-                          </span>
-                        </button>
-                      ))}
+                    <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                      {PACKAGING_VARIANTS.map((v) => {
+                        const isSelected = selectedPackaging.id === v.id
+                        return (
+                          <button
+                            key={v.id}
+                            onClick={() => setSelectedPackaging(v)}
+                            className={`h-9 px-3 rounded-full border text-xs font-heading font-semibold inline-flex items-center gap-2 transition-all cursor-pointer select-none ${
+                              isSelected
+                                ? 'bg-[#0F58A8] text-white border-[#0F58A8] shadow-xs'
+                                : 'bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200/90'
+                            }`}
+                          >
+                            <div className="w-5 h-5 flex items-center justify-center shrink-0">
+                              <img
+                                src={v.image}
+                                alt={v.label}
+                                className={`w-full h-full object-contain ${isSelected ? 'brightness-110' : 'mix-blend-multiply'}`}
+                              />
+                            </div>
+                            <span>{v.label}</span>
+                          </button>
+                        )
+                      })}
                     </div>
                   </div>
 
