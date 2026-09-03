@@ -63,7 +63,7 @@ _Dikirim melalui Portal Resmi PT Kediri Chemical Abadi (kedirichemical.com)_`
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+      <div className="fixed inset-0 z-[100] flex items-center justify-center p-2.5 sm:p-6 overflow-y-auto">
         {/* Dark Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -79,11 +79,11 @@ _Dikirim melalui Portal Resmi PT Kediri Chemical Abadi (kedirichemical.com)_`
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-          className="relative w-full max-w-2xl bg-white text-slate-900 rounded-3xl shadow-2xl border border-slate-200 overflow-hidden z-10 my-8"
+          className="relative w-full max-w-2xl bg-white text-slate-900 rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-200 overflow-hidden z-10 my-8"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header Strip */}
-          <div className="bg-slate-50 p-6 sm:p-7 relative border-b border-slate-200">
+          <div className="bg-slate-50 p-4 sm:p-7 relative border-b border-slate-200">
             <button
               onClick={onClose}
               className="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-200/80 hover:bg-[#0F58A8] text-slate-600 hover:text-white flex items-center justify-center transition-colors cursor-pointer"
@@ -97,7 +97,7 @@ _Dikirim melalui Portal Resmi PT Kediri Chemical Abadi (kedirichemical.com)_`
               <span>Pusat Korespondensi B2B & RFQ Pabrik</span>
             </div>
 
-            <h3 className="text-xl sm:text-2xl font-extrabold font-heading text-slate-900">
+            <h3 className="text-lg sm:text-2xl font-extrabold font-heading text-slate-900">
               Formulir Permintaan Penawaran Resmi (RFQ)
             </h3>
             <p className="text-xs text-slate-600 mt-1 leading-relaxed">

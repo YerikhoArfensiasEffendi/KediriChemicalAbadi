@@ -12,7 +12,7 @@ export default function CTASection() {
 
   return (
     <>
-      <section className="pt-20 sm:pt-24 pb-28 sm:pb-36 bg-gradient-to-b from-white to-blue-50/40 text-slate-900 relative overflow-hidden">
+      <section className="pt-12 sm:pt-20 pb-20 sm:pb-32 bg-gradient-to-b from-white to-blue-50/40 text-slate-900 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 w-full relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -21,7 +21,7 @@ export default function CTASection() {
             transition={{ duration: 0.4 }}
             className="max-w-3xl mx-auto space-y-6"
           >
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-black font-heading text-slate-900 tracking-tight leading-tight uppercase">
+            <h2 className="text-lg sm:text-2xl lg:text-3xl font-black font-heading text-slate-900 tracking-tight leading-tight uppercase">
               Siap Mengoptimalkan Efisiensi Kimia Pembersih Fasilitas Anda?
             </h2>
 
@@ -32,7 +32,7 @@ export default function CTASection() {
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
               <button
                 onClick={() => setRfqOpen(true)}
-                className="btn-fluid-primary w-full sm:w-auto h-10 px-6 text-xs"
+                className="btn-fluid-primary w-full sm:w-auto h-9 sm:h-10 px-4 sm:px-6 text-[11px] sm:text-xs"
               >
                 <Send className="w-3.5 h-3.5" />
                 <span>Minta Penawaran Resmi (RFQ)</span>
@@ -42,7 +42,7 @@ export default function CTASection() {
                 href={`https://wa.me/${waNumber}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-fluid-secondary w-full sm:w-auto h-10 px-6 text-xs"
+                className="btn-fluid-secondary w-full sm:w-auto h-9 sm:h-10 px-4 sm:px-6 text-[11px] sm:text-xs"
               >
                 <Phone className="w-4 h-4 text-[#0F58A8]" />
                 <span>WhatsApp: {waDisplay}</span>

@@ -27,8 +27,8 @@ export default function Navbar() {
       className={cn(
         "fixed top-0 inset-x-0 z-50 w-full transition-all duration-300 select-none",
         isScrolled
-          ? "bg-white/95 backdrop-blur-xl border-b border-slate-200/90 shadow-xs h-18 sm:h-20"
-          : "bg-white/90 backdrop-blur-lg border-b border-slate-200/60 h-20"
+          ? "bg-white/95 backdrop-blur-xl border-b border-slate-200/90 shadow-xs h-16 sm:h-20"
+          : "bg-white/90 backdrop-blur-lg border-b border-slate-200/60 h-16 sm:h-20"
       )}
     >
       <div className="max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-14 xl:px-20 h-full w-full flex items-center justify-between gap-6">
@@ -40,7 +40,7 @@ export default function Navbar() {
           <img
             src="/images/kca_logo.png"
             alt="Logo Resmi PT Kediri Chemical Abadi"
-            className="h-11 sm:h-13 lg:h-14 w-auto object-contain transition-transform group-hover:scale-105 duration-300"
+            className="h-9 sm:h-12 lg:h-14 w-auto object-contain transition-transform group-hover:scale-105 duration-300"
           />
         </Link>
 
@@ -76,7 +76,7 @@ export default function Navbar() {
           {/* CTA Hubungi Lab */}
           <Link
             to="/contact"
-            className="h-9 px-4 bg-[#0F58A8] hover:bg-blue-700 active:bg-blue-800 text-white rounded-md text-[11px] font-heading font-semibold uppercase tracking-wider inline-flex items-center gap-1.5 transition-all shadow-xs cursor-pointer"
+            className="h-8 sm:h-9 px-2.5 sm:px-4 bg-[#0F58A8] hover:bg-blue-700 active:bg-blue-800 text-white rounded-md text-[10px] sm:text-[11px] font-heading font-semibold uppercase tracking-wider inline-flex items-center gap-1 transition-all shadow-xs cursor-pointer"
           >
             <span>Hubungi Lab</span>
             <ArrowUpRight className="w-3.5 h-3.5" />

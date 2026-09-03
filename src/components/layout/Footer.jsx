@@ -13,11 +13,11 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="bg-[#0A192F] text-slate-300 border-t border-slate-800/80 pt-16 sm:pt-20 pb-12 sm:pb-16 relative">
+      <footer className="bg-[#0A192F] text-slate-300 border-t border-slate-800/80 pt-10 sm:pt-20 pb-8 sm:pb-16 relative">
         <div className="max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-14 xl:px-20 w-full">
           
           {/* Main Footer Grid (Wide 12-Col Distribution) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-14 xl:gap-16 pb-14 sm:pb-16 border-b border-slate-800/80">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-14 xl:gap-16 pb-8 sm:pb-16 border-b border-slate-800/80">
             
             {/* Col 1: Brand & Identity (4 cols) */}
             <div className="lg:col-span-4 xl:col-span-4 space-y-5">

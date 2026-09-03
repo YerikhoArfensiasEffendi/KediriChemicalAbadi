@@ -248,7 +248,7 @@ export default function ServicesPage() {
             {/* ------------------------------------------------------------- */}
             {/* 1. TOP ROW: 5 CONNECTED STAGE CARDS (FLUID WATER THEME)       */}
             {/* ------------------------------------------------------------- */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-4 relative items-stretch">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 sm:gap-4 relative items-stretch">
               {WORKFLOW_STEPS.map((step, idx) => {
                 const IconComp = step.icon
                 const isNotLast = idx < WORKFLOW_STEPS.length - 1
@@ -261,7 +261,7 @@ export default function ServicesPage() {
                     viewport={{ once: true, margin: "-40px" }}
                     whileHover={{ y: -4, transition: { type: 'spring', stiffness: 350, damping: 22 } }}
                     transition={{ duration: 0.6, delay: idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                    className="bg-white p-6 rounded-3xl border border-sky-100 shadow-lg shadow-blue-900/5 hover:shadow-xl transition-all flex flex-col justify-between space-y-5 relative group"
+                    className="bg-white p-4 sm:p-6 rounded-2xl sm:rounded-3xl border border-sky-100 shadow-xs hover:shadow-md transition-all flex flex-col justify-between space-y-3.5 sm:space-y-5 relative group"
                   >
                     {/* Rounded Number Badge */}
                     <div className="flex items-center justify-between">
@@ -272,8 +272,8 @@ export default function ServicesPage() {
 
                     {/* Centered Large Icon */}
                     <div className="flex flex-col items-center text-center space-y-3 pt-1">
-                      <div className="p-3.5 rounded-2xl bg-sky-50/70 border border-sky-100 flex items-center justify-center group-hover:scale-105 transition-transform">
-                        <IconComp className={`w-10 h-10 ${step.textColor} stroke-[1.5]`} />
+                      <div className="p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl bg-sky-50/70 border border-sky-100 flex items-center justify-center group-hover:scale-105 transition-transform">
+                        <IconComp className={`w-7 h-7 sm:w-10 sm:h-10 ${step.textColor} stroke-[1.5]`} />
                       </div>
 
                       {/* Phase Tag */}
@@ -421,7 +421,7 @@ export default function ServicesPage() {
       {/* ========================================================================= */}
       {/* FAQ SECTION (NO EYEBROW TAG - DIRECT TITLE)                               */}
       {/* ========================================================================= */}
-      <section className="py-16 sm:py-24 bg-white text-slate-900 border-b border-sky-100">
+      <section className="py-10 sm:py-20 bg-white text-slate-900 border-b border-sky-100">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-12 w-full space-y-10">
           
           <div className="text-center space-y-2 pb-6 border-b border-sky-100">

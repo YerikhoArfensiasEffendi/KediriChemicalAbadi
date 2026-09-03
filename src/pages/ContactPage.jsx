@@ -74,10 +74,10 @@ _Dikirim via Halaman Kontak kedirichemical.com_`
       {/* ========================================================================= */}
       {/* 1. HEADER BANNER UTAMA (CLEAN WHITE EDITORIAL)                            */}
       {/* ========================================================================= */}
-      <section className="py-14 sm:py-20 bg-gradient-to-b from-sky-50/50 via-white to-white border-b border-sky-100 text-center">
+      <section className="py-10 sm:py-18 bg-gradient-to-b from-sky-50/50 via-white to-white border-b border-sky-100 text-center">
         <div className="max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-14 xl:px-20 w-full">
           <div className="max-w-4xl mx-auto space-y-3">
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-heading text-slate-900 tracking-tight leading-tight">
+            <h1 className="text-xl sm:text-3xl lg:text-4xl font-extrabold font-heading text-slate-900 tracking-tight leading-tight">
               Hubungi Manajemen &amp; Tim Formulator Lab Pabrik
             </h1>
 
@@ -109,16 +109,16 @@ _Dikirim via Halaman Kontak kedirichemical.com_`
       {/* ========================================================================= */}
       {/* 2. SPLIT CONTACT & INQUIRY SECTION (CLEAN WHITE, FLUID WATER THEME)       */}
       {/* ========================================================================= */}
-      <section className="py-16 sm:py-24 bg-sky-50/30 border-b border-sky-100">
+      <section className="py-10 sm:py-20 bg-sky-50/30 border-b border-sky-100">
         <div className="max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-14 xl:px-20 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             
             {/* 1. SISI KIRI: KANTOR PUSAT & INFORMASI RESMI (5 Kolom) */}
-            <div className="lg:col-span-5 bg-white border border-sky-100 rounded-3xl shadow-lg shadow-blue-900/5 overflow-hidden flex flex-col justify-between">
+            <div className="lg:col-span-5 bg-white border border-sky-100 rounded-2xl sm:rounded-3xl shadow-xs sm:shadow-lg shadow-blue-900/5 overflow-hidden flex flex-col justify-between">
               {/* Volumetric Top Bar */}
               <div className="h-1.5 w-full bg-gradient-to-r from-[#0F58A8] to-[#0284C7]" />
 
-              <div className="p-6 sm:p-8 space-y-7">
+              <div className="p-4 sm:p-8 space-y-5 sm:space-y-7">
                 <div className="border-b border-sky-100 pb-4 space-y-1">
                   <h2 className="font-heading font-extrabold text-xl sm:text-2xl text-slate-900 leading-tight">
                     Kantor Pusat &amp; Fasilitas Pabrik
@@ -222,7 +222,7 @@ _Dikirim via Halaman Kontak kedirichemical.com_`
             </div>
 
             {/* 2. SISI KANAN: FORMULIR PESAN & PERMINTAAN PENAWARAN (7 Kolom) */}
-            <div className="lg:col-span-7 bg-white border border-sky-100 rounded-3xl shadow-lg shadow-blue-900/5 overflow-hidden flex flex-col justify-between">
+            <div className="lg:col-span-7 bg-white border border-sky-100 rounded-2xl sm:rounded-3xl shadow-xs sm:shadow-lg shadow-blue-900/5 overflow-hidden flex flex-col justify-between">
               {/* Volumetric Top Bar */}
               <div className="h-1.5 w-full bg-gradient-to-r from-[#059669] to-emerald-400" />
 
@@ -347,13 +347,13 @@ _Dikirim via Halaman Kontak kedirichemical.com_`
       {/* ========================================================================= */}
       {/* 3. GOOGLE MAPS & PETA LOKASI PABRIK (FLUID WATER THEME)                   */}
       {/* ========================================================================= */}
-      <section className="py-16 sm:py-24 bg-white border-b border-sky-100">
+      <section className="py-10 sm:py-20 bg-white border-b border-sky-100">
         <div className="max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-14 xl:px-20 w-full space-y-8">
           
           {/* Header Map Section (Direct Title) */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-sky-100">
             <div className="space-y-1 max-w-3xl">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-heading text-slate-900 tracking-tight leading-tight">
+              <h2 className="text-xl sm:text-3xl lg:text-4xl font-extrabold font-heading text-slate-900 tracking-tight leading-tight">
                 Lokasi Fasilitas Produksi Mojoroto, Kediri
               </h2>
             </div>
