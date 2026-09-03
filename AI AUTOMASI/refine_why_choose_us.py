@@ -1,4 +1,6 @@
-import { motion } from 'framer-motion'
+import os
+
+new_code = '''import { motion } from 'framer-motion'
 import { Check } from 'lucide-react'
 
 // =========================================================================
@@ -261,3 +263,9 @@ export default function WhyChooseUsSection() {
     </section>
   )
 }
+'''
+
+with open('src/components/sections/WhyChooseUsSection.jsx', 'w', encoding='utf-8') as f:
+    f.write(new_code)
+
+print('Updated src/components/sections/WhyChooseUsSection.jsx successfully!')
