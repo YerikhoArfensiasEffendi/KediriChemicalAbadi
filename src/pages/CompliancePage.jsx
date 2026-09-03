@@ -568,7 +568,7 @@ export default function CompliancePage() {
             {/* ------------------------------------------------------------- */}
             {/* 1. TOP ROW: 5 CONNECTED STAGE CARDS (FLUID WATER THEME)       */}
             {/* ------------------------------------------------------------- */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-4 relative items-stretch">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 sm:gap-4 relative items-stretch">
               {QC_STEPS.map((step, idx) => {
                 const IconComp = step.icon
                 const isNotLast = idx < QC_STEPS.length - 1
@@ -581,7 +581,7 @@ export default function CompliancePage() {
                     viewport={{ once: true, margin: "-40px" }}
                     whileHover={{ y: -6, transition: { type: 'spring', stiffness: 350, damping: 22 } }}
                     transition={{ duration: 0.6, delay: idx * 0.09, ease: [0.16, 1, 0.3, 1] }}
-                    className="bg-white rounded-xl p-5 sm:p-6 border border-slate-200/90 shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-5 relative group"
+                    className="bg-white rounded-xl p-4 sm:p-6 border border-slate-200/90 shadow-xs hover:shadow-md transition-all flex flex-col justify-between space-y-3.5 sm:space-y-5 relative group"
                   >
                     {/* Circle Number Badge (Top Left) */}
                     <div className="flex items-center justify-between">
@@ -592,8 +592,8 @@ export default function CompliancePage() {
 
                     {/* Centered Large Icon */}
                     <div className="flex flex-col items-center text-center space-y-3 pt-1">
-                      <div className={`w-14 h-14 rounded-lg ${step.iconContainerBg} border flex items-center justify-center group-hover:scale-105 transition-transform shadow-2xs`}>
-                        <IconComp className={`w-8 h-8 ${step.textColor}`} />
+                      <div className={`w-11 h-11 sm:w-14 sm:h-14 rounded-lg ${step.iconContainerBg} border flex items-center justify-center group-hover:scale-105 transition-transform shadow-2xs`}>
+                        <IconComp className={`w-6 h-6 sm:w-8 sm:h-8 ${step.textColor}`} />
                       </div>
 
                       {/* Phase Tag */}
@@ -602,12 +602,12 @@ export default function CompliancePage() {
                       </span>
 
                       {/* Step Title */}
-                      <h3 className="text-sm sm:text-base font-extrabold font-heading text-slate-900 leading-tight">
+                      <h3 className="text-xs sm:text-base font-extrabold font-heading text-slate-900 leading-tight">
                         {step.title}
                       </h3>
 
                       {/* Step Description */}
-                      <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                      <p className="text-[11px] sm:text-xs text-slate-600 leading-relaxed font-normal">
                         {step.desc}
                       </p>
                     </div>

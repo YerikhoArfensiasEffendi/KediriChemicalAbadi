@@ -204,7 +204,7 @@ export default function ProductsPage() {
               </div>
 
               {/* Volumetric Product Cards Grid for this Sector */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2.5 sm:gap-6">
                 {sectorProducts.map((product) => (
                   <motion.div
                     key={product.id}
@@ -212,7 +212,7 @@ export default function ProductsPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.3 }}
-                    className="bg-white border border-slate-200/90 hover:border-[#0F58A8]/40 rounded-3xl p-5 sm:p-6 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group relative space-y-5"
+                    className="bg-white border border-slate-200/90 hover:border-[#0F58A8]/40 rounded-2xl sm:rounded-3xl p-3 sm:p-5 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between group relative space-y-3 sm:space-y-4"
                   >
                     <div className="space-y-4">
                       
@@ -229,7 +229,7 @@ export default function ProductsPage() {
                       </div>
 
                       {/* Pure Product Image (No Inner Box, Pure Floating Bottle, No Rectangular Shadow) */}
-                      <div className="w-full h-44 sm:h-52 flex items-center justify-center overflow-hidden py-1 group-hover:scale-105 transition-transform duration-500">
+                      <div className="w-full h-28 sm:h-48 flex items-center justify-center overflow-hidden py-0.5 group-hover:scale-105 transition-transform duration-500">
                         <img
                           src={product.image || '/images/product_jerigen5l.jpg'}
                           alt={product.title}
@@ -240,16 +240,16 @@ export default function ProductsPage() {
 
                       {/* Title & Description */}
                       <div className="space-y-1">
-                        <h3 className="font-heading font-extrabold text-base sm:text-lg text-slate-900 group-hover:text-[#0F58A8] transition-colors leading-snug">
+                        <h3 className="font-heading font-extrabold text-xs sm:text-base text-slate-900 group-hover:text-[#0F58A8] transition-colors leading-snug line-clamp-2">
                           {product.title}
                         </h3>
-                        <p className="text-xs text-slate-600 leading-relaxed font-normal line-clamp-2">
+                        <p className="text-[10px] sm:text-xs text-slate-600 leading-relaxed font-normal line-clamp-2">
                           {product.description}
                         </p>
                       </div>
 
                       {/* 4-Grid Technical Specification Matrix */}
-                      <div className="grid grid-cols-2 gap-2 p-3 rounded-xl bg-slate-50/80 border border-slate-200/70 text-xs">
+                      <div className="grid grid-cols-2 gap-1 sm:gap-2 p-2 sm:p-3 rounded-lg sm:rounded-xl bg-slate-50/80 border border-slate-200/70 text-[9.5px] sm:text-xs">
                         <div className="space-y-0.5">
                           <span className="text-[9px] text-slate-500 block uppercase font-bold tracking-wider">
                             Bahan Aktif:
@@ -288,7 +288,7 @@ export default function ProductsPage() {
                       </div>
 
                       {/* Bullet Key Highlights */}
-                      <div className="space-y-1.5 text-xs text-slate-700">
+                      <div className="hidden sm:block space-y-1.5 text-xs text-slate-700">
                         {product.features?.map((ft, fIdx) => (
                           <div key={fIdx} className="flex items-center gap-1.5">
                             <div className="w-3.5 h-3.5 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
@@ -302,10 +302,10 @@ export default function ProductsPage() {
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="pt-2 flex items-center gap-2">
+                    <div className="pt-1 sm:pt-2 flex items-center gap-1.5 sm:gap-2">
                       <button
                         onClick={() => handleOpenRfq(product)}
-                        className={`flex-1 h-10 px-3 rounded-xl text-xs font-bold font-heading uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-xs ${theme.btnBg}`}
+                        className={`flex-1 h-8 sm:h-10 px-2 sm:px-3 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-bold font-heading uppercase tracking-wider transition-all flex items-center justify-center gap-1 cursor-pointer shadow-xs ${theme.btnBg}`}
                       >
                         <FileText className="w-3.5 h-3.5" />
                         <span>Minta RFQ</span>
@@ -315,7 +315,7 @@ export default function ProductsPage() {
                         href={`https://wa.me/${waNumber}?text=${encodeURIComponent(`Halo Tim Formulator PT Kediri Chemical Abadi, saya ingin konsultasi teknis mengenai produk: ${product.title} (SKU: ${product.sku}).`)}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="h-10 px-3.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 rounded-xl text-xs font-bold transition-colors flex items-center justify-center cursor-pointer shadow-2xs"
+                        className="h-8 sm:h-10 px-2.5 sm:px-3.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-bold transition-colors flex items-center justify-center cursor-pointer shadow-2xs"
                         title="Konsultasi via WhatsApp"
                       >
                         <Phone className="w-4 h-4 text-emerald-600" />

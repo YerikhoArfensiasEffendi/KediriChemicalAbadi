@@ -147,7 +147,7 @@ Mohon informasi penawaran resmi (RFQ) dan sampel uji coba pabrik.`
       {/* ========================================================================= */}
       {/* 1. HERO HEADER: JUDUL DI PALING ATAS (TANPA TAG DI ATAS JUDUL)            */}
       {/* ========================================================================= */}
-      <section className="pt-28 sm:pt-36 pb-12 sm:pb-16 bg-gradient-to-b from-white via-sky-50/20 to-white text-slate-900 relative overflow-hidden">
+      <section className="pt-24 sm:pt-36 pb-8 sm:pb-14 bg-gradient-to-b from-white via-sky-50/20 to-white text-slate-900 relative overflow-hidden">
         
         {/* Ambient Liquid Water Caustics Texture */}
         <div className="absolute inset-0 pointer-events-none opacity-20 select-none overflow-hidden mix-blend-multiply">
@@ -162,7 +162,7 @@ Mohon informasi penawaran resmi (RFQ) dan sampel uji coba pabrik.`
           
           {/* Main Title is the Topmost Element (No Tag/Eyebrow Above) */}
           <div className="space-y-3 max-w-4xl">
-            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black font-heading text-slate-900 tracking-tight leading-[1.15] uppercase">
+            <h1 className="text-xl sm:text-3xl lg:text-5xl font-black font-heading text-slate-900 tracking-tight leading-[1.2] uppercase">
               Pusat Formulasi, Kalkulator Dosis &amp; Panduan Teknis
             </h1>
 
@@ -197,7 +197,7 @@ Mohon informasi penawaran resmi (RFQ) dan sampel uji coba pabrik.`
       {/* ========================================================================= */}
       {/* 2. UNIFIED WORKSPACE: DIAGNOSA NODA & KALKULATOR DOSIS TERPADU            */}
       {/* ========================================================================= */}
-      <section className="py-10 sm:py-16 bg-white text-slate-900 relative">
+      <section className="py-8 sm:py-14 bg-white text-slate-900 relative">
         <div className="max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-14 xl:px-20 w-full space-y-12">
           
           {/* Section Heading */}
@@ -205,7 +205,7 @@ Mohon informasi penawaran resmi (RFQ) dan sampel uji coba pabrik.`
             <span className="text-[10.5px] sm:text-[11px] font-bold font-heading uppercase tracking-widest text-[#0F58A8] block">
               DIAGNOSTIK &amp; KALKULATOR KEBUTUHAN TERPADU
             </span>
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-black font-heading text-slate-900 tracking-tight uppercase">
+            <h2 className="text-lg sm:text-2xl lg:text-3xl font-black font-heading text-slate-900 tracking-tight uppercase">
               Konsultasi Noda &amp; Estimasi Dosis Operasional
             </h2>
           </div>
@@ -273,7 +273,7 @@ Mohon informasi penawaran resmi (RFQ) dan sampel uji coba pabrik.`
             </div>
 
             {/* Interactive Calculator Inputs: Capacity & Water Hardness */}
-            <div className="p-6 sm:p-7 rounded-3xl bg-slate-50/80 border border-slate-200/90 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+            <div className="p-4 sm:p-7 rounded-2xl sm:rounded-3xl bg-slate-50/80 border border-slate-200/90 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 items-center">
               
               {/* Parameter 1: Kapasitas Cucian Harian */}
               <div className="space-y-2.5">
@@ -390,11 +390,11 @@ Mohon informasi penawaran resmi (RFQ) dan sampel uji coba pabrik.`
             </div>
 
             {/* Product Catalog Cards Grid (Pure Floating Product Images) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-6">
               {calculationResults.productVolumes.map((prod, idx) => (
                 <div
                   key={idx}
-                  className="bg-white border border-slate-200/90 rounded-3xl p-5 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between group space-y-4"
+                  className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-3 sm:p-5 shadow-xs hover:shadow-md transition-all duration-300 flex flex-col justify-between group space-y-2.5 sm:space-y-4"
                 >
                   <div className="space-y-3">
                     
@@ -409,7 +409,7 @@ Mohon informasi penawaran resmi (RFQ) dan sampel uji coba pabrik.`
                     </div>
 
                     {/* Pure 3D Product Image (No Box, Pure Floating Silhouette) */}
-                    <div className="w-full h-40 sm:h-44 flex items-center justify-center overflow-hidden py-1 group-hover:scale-105 transition-transform duration-500">
+                    <div className="w-full h-28 sm:h-44 flex items-center justify-center overflow-hidden py-0.5 group-hover:scale-105 transition-transform duration-500">
                       <img
                         src={prod.image}
                         alt={prod.name}
@@ -420,7 +420,7 @@ Mohon informasi penawaran resmi (RFQ) dan sampel uji coba pabrik.`
 
                     {/* Product Name & Chemical Function */}
                     <div className="space-y-1">
-                      <h4 className="font-heading font-extrabold text-sm sm:text-[15px] text-slate-900 group-hover:text-[#0F58A8] transition-colors leading-snug">
+                      <h4 className="font-heading font-extrabold text-xs sm:text-[15px] text-slate-900 group-hover:text-[#0F58A8] transition-colors leading-snug line-clamp-2">
                         {prod.name}
                       </h4>
                       <p className="text-[11px] text-slate-600 font-normal leading-relaxed line-clamp-2">
@@ -548,14 +548,14 @@ Mohon informasi penawaran resmi (RFQ) dan sampel uji coba pabrik.`
       {/* ========================================================================= */}
       {/* 3. BOTTOM SECTION: PUSAT EDUKASI & BLOG TUTORIAL TEKNIS                   */}
       {/* ========================================================================= */}
-      <section className="py-16 sm:py-24 bg-slate-50/60 text-slate-900 border-t border-slate-200/90">
+      <section className="py-10 sm:py-20 bg-slate-50/60 text-slate-900 border-t border-slate-200/90">
         <div className="max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-14 xl:px-20 w-full space-y-10">
           
           <div className="space-y-2 border-b border-slate-200 pb-5">
             <span className="text-[10.5px] sm:text-[11px] font-bold font-heading uppercase tracking-widest text-[#0F58A8] block">
               PUSAT EDUKASI, ARTIKEL &amp; TUTORIAL TEKNIS
             </span>
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-black font-heading text-slate-900 tracking-tight uppercase">
+            <h2 className="text-lg sm:text-2xl lg:text-3xl font-black font-heading text-slate-900 tracking-tight uppercase">
               Panduan Ilmiah &amp; SOP Standar Manufaktur Kimia
             </h2>
             <p className="text-xs sm:text-sm text-slate-600 max-w-2xl font-normal leading-relaxed">
@@ -591,11 +591,11 @@ Mohon informasi penawaran resmi (RFQ) dan sampel uji coba pabrik.`
           </div>
 
           {/* Articles Grid (Clean 3-Columns) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-6">
             {filteredArticles.map((art) => (
               <div
                 key={art.id}
-                className="bg-white border border-slate-200/90 rounded-3xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between group space-y-5"
+                className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-xs hover:shadow-md transition-all duration-300 flex flex-col justify-between group space-y-3.5 sm:space-y-5"
               >
                 <div className="space-y-3.5">
                   <div className="flex items-center justify-between gap-2">

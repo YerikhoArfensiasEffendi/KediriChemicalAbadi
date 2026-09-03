@@ -86,7 +86,7 @@ export default function IndustriesPage() {
       </section>
 
       {/* Efficiency Metrics Grid: TEGAS, TIDAK ROUNDED, WARNA KONTRAS (DARK NAVY) & BERGAMBAR */}
-      <section className="py-16 sm:py-20 bg-slate-100/70 text-slate-900 border-b border-slate-200">
+      <section className="py-10 sm:py-20 bg-slate-100/70 text-slate-900 border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 w-full space-y-10">
           
           <div className="text-center max-w-2xl mx-auto space-y-2">
@@ -99,7 +99,7 @@ export default function IndustriesPage() {
           </div>
 
           {/* 4 Sharp Geometric Architectural Cards with Visual Headers */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {SECTOR_BENEFITS.map((item, idx) => (
               <motion.div
                 key={item.id}
@@ -110,7 +110,7 @@ export default function IndustriesPage() {
                 className={`bg-[#0A192F] text-white rounded-lg overflow-hidden border border-slate-800/90 border-t-4 ${item.topColor} shadow-xl shadow-slate-900/10 flex flex-col justify-between group hover:border-[#0F58A8]/60 transition-all duration-300`}
               >
                 {/* Visual Header Image with Technical Micro-Badges */}
-                <div className="relative h-40 w-full overflow-hidden bg-slate-950">
+                <div className="relative h-32 sm:h-40 w-full overflow-hidden bg-slate-950">
                   <img
                     src={item.image}
                     alt={item.sector}
@@ -131,7 +131,7 @@ export default function IndustriesPage() {
                 </div>
 
                 {/* Card Content Body */}
-                <div className="p-5 sm:p-6 space-y-3.5 flex-1 flex flex-col justify-between">
+                <div className="p-4 sm:p-6 space-y-2.5 sm:space-y-3.5 flex-1 flex flex-col justify-between">
                   <div className="space-y-2">
                     <span className={`text-[11px] font-mono font-bold uppercase tracking-wider ${item.accentText} block`}>
                       {item.sector}
