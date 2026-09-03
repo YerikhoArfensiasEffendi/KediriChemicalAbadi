@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom'
 import { 
   ArrowRight, 
   CheckCircle2,
-  FileText
+  FileText,
+  Package
 } from 'lucide-react'
 import { INDUSTRIES_DATA } from '@/data/industriesData'
 import RFQModal from '@/components/ui/RFQModal'
@@ -165,7 +166,6 @@ export default function IndustriesSection() {
         <div className="w-full space-y-8 sm:space-y-10 mb-14 sm:mb-20">
           {SECTOR_DETAILS.map((sec, idx) => {
             const isRightAligned = idx % 2 === 1
-            const LogoComp = SectorLogos[sec.id] || SectorLogos['laundry-textile']
 
             return (
               <motion.div
@@ -174,14 +174,23 @@ export default function IndustriesSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.35, delay: idx * 0.04 }}
-                className={`w-full max-w-[96%] sm:max-w-[92%] lg:max-w-[88%] xl:max-w-[84%] bg-gradient-to-r from-sky-50/40 via-white to-sky-50/20 border border-sky-100 rounded-3xl shadow-lg shadow-blue-900/5 transition-all flex flex-col lg:flex-row items-stretch overflow-hidden ${
+                className={`w-full max-w-[96%] sm:max-w-[92%] lg:max-w-[88%] xl:max-w-[84%] bg-white border border-slate-200/90 rounded-3xl shadow-md hover:shadow-xl hover:border-[#0F58A8]/40 transition-all duration-500 flex flex-col lg:flex-row items-stretch overflow-hidden relative group ${
                   isRightAligned ? 'ml-auto' : 'mr-auto'
                 }`}
               >
-                {/* 1. Foto Sektor Bersih */}
+                {/* 1. Tekstur Halus Latar Belakang (Agar Tidak Sepi) */}
+                <div className="absolute inset-0 pointer-events-none opacity-[0.06] select-none overflow-hidden mix-blend-multiply z-0">
+                  <img
+                    src="/images/bg_liquid_caustics_4k.png"
+                    alt=""
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                {/* 2. Foto Sektor Bersih & Tegas */}
                 <div
-                  className={`w-full lg:w-80 xl:w-96 min-h-[200px] lg:min-h-full shrink-0 relative overflow-hidden bg-slate-100 ${
-                    isRightAligned ? 'lg:order-2' : 'lg:order-1'
+                  className={`w-full lg:w-80 xl:w-96 min-h-[220px] lg:min-h-full shrink-0 relative overflow-hidden bg-slate-100 z-10 ${
+                    isRightAligned ? 'lg:order-2 border-l border-slate-100' : 'lg:order-1 border-r border-slate-100'
                   }`}
                 >
                   <img
@@ -189,48 +198,52 @@ export default function IndustriesSection() {
                     alt={sec.title}
                     className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 select-none"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent pointer-events-none" />
                 </div>
 
-                {/* 2. Informasi Konten Open Editorial */}
+                {/* 3. Informasi Konten Open Editorial yang Tegas */}
                 <div
-                  className={`flex-1 p-6 sm:p-8 flex flex-col justify-between space-y-5 ${
+                  className={`flex-1 p-6 sm:p-8 flex flex-col justify-between space-y-6 relative z-10 ${
                     isRightAligned ? 'lg:order-1' : 'lg:order-2'
                   }`}
                 >
-                  {/* Header Sektor: Judul Langsung di Paling Atas */}
+                  {/* Header Sektor: Judul Langsung di Paling Atas Secara Tegas */}
                   <div className="space-y-2">
-                    <h3 className="text-lg sm:text-xl lg:text-2xl font-extrabold font-heading text-slate-900 leading-snug">
+                    <h3 className="text-xl sm:text-2xl font-black font-heading text-slate-900 tracking-tight leading-snug">
                       {sec.title}
                     </h3>
 
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+                    <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">
                       {sec.description}
                     </p>
                   </div>
 
-                  {/* 4 Poin Keunggulan Formula */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2 border-t border-sky-100 text-xs">
+                  {/* 4 Poin Keunggulan Formula - Kotak Panel Tegas */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 text-xs">
                     {sec.features.map((feat, fIdx) => (
-                      <div key={fIdx} className="flex items-start gap-2 text-slate-700">
-                        <div className="w-4 h-4 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
+                      <div 
+                        key={fIdx} 
+                        className="p-3 rounded-xl bg-slate-50/90 hover:bg-blue-50/50 border border-slate-200/80 flex items-start gap-3 transition-colors shadow-2xs group/item"
+                      >
+                        <div className="w-5 h-5 rounded-md bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
                           <CheckCircle2 className="w-3.5 h-3.5" />
                         </div>
-                        <span className="font-medium">{feat}</span>
+                        <span className="font-semibold text-slate-800 leading-snug">{feat}</span>
                       </div>
                     ))}
                   </div>
 
-                  {/* Footer: Kemasan & Tombol Aksi (Fluid Pill) */}
-                  <div className="pt-3 border-t border-sky-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 flex-wrap">
-                    <div className="text-[11px] text-slate-500 font-medium">
-                      <span className="text-slate-400">Kemasan Distribusi:</span>{' '}
-                      <strong className="text-slate-800 font-bold">{sec.packaging}</strong>
+                  {/* Footer: Kemasan & Tombol Aksi yang Tegas */}
+                  <div className="pt-4 border-t border-slate-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4 flex-wrap">
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-100/90 border border-slate-200/90 text-xs text-slate-700">
+                      <Package className="w-4 h-4 text-[#0F58A8] shrink-0" />
+                      <span>Kemasan: <strong className="text-slate-900 font-bold">{sec.packaging}</strong></span>
                     </div>
 
                     <div className="flex items-center gap-3 shrink-0">
                       <button
                         onClick={() => setRfqOpen(true)}
-                        className="btn-fluid-primary text-xs py-2 px-4"
+                        className="btn-fluid-primary text-xs py-2.5 px-5 font-semibold shadow-sm hover:shadow-md"
                       >
                         <span>{sec.ctaLabel}</span>
                         <ArrowRight className="w-3.5 h-3.5" />
@@ -238,7 +251,7 @@ export default function IndustriesSection() {
 
                       <Link
                         to="/industries"
-                        className="text-xs font-bold text-slate-500 hover:text-[#0F58A8] transition-colors uppercase tracking-wider hidden sm:inline"
+                        className="h-9 px-4 rounded-xl border border-slate-200 hover:border-[#0F58A8] hover:text-[#0F58A8] text-xs font-heading font-bold uppercase tracking-wider text-slate-700 hover:bg-blue-50/40 transition-all inline-flex items-center justify-center hidden sm:inline-flex"
                       >
                         Detail Sektor →
                       </Link>
