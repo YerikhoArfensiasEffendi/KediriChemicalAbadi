@@ -238,47 +238,39 @@ export default function ProductShowcaseSection() {
                     </div>
                   </div>
 
-                  {/* Highlights Bullet Badges (Open Inline) */}
-                  <div className="grid grid-cols-2 gap-2.5 pt-1">
-                    <div className="flex items-center gap-2 text-xs text-slate-700 font-medium">
-                      <div className="w-4 h-4 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
-                        <CheckCircle2 className="w-3.5 h-3.5" />
-                      </div>
-                      <span>100% Bebas Fosfat STPP</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-xs text-slate-700 font-medium">
-                      <div className="w-4 h-4 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
-                        <CheckCircle2 className="w-3.5 h-3.5" />
-                      </div>
-                      <span>OECD 301D &gt;90% IPAL</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-xs text-slate-700 font-medium">
-                      <div className="w-4 h-4 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
-                        <CheckCircle2 className="w-3.5 h-3.5" />
-                      </div>
-                      <span>Dosis Hemat 10–15 ml/kg</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-xs text-slate-700 font-medium">
-                      <div className="w-4 h-4 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
-                        <CheckCircle2 className="w-3.5 h-3.5" />
-                      </div>
-                      <span>Optical Brightener Anti-Pudar</span>
-                    </div>
-                  </div>
-
                 </div>
 
                 {/* Sisi Kanan: Tab Interaktif Detail Formulasi & TDS (7 Kolom) */}
                 <div className="lg:col-span-7 space-y-5">
                   
-                  {/* Title & Narrative Overview (Direct Title - No Eyebrow Tag) */}
-                  <div className="space-y-1.5">
+                  {/* Title & Narrative Overview with Included Key Highlights */}
+                  <div className="space-y-3">
                     <h3 className="text-lg sm:text-xl lg:text-2xl font-black font-heading text-slate-900 tracking-tight leading-snug">
                       {heroProduct.title || heroProduct.name}
                     </h3>
                     <p className="text-slate-700 text-xs sm:text-[12.5px] leading-relaxed font-normal">
                       Deterjen cair konsentrat rendah busa (*low-foam*) dengan rekayasa agen pengkhelat murni (*sequestering agent*) yang menaklukkan kesadahan air tanah tinggi Jawa Timur (&gt;350 ppm CaCO₃). Mencegah pengapuran elemen pemanas mesin cuci industri dan menjaga kelembutan serat linen hingga 50x siklus cuci.
                     </p>
+
+                    {/* Integrated Key Accreditations / Highlights */}
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 pb-1">
+                      <div className="flex items-center gap-1.5 text-xs text-slate-700 font-medium">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                        <span className="truncate">100% Bebas Fosfat STPP</span>
+                      </div>
+                      <div className="flex items-center gap-1.5 text-xs text-slate-700 font-medium">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                        <span className="truncate">OECD 301D &gt;90% IPAL</span>
+                      </div>
+                      <div className="flex items-center gap-1.5 text-xs text-slate-700 font-medium">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                        <span className="truncate">Dosis Hemat 10–15 ml/kg</span>
+                      </div>
+                      <div className="flex items-center gap-1.5 text-xs text-slate-700 font-medium">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                        <span className="truncate">Optical Brightener Anti-Pudar</span>
+                      </div>
+                    </div>
                   </div>
 
                   {/* Interactive Tab Switcher (Minimalist Underline Style) */}
