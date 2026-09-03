@@ -1,19 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-PT Kediri Chemical Abadi
-Generator Halaman Sejarah (AboutPage.jsx)
-Pembaruan Sesuai Arahan User:
-1. Garis Terakhir di Tahun 2024-2026:
-   - Pada slide terakhir linimasa (2024-2026), garis berhenti tepat di tengah layar (h-1/2) pada titik simpul (node). Tidak ada garis yang tembus ke bawah lagi.
-   - Titik simpul 2026 dilengkapi aksen ring terminasi (ring-4 ring-blue-100) sebagai tanda tonggak masa kini.
-2. Animasi Meninggalkan Garis Saat Scroll ke Direksi:
-   - Saat di-scroll dari 2026 ke Direksi, garis dan titik simpul bersama konten 2026 melayang naik ke atas (-160px) secara mulus dan memudar ("meninggalkan garisnya").
-   - Layar kemudian berpindah secara stabil, bersih, dan berwibawa ke section Dewan Direksi & Tata Kelola Korporat.
-Author: Yerikho Arfensias Effendi
-Company: PT Kediri Chemical Abadi
-"""
-
-CODE = """import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
@@ -379,34 +364,6 @@ export default function AboutPage() {
           </AnimatePresence>
         </motion.div>
       )}
-
-      {/* ═════════════════════════════════════════════════════════════════════ */}
-      {/* SIDEBAR NAVIGASI DOTS INDIKATOR                                     */}
-      {/* ═════════════════════════════════════════════════════════════════════ */}
-      <div className="hidden md:flex flex-col gap-2.5 fixed right-6 sm:right-8 top-1/2 -translate-y-1/2 z-40">
-        {SLIDES.map((slide, idx) => {
-          const isActive = idx === currentIdx
-          return (
-            <button
-              key={slide.id}
-              onClick={() => changeSlide(idx, idx > currentIdx ? 1 : -1)}
-              className="flex items-center gap-2 group cursor-pointer text-right justify-end"
-              aria-label={`Pindah ke ${slide.label}`}
-            >
-              <span className={`text-[11px] font-heading font-semibold uppercase tracking-wider transition-all duration-300 ${
-                isActive ? 'text-[#0F58A8] opacity-100 pr-1' : 'text-slate-400 opacity-0 group-hover:opacity-100'
-              }`}>
-                {slide.label}
-              </span>
-              <div className={`rounded-full transition-all duration-300 ${
-                isActive 
-                  ? 'w-3 h-3 bg-[#0F58A8] ring-4 ring-sky-100' 
-                  : 'w-2 h-2 bg-slate-300 group-hover:bg-sky-400'
-              }`} />
-            </button>
-          )
-        })}
-      </div>
 
       {/* ═════════════════════════════════════════════════════════════════════ */}
       {/* PANGGUNG PRESENTASI: FADE OUT LEBIH PELAN & LEBIH JAUH KE ATAS (-120PX)*/}
@@ -866,35 +823,6 @@ export default function AboutPage() {
           </motion.div>
         </AnimatePresence>
       </div>
-
-      {/* ═════════════════════════════════════════════════════════════════════ */}
-      {/* FLOATING SCROLL GUIDE (PANDUAN GULIR HALUS)                         */}
-      {/* ═════════════════════════════════════════════════════════════════════ */}
-      <div className="w-full pb-4 sm:pb-6 pt-2 flex items-center justify-between px-6 sm:px-12 fixed bottom-0 left-0 right-0 z-30 pointer-events-none bg-gradient-to-t from-white via-white/80 to-transparent">
-        <div className="text-xs font-mono font-bold text-slate-400">
-          <span className="text-[#0F58A8] text-sm">{String(currentIdx + 1).padStart(2, '0')}</span>
-          <span> / {String(SLIDES.length).padStart(2, '0')}</span>
-        </div>
-
-        <div className="flex items-center gap-2 text-slate-400">
-          <div className="w-4 h-6 border-2 border-slate-400 rounded-full flex justify-center pt-1 shadow-2xs">
-            <div className="w-1 h-1.5 bg-[#0F58A8] rounded-full animate-bounce" />
-          </div>
-          <span className="text-[11px] font-heading font-medium uppercase tracking-widest text-slate-500 hidden sm:inline">
-            {currentIdx === SLIDES.length - 1 ? 'Anda Telah di Akhir Perjalanan' : 'Gulir untuk Melanjutkan'}
-          </span>
-        </div>
-
-        <div className="text-[11px] font-heading font-semibold uppercase text-slate-400">
-          PT Kediri Chemical Abadi
-        </div>
-      </div>
     </main>
   )
 }
-"""
-
-with open('src/pages/AboutPage.jsx', 'w', encoding='utf-8') as f:
-    f.write(CODE)
-
-print("BERHASIL: Garis terakhir berhenti di tengah pada tahun 2026, dan saat di-scroll melayang anggun naik meninggalkan garisnya menuju Dewan Direksi secara stabil!")

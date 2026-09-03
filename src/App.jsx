@@ -116,7 +116,6 @@ export default function App() {
             <AnimatedRoutes />
           </div>
           <Footer />
-          <WhatsAppFloat />
         </div>
       </BrowserRouter>
     </HelmetProvider>
