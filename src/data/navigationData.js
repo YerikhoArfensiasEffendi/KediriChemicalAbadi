@@ -2,6 +2,7 @@ export const NAVIGATION_DATA = {
   navLinks: [
     { to: '/', label: 'Beranda' },
     { to: '/products', label: 'Katalog Kimia' },
+    { to: '/calculator', label: 'Kalkulator & Panduan' },
     { to: '/services', label: 'Layanan Maklon' },
     { to: '/industries', label: 'Sektor Industri' },
     { to: '/compliance', label: 'Kepatuhan & Mutu' },
@@ -11,6 +12,7 @@ export const NAVIGATION_DATA = {
   footerLinks: [
     { to: '/', label: 'Beranda' },
     { to: '/products', label: 'Katalog Kimia B2B' },
+    { to: '/calculator', label: 'Kalkulator Dosis & Konsultasi Noda' },
     { to: '/services', label: 'Skema Maklon & Kemitraan' },
     { to: '/industries', label: 'Sektor Industri' },
     { to: '/about', label: 'Profil Perusahaan & Direksi' },

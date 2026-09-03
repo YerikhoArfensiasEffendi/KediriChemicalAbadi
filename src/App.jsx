@@ -19,6 +19,7 @@ const CompliancePage = lazy(() => import('@/pages/CompliancePage'))
 const ContactPage = lazy(() => import('@/pages/ContactPage'))
 const PrivacyPolicyPage = lazy(() => import('@/pages/PrivacyPolicyPage'))
 const TermsPage = lazy(() => import('@/pages/TermsPage'))
+const CalculatorPage = lazy(() => import('@/pages/CalculatorPage'))
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'))
 
 function LoadingFallback() {
@@ -93,6 +94,7 @@ function AnimatedRoutes() {
             <Route path="/industries" element={<IndustriesPage />} />
             <Route path="/compliance" element={<CompliancePage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/calculator" element={<CalculatorPage />} />
             <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
             <Route path="/terms" element={<TermsPage />} />
             <Route path="*" element={<NotFoundPage />} />
